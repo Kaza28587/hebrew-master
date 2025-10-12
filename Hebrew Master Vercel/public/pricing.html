@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Plan - Hebrew Master</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            min-height: 100vh;
+            padding: 6rem 5% 4rem;
+            overflow-x: hidden;
+        }
+
+        #canvas3d {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(30px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 3rem 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(168, 85, 247, 0.4);
+            box-shadow: 0 30px 60px rgba(168, 85, 247, 0.3);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid rgba(168, 85, 247, 0.6);
+            transform: scale(1.05);
+            background: rgba(168, 85, 247, 0.1);
+        }
+
+        .pricing-card.featured::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            color: white;
+            padding: 5px 40px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            transform: rotate(45deg);
+            letter-spacing: 1px;
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .price {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .price-amount {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .price-period {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .features-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            color: #a855f7;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .plan-btn {
+            width: 100%;
+            padding: 1.2rem;
+            border: none;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .plan-btn.primary {
+            background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+            background-size: 200% 200%;
+            animation: gradientShift 4s ease infinite;
+            color: white;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .plan-btn.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6);
+        }
+
+        .plan-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .plan-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .guarantee {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .guarantee h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #a855f7;
+        }
+
+        .guarantee p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas3d"></canvas>
+
+    <div class="container">
+        <div class="header">
+            <h1>Choose Your Plan</h1>
+            <p class="subtitle">Start free, upgrade anytime. Cancel whenever you want.</p>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="plan-name">Free Trial</div>
+                <div class="price">
+                    <div class="price-amount">$0</div>
+                    <div class="price-period">7 days free</div>
+                </div>
+                <ul class="features-list">
+                    <li>5 AI-generated lessons</li>
+                    <li>Basic voice features</li>
+                    <li>Translation access</li>
+                    <li>Mobile & desktop</li>
+                    <li>Progress tracking</li>
+                </ul>
+                <button class="plan-btn secondary" onclick="selectPlan('free')">Start Free Trial</button>
+            </div>
+
+            <div class="pricing-card featured">
+                <div class="plan-name">Premium</div>
+                <div class="price">
+                    <div class="price-amount">$19</div>
+                    <div class="price-period">per month</div>
+                </div>
+                <ul class="features-list">
+                    <li>Unlimited AI lessons</li>
+                    <li>Premium voices (ElevenLabs)</li>
+                    <li>Advanced exercises & quizzes</li>
+                    <li>Speaking practice with AI</li>
+                    <li>Progress analytics</li>
+                    <li>Zen mode features</li>
+                    <li>Priority support</li>
+                    <li>Certificate of completion</li>
+                </ul>
+                <button class="plan-btn primary" onclick="selectPlan('premium')">Get Premium</button>
+            </div>
+
+            <div class="pricing-card">
+                <div class="plan-name">Lifetime</div>
+                <div class="price">
+                    <div class="price-amount">$199</div>
+                    <div class="price-period">one-time payment</div>
+                </div>
+                <ul class="features-list">
+                    <li>Everything in Premium</li>
+                    <li>Lifetime access</li>
+                    <li>All future updates</li>
+                    <li>VIP support</li>
+                    <li>Early feature access</li>
+                    <li>Private community</li>
+                    <li>1-on-1 coaching session</li>
+                    <li>Downloadable content</li>
+                </ul>
+                <button class="plan-btn primary" onclick="selectPlan('lifetime')">Get Lifetime Access</button>
+            </div>
+        </div>
+
+        <div class="guarantee">
+            <h3>💯 30-Day Money-Back Guarantee</h3>
+            <p>Not satisfied? Get a full refund within 30 days, no questions asked.</p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // 3D Background
+        const canvas = document.getElementById('canvas3d');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.position.z = 8;
+
+        const geometries = [
+            new THREE.IcosahedronGeometry(0.6, 1),
+            new THREE.OctahedronGeometry(0.6, 2),
+            new THREE.DodecahedronGeometry(0.6, 0)
+        ];
+
+        const materials = [
+            new THREE.MeshPhongMaterial({ color: 0x6366f1, wireframe: true, transparent: true, opacity: 0.4 }),
+            new THREE.MeshPhongMaterial({ color: 0xa855f7, wireframe: true, transparent: true, opacity: 0.35 })
+        ];
+
+        const shapes = [];
+        for (let i = 0; i < 20; i++) {
+            const geometry = geometries[Math.floor(Math.random() * geometries.length)];
+            const material = materials[Math.floor(Math.random() * materials.length)].clone();
+            const mesh = new THREE.Mesh(geometry, material);
+            mesh.position.x = (Math.random() - 0.5) * 20;
+            mesh.position.y = (Math.random() - 0.5) * 20;
+            mesh.position.z = (Math.random() - 0.5) * 15;
+            mesh.rotation.x = Math.random() * Math.PI;
+            mesh.rotation.y = Math.random() * Math.PI;
+            mesh.userData.velocity = {
+                x: (Math.random() - 0.5) * 0.003,
+                y: (Math.random() - 0.5) * 0.003,
+                rotationX: (Math.random() - 0.5) * 0.008,
+                rotationY: (Math.random() - 0.5) * 0.008
+            };
+            scene.add(mesh);
+            shapes.push(mesh);
+        }
+
+        const light1 = new THREE.PointLight(0xa855f7, 1.5, 100);
+        light1.position.set(8, 8, 8);
+        scene.add(light1);
+
+        const light2 = new THREE.PointLight(0x6366f1, 1.5, 100);
+        light2.position.set(-8, -8, 8);
+        scene.add(light2);
+
+        let time = 0;
+        function animate() {
+            requestAnimationFrame(animate);
+            time += 0.01;
+            light1.position.x = Math.sin(time * 0.5) * 10;
+            light1.position.z = Math.cos(time * 0.5) * 10;
+            shapes.forEach(function(shape) {
+                shape.rotation.x += shape.userData.velocity.rotationX;
+                shape.rotation.y += shape.userData.velocity.rotationY;
+                shape.position.x += shape.userData.velocity.x;
+                shape.position.y += shape.userData.velocity.y;
+                if (Math.abs(shape.position.x) > 10) shape.userData.velocity.x *= -1;
+                if (Math.abs(shape.position.y) > 10) shape.userData.velocity.y *= -1;
+            });
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', function() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        function selectPlan(plan) {
+            const user = JSON.parse(localStorage.getItem('hebrewMasterUser') || '{}');
+            user.selectedPlan = plan;
+            localStorage.setItem('hebrewMasterUser', JSON.stringify(user));
+
+            if (plan === 'free') {
+                window.location.href = 'dashboard.html';
+            } else {
+                window.location.href = 'checkout.html?plan=' + plan;
+            }
+        }
+    </script>
+</body>
+</html>

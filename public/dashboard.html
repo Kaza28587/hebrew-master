@@ -5,119 +5,162 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Hebrew Master</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             color: #fff;
             min-height: 100vh;
+            padding: 2rem;
         }
 
-        #canvas3d {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1rem 5%;
+        /* Header */
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(30px);
-            background: rgba(15, 12, 41, 0.7);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: 900;
+            background: linear-gradient(135deg, #a8daff 0%, #6366f1 30%, #a855f7 60%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             background: linear-gradient(135deg, #6366f1, #a855f7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .user-email {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .logout-btn {
+            padding: 0.6rem 1.5rem;
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff 0%, #a855f7 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .user-menu {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .streak {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .welcome-subtitle {
+            color: rgba(255, 255, 255, 0.7);
             font-size: 1.1rem;
-            font-weight: 700;
         }
 
-        .profile-btn {
-            padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .profile-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .dashboard {
-            position: relative;
-            z-index: 2;
-            padding: 6rem 5% 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .welcome {
-            margin-bottom: 3rem;
-        }
-
-        .welcome h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin-bottom: 0.5rem;
-        }
-
-        .welcome p {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
+        /* Stats Grid */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .stat-card {
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(30px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            padding: 1.5rem;
+            padding: 2rem;
             transition: all 0.3s ease;
         }
 
         .stat-card:hover {
             transform: translateY(-5px);
             border-color: rgba(168, 85, 247, 0.3);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.2);
         }
 
         .stat-icon {
-            font-size: 2rem;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
             margin-bottom: 0.5rem;
         }
 
@@ -129,385 +172,275 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .stat-label {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .main-content {
+        /* Quick Actions */
+        .quick-actions {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .current-lesson {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            padding: 3rem;
-        }
-
-        .lesson-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .lesson-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .lesson-level {
-            padding: 0.5rem 1rem;
-            background: rgba(168, 85, 247, 0.3);
-            border-radius: 50px;
-            font-size: 0.9rem;
-        }
-
-        .lesson-progress {
-            margin-bottom: 2rem;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 1rem 0;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #6366f1, #a855f7);
-            border-radius: 10px;
-            width: 35%;
-        }
-
-        .start-btn {
-            width: 100%;
-            padding: 1.5rem;
-            background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
-            background-size: 200% 200%;
-            animation: gradientShift 4s ease infinite;
-            border: none;
-            border-radius: 20px;
-            color: white;
-            font-weight: 700;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .start-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6);
-        }
-
-        .achievements {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            padding: 2rem;
-        }
-
-        .achievements-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .badge {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            margin-bottom: 1rem;
-        }
-
-        .badge-icon {
-            font-size: 2.5rem;
-        }
-
-        .badge-info {
-            flex: 1;
-        }
-
-        .badge-name {
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-        }
-
-        .badge-desc {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .lessons-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
-        .lesson-card {
+        .action-card {
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(30px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
             padding: 2rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            display: block;
         }
 
-        .lesson-card:hover {
+        .action-card:hover {
             transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
             border-color: rgba(168, 85, 247, 0.3);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.2);
         }
 
-        .lesson-card-icon {
+        .action-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
         }
 
-        .lesson-card-title {
+        .action-title {
             font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
         }
 
-        .lesson-card-desc {
+        .action-description {
             color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 4rem;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top-color: #a855f7;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         @media (max-width: 768px) {
-            .main-content {
-                grid-template-columns: 1fr;
+            body {
+                padding: 1rem;
             }
 
-            .user-menu {
-                gap: 1rem;
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .welcome-title {
+                font-size: 1.8rem;
+            }
+
+            .stats-grid,
+            .quick-actions {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <canvas id="canvas3d"></canvas>
-
-    <nav>
-        <div class="logo">🕊️ Hebrew Master</div>
-        <div class="user-menu">
-            <div class="streak">
-                🔥 <span id="streakCount">5</span>
-            </div>
-            <button class="profile-btn" onclick="window.location.href='profile.html'">
-                Profile
-            </button>
-        </div>
-    </nav>
-
-    <div class="dashboard">
-        <div class="welcome">
-            <h1>Welcome back, <span id="userName">Friend</span>! 👋</h1>
-            <p>Ready to continue your Hebrew journey?</p>
+    <div class="container">
+        <!-- Loading State -->
+        <div id="loadingState" class="loading">
+            <div class="loading-spinner"></div>
+            <div>Loading your dashboard...</div>
         </div>
 
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-icon">⚡</div>
-                <div class="stat-value" id="xpCount">1,250</div>
-                <div class="stat-label">Total XP</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">📚</div>
-                <div class="stat-value" id="lessonsCount">12</div>
-                <div class="stat-label">Lessons Completed</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">🎯</div>
-                <div class="stat-value" id="accuracyCount">87%</div>
-                <div class="stat-label">Accuracy</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">🏆</div>
-                <div class="stat-value" id="badgesCount">8</div>
-                <div class="stat-label">Badges Earned</div>
-            </div>
-        </div>
+        <!-- Main Dashboard Content -->
+        <div id="dashboardContent" style="display: none;">
+            <!-- Header -->
+            <div class="header">
+                <div class="logo">
+                    <span>🕊️</span>
+                    <span>Hebrew Master</span>
+                </div>
 
-        <div class="main-content">
-            <div class="current-lesson">
-                <div class="lesson-header">
-                    <div class="lesson-title">Continue Learning</div>
-                    <div class="lesson-level">Level 3</div>
-                </div>
-                <div class="lesson-progress">
-                    <h3 style="margin-bottom: 0.5rem;">Hebrew Alphabet - Part 2</h3>
-                    <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem;">
-                        Learn the next 5 letters: ה (He), ו (Vav), ז (Zayin), ח (Het), ט (Tet)
-                    </p>
-                    <div class="progress-bar">
-                        <div class="progress-fill"></div>
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">👤</div>
+                    <div class="user-details">
+                        <div class="user-name" id="userName">Loading...</div>
+                        <div class="user-email" id="userEmail">Loading...</div>
                     </div>
-                    <p style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.6);">35% Complete</p>
+                    <button class="logout-btn" onclick="handleLogout()">Sign Out</button>
                 </div>
-                <button class="start-btn" onclick="window.location.href='lesson.html'">
-                    Continue Lesson 🚀
-                </button>
             </div>
 
-            <div class="achievements">
-                <div class="achievements-title">Recent Achievements</div>
-                <div class="badge">
-                    <div class="badge-icon">🔥</div>
-                    <div class="badge-info">
-                        <div class="badge-name">5 Day Streak!</div>
-                        <div class="badge-desc">Keep it up!</div>
-                    </div>
-                </div>
-                <div class="badge">
-                    <div class="badge-icon">📖</div>
-                    <div class="badge-info">
-                        <div class="badge-name">Alphabet Master</div>
-                        <div class="badge-desc">Learned 10 letters</div>
-                    </div>
-                </div>
-                <div class="badge">
-                    <div class="badge-icon">⭐</div>
-                    <div class="badge-info">
-                        <div class="badge-name">Perfect Score</div>
-                        <div class="badge-desc">100% on a lesson!</div>
-                    </div>
-                </div>
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <h1 class="welcome-title">Welcome back, <span id="welcomeName">Student</span>! 👋</h1>
+                <p class="welcome-subtitle">Ready to continue your Hebrew learning journey?</p>
             </div>
-        </div>
 
-        <h2 style="font-size: 2rem; margin-bottom: 2rem;">Explore Lessons</h2>
-        <div class="lessons-grid">
-            <div class="lesson-card" onclick="window.location.href='lesson.html'">
-                <div class="lesson-card-icon">🔤</div>
-                <div class="lesson-card-title">Alphabet Basics</div>
-                <div class="lesson-card-desc">Master the Hebrew alphabet from Aleph to Tav</div>
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-label">Lessons Completed</div>
+                    <div class="stat-value" id="lessonsCompleted">0</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-label">Day Streak</div>
+                    <div class="stat-value" id="dayStreak">0</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-label">Minutes Learned</div>
+                    <div class="stat-value" id="minutesLearned">0</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-label">Words Mastered</div>
+                    <div class="stat-value" id="wordsMastered">0</div>
+                </div>
             </div>
-            <div class="lesson-card">
-                <div class="lesson-card-icon">💬</div>
-                <div class="lesson-card-title">Common Phrases</div>
-                <div class="lesson-card-desc">Essential greetings and everyday expressions</div>
-            </div>
-            <div class="lesson-card">
-                <div class="lesson-card-icon">🍽️</div>
-                <div class="lesson-card-title">Food & Dining</div>
-                <div class="lesson-card-desc">Order food, read menus, and dine like a local</div>
-            </div>
-            <div class="lesson-card">
-                <div class="lesson-card-icon">🚗</div>
-                <div class="lesson-card-title">Travel Hebrew</div>
-                <div class="lesson-card-desc">Navigate Israel with confidence</div>
+
+            <!-- Quick Actions -->
+            <h2 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Quick Actions</h2>
+            <div class="quick-actions">
+                <a href="lesson.html" class="action-card">
+                    <div class="action-icon">📖</div>
+                    <div class="action-title">Start Learning</div>
+                    <div class="action-description">Continue with your next lesson and practice Hebrew</div>
+                </a>
+
+                <a href="pricing.html" class="action-card">
+                    <div class="action-icon">⭐</div>
+                    <div class="action-title">Upgrade Plan</div>
+                    <div class="action-description">Unlock premium features and advanced lessons</div>
+                </a>
+
+                <a href="test-apis.html" class="action-card">
+                    <div class="action-icon">🧪</div>
+                    <div class="action-title">Test Features</div>
+                    <div class="action-description">Try out translation and text-to-speech APIs</div>
+                </a>
             </div>
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="firebase-config.js"></script>
+
     <script>
-        // Load user data
-        const user = JSON.parse(localStorage.getItem('hebrewMasterUser') || '{}');
-        document.getElementById('userName').textContent = user.name || 'Friend';
+        // Check authentication state
+        firebase.auth().onAuthStateChanged((user) => {
+            const loadingState = document.getElementById('loadingState');
+            const dashboardContent = document.getElementById('dashboardContent');
 
-        // Initialize stats from localStorage or defaults
-        const stats = {
-            streak: parseInt(localStorage.getItem('streak')) || 5,
-            xp: parseInt(localStorage.getItem('xp')) || 1250,
-            lessons: parseInt(localStorage.getItem('lessonsCompleted')) || 12,
-            accuracy: parseInt(localStorage.getItem('accuracy')) || 87,
-            badges: parseInt(localStorage.getItem('badges')) || 8
-        };
+            if (user) {
+                // User is signed in
+                console.log('User authenticated:', user.email);
+                
+                // Hide loading, show dashboard
+                loadingState.style.display = 'none';
+                dashboardContent.style.display = 'block';
 
-        document.getElementById('streakCount').textContent = stats.streak;
-        document.getElementById('xpCount').textContent = stats.xp.toLocaleString();
-        document.getElementById('lessonsCount').textContent = stats.lessons;
-        document.getElementById('accuracyCount').textContent = stats.accuracy + '%';
-        document.getElementById('badgesCount').textContent = stats.badges;
-
-        // 3D Background
-        const canvas = document.getElementById('canvas3d');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        camera.position.z = 8;
-
-        const geometries = [
-            new THREE.IcosahedronGeometry(0.6, 1),
-            new THREE.OctahedronGeometry(0.6, 2)
-        ];
-
-        const shapes = [];
-        for (let i = 0; i < 20; i++) {
-            const geometry = geometries[Math.floor(Math.random() * geometries.length)];
-            const material = new THREE.MeshPhongMaterial({
-                color: Math.random() > 0.5 ? 0x6366f1 : 0xa855f7,
-                wireframe: true,
-                transparent: true,
-                opacity: 0.35
-            });
-            const mesh = new THREE.Mesh(geometry, material);
-            mesh.position.x = (Math.random() - 0.5) * 20;
-            mesh.position.y = (Math.random() - 0.5) * 20;
-            mesh.position.z = (Math.random() - 0.5) * 15;
-            mesh.userData.velocity = {
-                x: (Math.random() - 0.5) * 0.003,
-                y: (Math.random() - 0.5) * 0.003,
-                rotationX: (Math.random() - 0.5) * 0.008,
-                rotationY: (Math.random() - 0.5) * 0.008
-            };
-            scene.add(mesh);
-            shapes.push(mesh);
-        }
-
-        const light1 = new THREE.PointLight(0xa855f7, 1.5, 100);
-        light1.position.set(8, 8, 8);
-        scene.add(light1);
-
-        const light2 = new THREE.PointLight(0x6366f1, 1.5, 100);
-        light2.position.set(-8, -8, 8);
-        scene.add(light2);
-
-        let time = 0;
-        function animate() {
-            requestAnimationFrame(animate);
-            time += 0.01;
-            light1.position.x = Math.sin(time * 0.5) * 10;
-            light1.position.z = Math.cos(time * 0.5) * 10;
-            shapes.forEach(function(shape) {
-                shape.rotation.x += shape.userData.velocity.rotationX;
-                shape.rotation.y += shape.userData.velocity.rotationY;
-                shape.position.x += shape.userData.velocity.x;
-                shape.position.y += shape.userData.velocity.y;
-                if (Math.abs(shape.position.x) > 10) shape.userData.velocity.x *= -1;
-                if (Math.abs(shape.position.y) > 10) shape.userData.velocity.y *= -1;
-            });
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        window.addEventListener('resize', function() {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+                // Update user info
+                displayUserInfo(user);
+                
+                // Load user progress
+                loadUserProgress(user);
+            } else {
+                // User is not signed in, redirect to login
+                console.log('No user authenticated, redirecting to login...');
+                window.location.href = 'login.html';
+            }
         });
+
+        // Display user information
+        function displayUserInfo(user) {
+            const userName = document.getElementById('userName');
+            const userEmail = document.getElementById('userEmail');
+            const welcomeName = document.getElementById('welcomeName');
+            const userAvatar = document.getElementById('userAvatar');
+
+            // Set user name
+            const displayName = user.displayName || user.email.split('@')[0];
+            userName.textContent = displayName;
+            welcomeName.textContent = displayName;
+
+            // Set email
+            userEmail.textContent = user.email;
+
+            // Set avatar
+            if (user.photoURL) {
+                userAvatar.innerHTML = `<img src="${user.photoURL}" alt="Avatar">`;
+            } else {
+                userAvatar.textContent = displayName.charAt(0).toUpperCase();
+            }
+        }
+
+        // Load user progress (demo data for now)
+        function loadUserProgress(user) {
+            // In a real app, this would fetch from your database
+            // For now, we'll use demo data
+            
+            const userId = user.uid;
+            const storageKey = `hebrewMaster_${userId}_progress`;
+            
+            // Try to load existing progress
+            let progress = localStorage.getItem(storageKey);
+            
+            if (progress) {
+                progress = JSON.parse(progress);
+            } else {
+                // Initialize default progress
+                progress = {
+                    lessonsCompleted: 0,
+                    dayStreak: 1,
+                    minutesLearned: 0,
+                    wordsMastered: 0,
+                    lastActive: new Date().toISOString()
+                };
+                localStorage.setItem(storageKey, JSON.stringify(progress));
+            }
+
+            // Update stats on page
+            document.getElementById('lessonsCompleted').textContent = progress.lessonsCompleted;
+            document.getElementById('dayStreak').textContent = progress.dayStreak;
+            document.getElementById('minutesLearned').textContent = progress.minutesLearned;
+            document.getElementById('wordsMastered').textContent = progress.wordsMastered;
+        }
+
+        // Handle logout
+        async function handleLogout() {
+            if (confirm('Are you sure you want to sign out?')) {
+                try {
+                    await signOut(); // Function from firebase-config.js
+                } catch (error) {
+                    console.error('Logout error:', error);
+                    alert('Error signing out. Please try again.');
+                }
+            }
+        }
     </script>
 </body>
 </html>

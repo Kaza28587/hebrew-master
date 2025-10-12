@@ -1,5 +1,4 @@
 export default async function handler(req, res) {
-  // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -19,7 +18,12 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Text is required' });
     }
 
-    // Call OpenAI API
+    if (!process.env.OPENAI_API_KEY) {
+      return res.status(500).json({ error: 'OpenAI API key not configured' });
+    }
+
+    console.log('Translating text:', text);
+
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -38,17 +42,26 @@ export default async function handler(req, res) {
             content: text
           }
         ],
-        temperature: 0.3
+        temperature: 0.3,
+        max_tokens: 500
       })
     });
 
     const data = await response.json();
 
+    console.log('OpenAI response status:', response.status);
+
     if (!response.ok) {
-      throw new Error(data.error?.message || 'Translation failed');
+      console.error('OpenAI error:', data);
+      return res.status(response.status).json({ 
+        error: data.error?.message || 'Translation failed',
+        details: data.error
+      });
     }
 
     const translation = data.choices[0].message.content.trim();
+
+    console.log('Translation successful:', translation);
 
     return res.status(200).json({ 
       translation,
@@ -63,4 +76,3 @@ export default async function handler(req, res) {
     });
   }
 }
-

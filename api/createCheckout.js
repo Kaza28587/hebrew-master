@@ -1,6 +1,5 @@
-import Stripe from 'stripe';
-
 export default async function handler(req, res) {
+  // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -14,41 +13,46 @@ export default async function handler(req, res) {
   }
 
   try {
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-    const { plan, email } = req.body;
+    const { priceId, userId } = req.body;
 
-    const prices = {
-      premium: { amount: 1900, name: 'Premium Plan', recurring: true },
-      lifetime: { amount: 19900, name: 'Lifetime Access', recurring: false }
-    };
+    if (!priceId) {
+      return res.status(400).json({ error: 'Price ID is required' });
+    }
 
-    const selected = prices[plan];
-    const origin = req.headers.origin || req.headers.referer || 'https://hebrew-master.vercel.app';
-
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items: [{
-        price_data: {
-          currency: 'usd',
-          product_data: {
-            name: selected.name,
-            description: 'Hebrew Master - AI Language Learning'
-          },
-          unit_amount: selected.amount,
-          recurring: selected.recurring ? { interval: 'month' } : undefined
-        },
-        quantity: 1
-      }],
-      mode: selected.recurring ? 'subscription' : 'payment',
-      success_url: `${origin}/dashboard.html?payment=success`,
-      cancel_url: `${origin}/checkout.html?cancelled=true`,
-      customer_email: email,
-      metadata: { plan }
+    // Create Stripe checkout session
+    const response = await fetch('https://api.stripe.com/v1/checkout/sessions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Bearer ${process.env.STRIPE_SECRET_KEY}`
+      },
+      body: new URLSearchParams({
+        'payment_method_types[]': 'card',
+        'line_items[0][price]': priceId,
+        'line_items[0][quantity]': '1',
+        'mode': 'subscription',
+        'success_url': `${req.headers.origin || 'https://hebrew-master-muab.vercel.app'}/dashboard?success=true`,
+        'cancel_url': `${req.headers.origin || 'https://hebrew-master-muab.vercel.app'}/pricing?canceled=true`,
+        'client_reference_id': userId || 'guest'
+      })
     });
 
-    res.status(200).json({ sessionId: session.id });
+    const session = await response.json();
+
+    if (!response.ok) {
+      throw new Error(session.error?.message || 'Checkout creation failed');
+    }
+
+    return res.status(200).json({ 
+      sessionId: session.id,
+      url: session.url 
+    });
+
   } catch (error) {
     console.error('Checkout error:', error);
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ 
+      error: 'Checkout creation failed',
+      details: error.message 
+    });
   }
 }

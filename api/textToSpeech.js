@@ -1,6 +1,5 @@
-import axios from 'axios';
-
 export default async function handler(req, res) {
+  // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -16,29 +15,52 @@ export default async function handler(req, res) {
   try {
     const { text } = req.body;
 
-    const response = await axios.post(
-      'https://api.elevenlabs.io/v1/text-to-speech/21m00Tcm4TlvDq8ikWAM',
+    if (!text) {
+      return res.status(400).json({ error: 'Text is required' });
+    }
+
+    // Use ElevenLabs API - Hebrew voice
+    const voiceId = 'pNInz6obpgDQGcFmaJgB'; // Adam - multilingual voice
+
+    const response = await fetch(
+      `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
       {
-        text: text,
-        model_id: 'eleven_multilingual_v2',
-        voice_settings: {
-          stability: 0.5,
-          similarity_boost: 0.75
-        }
-      },
-      {
+        method: 'POST',
         headers: {
-          'xi-api-key': process.env.ELEVENLABS_API_KEY,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'xi-api-key': process.env.ELEVENLABS_API_KEY
         },
-        responseType: 'arraybuffer'
+        body: JSON.stringify({
+          text: text,
+          model_id: 'eleven_multilingual_v2',
+          voice_settings: {
+            stability: 0.5,
+            similarity_boost: 0.75
+          }
+        })
       }
     );
 
-    const audioBase64 = Buffer.from(response.data).toString('base64');
-    res.status(200).json({ audio: audioBase64 });
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.detail?.message || 'Text-to-speech failed');
+    }
+
+    // Get audio as buffer
+    const audioBuffer = await response.arrayBuffer();
+    
+    // Convert to base64
+    const base64Audio = Buffer.from(audioBuffer).toString('base64');
+
+    return res.status(200).json({ 
+      audio: `data:audio/mpeg;base64,${base64Audio}`
+    });
+
   } catch (error) {
-    console.error('TTS error:', error);
-    res.status(500).json({ error: error.message });
+    console.error('Text-to-speech error:', error);
+    return res.status(500).json({ 
+      error: 'Text-to-speech failed',
+      details: error.message 
+    });
   }
 }

@@ -1,0 +1,9 @@
+{
+  "name": "hebrew-master-functions",
+  "version": "1.0.0",
+  "dependencies": {
+    "openai": "^4.20.0",
+    "axios": "^1.6.0",
+    "stripe": "^14.7.0"
+  }
+}

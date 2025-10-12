@@ -1,4 +1,5 @@
 // Firebase Configuration
+// Note: These keys are restricted in Firebase Console to only work from authorized domains
 const firebaseConfig = {
   apiKey: "AIzaSyCZtiVXvMKX3FodLchIQzIUUqg15htdwyA",
   authDomain: "ai-hebrew.firebaseapp.com",
@@ -18,7 +19,6 @@ const googleProvider = new firebase.auth.GoogleAuthProvider();
 // Auth state observer
 auth.onAuthStateChanged((user) => {
   if (user) {
-    // User is signed in
     console.log('User signed in:', user.email);
     localStorage.setItem('user', JSON.stringify({
       uid: user.uid,
@@ -27,7 +27,6 @@ auth.onAuthStateChanged((user) => {
       photoURL: user.photoURL
     }));
   } else {
-    // User is signed out
     console.log('User signed out');
     localStorage.removeItem('user');
   }

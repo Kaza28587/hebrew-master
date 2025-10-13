@@ -44,9 +44,7 @@ export default async function handler(req, res) {
                 },
             ],
             mode: 'subscription',
-success_url: `${protocol}://${domain}/pricing.html?success=true&session_id={CHECKOUT_SESSION_ID}`,
-cancel_url: `${protocol}://${domain}/pricing.html?cancelled=true`,
-            client_reference_id: userId || 'guest',
+success_url: `${protocol}://${domain}/api/success?session_id={CHECKOUT_SESSION_ID}`,cancel_url: `${protocol}://${domain}/api/cancel`,            client_reference_id: userId || 'guest',
             metadata: {
                 userId: userId || 'guest'
             }
@@ -67,6 +65,7 @@ cancel_url: `${protocol}://${domain}/pricing.html?cancelled=true`,
         });
     }
 }
+
 
 
 

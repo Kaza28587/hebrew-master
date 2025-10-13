@@ -1,3 +1,5 @@
+import Stripe from 'stripe';
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -25,12 +27,13 @@ export default async function handler(req, res) {
 
     console.log('Creating checkout for price:', priceId);
 
+    // Initialize Stripe
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
     // Get the origin for success/cancel URLs
     const origin = req.headers.origin || 'https://hebrew-master-muab.vercel.app';
-
-    // Create Stripe checkout session
-    const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
     
+    // Create checkout session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [

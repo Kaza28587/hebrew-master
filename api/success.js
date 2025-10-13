@@ -56,6 +56,10 @@ export default function handler(req, res) {
             font-weight: 600;
             margin: 10px;
         }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -67,7 +71,9 @@ export default function handler(req, res) {
         </div>
         <h1>Payment Successful! 🎉</h1>
         <p>Welcome to Hebrew Master Premium! Your subscription is now active.</p>
+        <p style="font-size: 14px; color: #a0aec0;">A confirmation email has been sent to your email address.</p>
         <a href="/pricing.html" class="btn">Back to Pricing</a>
+        <a href="/index.html" class="btn" style="background: white; color: #667eea; border: 2px solid #667eea;">Go to Dashboard</a>
     </div>
 </body>
 </html>

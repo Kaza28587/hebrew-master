@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { text } = req.body;
+    const { text, voice } = req.body;
 
     if (!text) {
       return res.status(400).json({ error: 'Text is required' });
@@ -22,9 +22,19 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Google Cloud API key not configured' });
     }
 
-    console.log('Generating TTS for:', text);
+    // Available Hebrew voices
+    const voices = {
+      'female1': { name: 'he-IL-Wavenet-A', gender: 'FEMALE' },
+      'female2': { name: 'he-IL-Wavenet-C', gender: 'FEMALE' },
+      'male1': { name: 'he-IL-Wavenet-B', gender: 'MALE' },
+      'male2': { name: 'he-IL-Wavenet-D', gender: 'MALE' }
+    };
 
-    // Use Google Cloud Text-to-Speech
+    // Default to female1 if not specified
+    const selectedVoice = voices[voice] || voices['female1'];
+
+    console.log('Generating TTS for:', text, 'with voice:', voice || 'female1');
+
     const response = await fetch(
       `https://texttospeech.googleapis.com/v1/text:synthesize?key=${process.env.GOOGLE_CLOUD_API_KEY}`,
       {
@@ -36,8 +46,8 @@ export default async function handler(req, res) {
           input: { text: text },
           voice: {
             languageCode: 'he-IL',
-            name: 'he-IL-Wavenet-A',  // High quality WaveNet voice
-            ssmlGender: 'FEMALE'
+            name: selectedVoice.name,
+            ssmlGender: selectedVoice.gender
           },
           audioConfig: {
             audioEncoding: 'MP3',
@@ -50,8 +60,6 @@ export default async function handler(req, res) {
 
     const data = await response.json();
 
-    console.log('Google TTS response status:', response.status);
-
     if (!response.ok) {
       console.error('Google TTS error:', data);
       return res.status(response.status).json({ 
@@ -61,8 +69,6 @@ export default async function handler(req, res) {
     }
 
     const audioBase64 = data.audioContent;
-
-    console.log('TTS successful, audio generated');
 
     return res.status(200).json({ 
       audio: `data:audio/mpeg;base64,${audioBase64}`

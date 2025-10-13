@@ -1,5 +1,4 @@
 export default async function handler(req, res) {
-  // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -19,29 +18,34 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Price ID is required' });
     }
 
+    if (!process.env.STRIPE_SECRET_KEY) {
+      console.error('STRIPE_SECRET_KEY is not set');
+      return res.status(500).json({ error: 'Stripe is not configured' });
+    }
+
+    console.log('Creating checkout for price:', priceId);
+
+    // Get the origin for success/cancel URLs
+    const origin = req.headers.origin || 'https://hebrew-master-muab.vercel.app';
+
     // Create Stripe checkout session
-    const response = await fetch('https://api.stripe.com/v1/checkout/sessions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': `Bearer ${process.env.STRIPE_SECRET_KEY}`
-      },
-      body: new URLSearchParams({
-        'payment_method_types[]': 'card',
-        'line_items[0][price]': priceId,
-        'line_items[0][quantity]': '1',
-        'mode': 'subscription',
-        'success_url': `${req.headers.origin || 'https://hebrew-master-muab.vercel.app'}/dashboard?success=true`,
-        'cancel_url': `${req.headers.origin || 'https://hebrew-master-muab.vercel.app'}/pricing?canceled=true`,
-        'client_reference_id': userId || 'guest'
-      })
+    const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+    
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: [
+        {
+          price: priceId,
+          quantity: 1,
+        },
+      ],
+      mode: 'subscription',
+      success_url: `${origin}/dashboard.html?success=true`,
+      cancel_url: `${origin}/pricing.html?canceled=true`,
+      client_reference_id: userId || 'guest',
     });
 
-    const session = await response.json();
-
-    if (!response.ok) {
-      throw new Error(session.error?.message || 'Checkout creation failed');
-    }
+    console.log('Checkout session created:', session.id);
 
     return res.status(200).json({ 
       sessionId: session.id,

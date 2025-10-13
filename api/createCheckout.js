@@ -1,65 +1,69 @@
 import Stripe from 'stripe';
 
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    // Enable CORS
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
-  try {
-    const { priceId, userId } = req.body;
-
-    if (!priceId) {
-      return res.status(400).json({ error: 'Price ID is required' });
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();
     }
 
-    if (!process.env.STRIPE_SECRET_KEY) {
-      console.error('STRIPE_SECRET_KEY is not set');
-      return res.status(500).json({ error: 'Stripe is not configured' });
+    if (req.method !== 'POST') {
+        return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    console.log('Creating checkout for price:', priceId);
+    try {
+        const { priceId, userId } = req.body;
 
-    // Initialize Stripe
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+        if (!priceId) {
+            return res.status(400).json({ error: 'Price ID is required' });
+        }
 
-    // Get the origin for success/cancel URLs
-    const origin = req.headers.origin || 'https://hebrew-master-muab.vercel.app';
-    
-    // Create checkout session
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items: [
-        {
-          price: priceId,
-          quantity: 1,
-        },
-      ],
-      mode: 'subscription',
-      success_url: `${origin}/dashboard.html?success=true`,
-      cancel_url: `${origin}/pricing.html?canceled=true`,
-      client_reference_id: userId || 'guest',
-    });
+        const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+        if (!stripeSecretKey) {
+            console.error('STRIPE_SECRET_KEY is not set');
+            return res.status(500).json({ error: 'Stripe configuration error' });
+        }
 
-    console.log('Checkout session created:', session.id);
+        const stripe = new Stripe(stripeSecretKey);
 
-    return res.status(200).json({ 
-      sessionId: session.id,
-      url: session.url 
-    });
+        console.log('Creating checkout for price:', priceId);
 
-  } catch (error) {
-    console.error('Checkout error:', error);
-    return res.status(500).json({ 
-      error: 'Checkout creation failed',
-      details: error.message 
-    });
-  }
+        // Get the domain for redirect URLs
+        const domain = req.headers.host || 'hebrew-master-muab.vercel.app';
+        const protocol = domain.includes('localhost') ? 'http' : 'https';
+
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: [
+                {
+                    price: priceId,
+                    quantity: 1,
+                },
+            ],
+            mode: 'subscription',
+            success_url: `${protocol}://${domain}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${protocol}://${domain}/cancel.html`,
+            client_reference_id: userId || 'guest',
+            metadata: {
+                userId: userId || 'guest'
+            }
+        });
+
+        console.log('Checkout session created:', session.id);
+
+        return res.status(200).json({ 
+            sessionId: session.id,
+            url: session.url 
+        });
+
+    } catch (error) {
+        console.error('Checkout error:', error);
+        return res.status(500).json({ 
+            error: 'Failed to create checkout session',
+            details: error.message 
+        });
+    }
 }

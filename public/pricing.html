@@ -199,7 +199,24 @@
         <div id="loading" class="loading">Loading pricing...</div>
 
         <div id="pricing-content" style="display: none;">
-            <div class="pricing-grid">
+<div class="pricing-grid">
+                <!-- Free Plan -->
+                <div class="pricing-card">
+                    <div class="plan-name">Free</div>
+                    <div class="price">$0</div>
+                    <div class="price-period">forever</div>
+                    <ul class="features">
+                        <li>Lesson 1: Hebrew Alphabet</li>
+                        <li>Basic vocabulary</li>
+                        <li>Progress tracking</li>
+                        <li>Mobile access</li>
+                        <li>No credit card required</li>
+                    </ul>
+                    <button class="subscribe-btn" onclick="window.location.href='/login.html'">
+                        Start Free
+                    </button>
+                </div>
+
                 <!-- Monthly Plan -->
                 <div class="pricing-card">
                     <div class="plan-name">Monthly</div>
@@ -337,3 +354,4 @@ const firebaseConfig = {
     </script>
 </body>
 </html>
+

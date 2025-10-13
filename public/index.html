@@ -45,16 +45,6 @@
             50% { opacity: 1; }
         }
 
-        .particles {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            pointer-events: none;
-        }
-
         nav {
             position: fixed;
             top: 0;
@@ -82,6 +72,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            cursor: pointer;
         }
 
         @keyframes logoGlow {
@@ -124,6 +115,26 @@
 
         .nav-links a:hover {
             color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .login-btn {
+            padding: 0.65rem 1.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .login-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
             transform: translateY(-2px);
         }
 
@@ -463,7 +474,7 @@
                 padding: 1rem 5%;
             }
 
-            .nav-links a {
+            .nav-links a:not(.login-btn) {
                 display: none;
             }
 
@@ -506,18 +517,18 @@
 <body>
     <canvas id="canvas3d"></canvas>
     <div class="gradient-overlay"></div>
-    <div class="particles" id="particles"></div>
 
     <nav>
-        <div class="logo">
+        <div class="logo" onclick="window.location.href='/index.html'">
             <span class="logo-icon">🕊️</span>
             Hebrew Master
         </div>
         <div class="nav-links">
             <a href="#features">Features</a>
-            <a href="#gamification">Fun Learning</a>
             <a href="#demo">Try Demo</a>
-            <button class="cta-button" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Try Free Demo</button>
+            <a href="/pricing.html">Pricing</a>
+            <a href="/login.html" class="login-btn">Login</a>
+            <button class="cta-button" onclick="window.location.href='/login.html'">Start Free Trial</button>
         </div>
     </nav>
 
@@ -526,8 +537,8 @@
             <h1>Master Hebrew<br>Like Never Before</h1>
             <p>Experience the most relaxing, AI-powered Hebrew learning journey. From complete beginner to fluent speaker with calming voices, humor, and cutting-edge technology.</p>
             <div class="hero-buttons">
-                <button class="primary-btn" onclick="window.location.href='signup.html'">Start Free Trial ✨</button>
-                <button class="secondary-btn">See How It Works</button>
+                <button class="primary-btn" onclick="window.location.href='/login.html'">Start Free Trial ✨</button>
+                <button class="secondary-btn" onclick="window.location.href='/pricing.html'">View Pricing</button>
             </div>
             <div class="trust-badges">
                 <div class="trust-badge"><span>✨</span><span>Powered by OpenAI GPT-4</span></div>

@@ -24,7 +24,6 @@
             margin: 0 auto;
         }
 
-        /* Header */
         .header {
             display: flex;
             justify-content: space-between;
@@ -62,7 +61,6 @@
             transform: translateY(-2px);
         }
 
-        /* Lesson Container */
         .lesson-container {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(30px);
@@ -88,7 +86,6 @@
             font-size: 1.1rem;
         }
 
-        /* Practice Section */
         .practice-section {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(30px);
@@ -117,7 +114,7 @@
             color: rgba(255, 255, 255, 0.8);
         }
 
-        input, textarea {
+        input, textarea, select {
             width: 100%;
             padding: 1rem;
             background: rgba(255, 255, 255, 0.1);
@@ -129,12 +126,21 @@
             transition: all 0.3s ease;
         }
 
+        select {
+            cursor: pointer;
+        }
+
+        select option {
+            background: #302b63;
+            color: white;
+        }
+
         textarea {
             min-height: 120px;
             resize: vertical;
         }
 
-        input:focus, textarea:focus {
+        input:focus, textarea:focus, select:focus {
             outline: none;
             border-color: rgba(168, 85, 247, 0.5);
             background: rgba(255, 255, 255, 0.15);
@@ -179,7 +185,6 @@
             background: rgba(255, 255, 255, 0.15);
         }
 
-        /* Result Box */
         .result-box {
             background: rgba(99, 102, 241, 0.1);
             border: 1px solid rgba(99, 102, 241, 0.3);
@@ -219,7 +224,6 @@
             width: 100%;
         }
 
-        /* Vocabulary Cards */
         .vocab-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -274,7 +278,6 @@
             opacity: 1;
         }
 
-        /* Loading State */
         .loading {
             display: inline-block;
             width: 20px;
@@ -289,7 +292,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Error Message */
         .error-message {
             background: rgba(239, 68, 68, 0.1);
             border: 1px solid rgba(239, 68, 68, 0.3);
@@ -326,7 +328,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <div class="header">
             <a href="dashboard.html" class="logo">
                 <span>🕊️</span>
@@ -335,13 +336,11 @@
             <a href="dashboard.html" class="back-btn">← Back to Dashboard</a>
         </div>
 
-        <!-- Lesson Title -->
         <div class="lesson-container">
             <h1 class="lesson-title">Interactive Hebrew Lesson 📚</h1>
             <p class="lesson-subtitle">Practice translation and pronunciation with AI</p>
         </div>
 
-        <!-- Translation Practice -->
         <div class="practice-section">
             <h2 class="section-title">
                 <span>🔤</span>
@@ -373,12 +372,21 @@
             <div id="translationError" class="error-message"></div>
         </div>
 
-        <!-- Text-to-Speech Practice -->
         <div class="practice-section">
             <h2 class="section-title">
                 <span>🔊</span>
                 <span>Hebrew Pronunciation Practice</span>
             </h2>
+
+            <div class="input-group">
+                <label for="voiceSelect">🎤 Choose Voice:</label>
+                <select id="voiceSelect">
+                    <option value="female1">👩 קול נשי 1 (טבעי)</option>
+                    <option value="female2">👩 קול נשי 2 (ברור)</option>
+                    <option value="male1">👨 קול גברי 1 (עמוק)</option>
+                    <option value="male2">👨 קול גברי 2 (אנרגטי)</option>
+                </select>
+            </div>
 
             <div class="input-group">
                 <label for="hebrewInput">Enter Hebrew text:</label>
@@ -402,67 +410,66 @@
             <div id="ttsError" class="error-message"></div>
         </div>
 
-        <!-- Common Vocabulary -->
         <div class="practice-section">
             <h2 class="section-title">
                 <span>📖</span>
                 <span>Common Hebrew Vocabulary</span>
             </h2>
             <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1.5rem;">
-                Click any card to hear the pronunciation
+                Click any card to hear the pronunciation with your selected voice
             </p>
 
             <div class="vocab-grid">
-                <div class="vocab-card" onclick="speakVocab('שלום', 'Shalom')">
+                <div class="vocab-card" onclick="speakVocab('שלום')">
                     <div class="vocab-hebrew">שלום</div>
                     <div class="vocab-english">Hello / Peace</div>
                     <div class="vocab-pronunciation">Shalom</div>
                     <div class="play-icon">▶️</div>
                 </div>
 
-                <div class="vocab-card" onclick="speakVocab('תודה', 'Toda')">
+                <div class="vocab-card" onclick="speakVocab('תודה')">
                     <div class="vocab-hebrew">תודה</div>
                     <div class="vocab-english">Thank you</div>
                     <div class="vocab-pronunciation">Toda</div>
                     <div class="play-icon">▶️</div>
                 </div>
 
-                <div class="vocab-card" onclick="speakVocab('בוקר טוב', 'Boker Tov')">
+                <div class="vocab-card" onclick="speakVocab('בוקר טוב')">
                     <div class="vocab-hebrew">בוקר טוב</div>
                     <div class="vocab-english">Good morning</div>
                     <div class="vocab-pronunciation">Boker Tov</div>
                     <div class="play-icon">▶️</div>
                 </div>
 
-                <div class="vocab-card" onclick="speakVocab('לילה טוב', 'Laila Tov')">
+                <div class="vocab-card" onclick="speakVocab('לילה טוב')">
                     <div class="vocab-hebrew">לילה טוב</div>
                     <div class="vocab-english">Good night</div>
                     <div class="vocab-pronunciation">Laila Tov</div>
                     <div class="play-icon">▶️</div>
                 </div>
 
-                <div class="vocab-card" onclick="speakVocab('מה שלומך', 'Ma Shlomkha')">
+                <div class="vocab-card" onclick="speakVocab('מה שלומך')">
                     <div class="vocab-hebrew">מה שלומך</div>
                     <div class="vocab-english">How are you?</div>
                     <div class="vocab-pronunciation">Ma Shlomkha</div>
                     <div class="play-icon">▶️</div>
                 </div>
 
-                <div class="vocab-card" onclick="speakVocab('כן', 'Ken')">
+                <div class="vocab-card" onclick="speakVocab('כן')">
                     <div class="vocab-hebrew">כן</div>
                     <div class="vocab-english">Yes</div>
                     <div class="vocab-pronunciation">Ken</div>
                     <div class="play-icon">▶️</div>
                 </div>
 
-                <div class="vocab-card" onclick="speakVocab('לא', 'Lo')">
+                <div class="vocab-card" onclick="speakVocab('לא')">
                     <div class="vocab-hebrew">לא</div>
                     <div class="vocab-english">No</div>
                     <div class="vocab-pronunciation">Lo</div>
                     <div class="play-icon">▶️</div>
                 </div>
 
-                <div class="vocab-card" onclick="speakVocab('סליחה', 'Slicha')">
+                <div class="vocab-card" onclick="speakVocab('סליחה')">
                     <div class="vocab-hebrew">סליחה</div>
                     <div class="vocab-english">Excuse me / Sorry</div>
                     <div class="vocab-pronunciation">Slicha</div>
@@ -472,7 +479,6 @@
         </div>
     </div>
 
-    <!-- Firebase (for auth check) -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     <script src="firebase-config.js"></script>
@@ -480,14 +486,12 @@
     <script>
         let currentHebrewText = '';
 
-        // Check if user is authenticated
         firebase.auth().onAuthStateChanged((user) => {
             if (!user) {
                 window.location.href = 'login.html';
             }
         });
 
-        // Translate English to Hebrew
         async function translateText() {
             const englishInput = document.getElementById('englishInput').value.trim();
             const translateBtn = document.getElementById('translateBtn');
@@ -500,7 +504,6 @@
                 return;
             }
 
-            // Show loading
             translateBtn.disabled = true;
             translateBtn.innerHTML = '<span class="loading"></span><span>Translating...</span>';
             resultBox.classList.remove('show');
@@ -534,7 +537,6 @@
             }
         }
 
-        // Speak translated Hebrew
         async function speakHebrew() {
             if (!currentHebrewText) {
                 showError('translationError', 'Please translate some text first');
@@ -544,6 +546,7 @@
             const speakBtn = document.getElementById('speakBtn');
             const audioPlayer = document.getElementById('audioPlayer');
             const errorBox = document.getElementById('translationError');
+            const selectedVoice = document.getElementById('voiceSelect').value;
 
             speakBtn.disabled = true;
             speakBtn.innerHTML = '<span class="loading"></span><span>Generating audio...</span>';
@@ -555,7 +558,10 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ text: currentHebrewText })
+                    body: JSON.stringify({ 
+                        text: currentHebrewText,
+                        voice: selectedVoice
+                    })
                 });
 
                 const data = await response.json();
@@ -576,13 +582,13 @@
             }
         }
 
-        // Speak custom Hebrew text
         async function speakCustomHebrew() {
             const hebrewInput = document.getElementById('hebrewInput').value.trim();
             const customSpeakBtn = document.getElementById('customSpeakBtn');
             const resultBox = document.getElementById('ttsResult');
             const audioPlayer = document.getElementById('customAudioPlayer');
             const errorBox = document.getElementById('ttsError');
+            const selectedVoice = document.getElementById('voiceSelect').value;
 
             if (!hebrewInput) {
                 showError('ttsError', 'Please enter some Hebrew text');
@@ -600,7 +606,10 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ text: hebrewInput })
+                    body: JSON.stringify({ 
+                        text: hebrewInput,
+                        voice: selectedVoice
+                    })
                 });
 
                 const data = await response.json();
@@ -621,15 +630,19 @@
             }
         }
 
-        // Speak vocabulary word
-        async function speakVocab(hebrewText, pronunciation) {
+        async function speakVocab(hebrewText) {
+            const selectedVoice = document.getElementById('voiceSelect').value;
+            
             try {
                 const response = await fetch('/api/textToSpeech', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ text: hebrewText })
+                    body: JSON.stringify({ 
+                        text: hebrewText,
+                        voice: selectedVoice
+                    })
                 });
 
                 const data = await response.json();
@@ -643,7 +656,6 @@
             }
         }
 
-        // Show error message
         function showError(elementId, message) {
             const errorBox = document.getElementById(elementId);
             errorBox.textContent = '❌ ' + message;
@@ -653,7 +665,6 @@
             }, 5000);
         }
 
-        // Allow Enter key to trigger translation
         document.getElementById('englishInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();

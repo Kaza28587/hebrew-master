@@ -44,8 +44,8 @@ export default async function handler(req, res) {
                 },
             ],
             mode: 'subscription',
-            success_url: `${protocol}://${domain}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${protocol}://${domain}/cancel.html`,
+success_url: `${protocol}://${domain}/pricing.html?success=true&session_id={CHECKOUT_SESSION_ID}`,
+cancel_url: `${protocol}://${domain}/pricing.html?cancelled=true`,
             client_reference_id: userId || 'guest',
             metadata: {
                 userId: userId || 'guest'
@@ -67,3 +67,4 @@ export default async function handler(req, res) {
         });
     }
 }
+

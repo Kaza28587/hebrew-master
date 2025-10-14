@@ -18,71 +18,7 @@
             overflow-x: hidden;
             color: white;
             position: relative;
-            transition: background 0.5s ease;
-        }
-
-        body.dark-theme {
             background: linear-gradient(135deg, #0a0b0d 0%, #1a1b26 100%);
-        }
-
-        body.light-theme {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 100%);
-            color: #1a1b26;
-        }
-
-        body.neon-theme {
-            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-        }
-
-        body.nature-theme {
-            background: linear-gradient(135deg, #134e4a 0%, #064e3b 100%);
-        }
-
-        body.minimalist-theme {
-            background: #ffffff;
-            color: #000000;
-        }
-
-        .mesh-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            opacity: 0.3;
-            pointer-events: none;
-        }
-
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.4;
-            animation: float 25s infinite ease-in-out;
-        }
-
-        .orb1 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.3), transparent);
-            top: -200px;
-            left: -200px;
-        }
-
-        .orb2 {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.25), transparent);
-            bottom: -250px;
-            right: -250px;
-            animation-delay: 7s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0); }
-            33% { transform: translate(50px, -50px); }
-            66% { transform: translate(-30px, 30px); }
         }
 
         .container {
@@ -112,33 +48,6 @@
 
         .persona-icon {
             font-size: 2.5rem;
-            animation: gentleFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes gentleFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        .lesson-info {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .streak-counter, .progress-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            font-weight: 600;
-        }
-
-        .progress-badge {
-            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
         }
 
         .lesson-card {
@@ -151,23 +60,12 @@
             margin-bottom: 30px;
         }
 
-        body.light-theme .lesson-card {
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
         .lesson-title {
             text-align: center;
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 15px;
             background: linear-gradient(135deg, #ffffff 0%, #a78bfa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        body.light-theme .lesson-title {
-            background: linear-gradient(135deg, #1a1b26 0%, #8b5cf6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -186,56 +84,24 @@
             text-align: center;
             margin: 40px 0;
             border: 2px solid rgba(168, 85, 247, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hebrew-showcase::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
-            animation: rotateGlow 10s linear infinite;
-        }
-
-        @keyframes rotateGlow {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
 
         .hebrew-letter-big {
             font-size: 10rem;
             font-weight: 900;
-            background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #a78bfa;
             margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-            animation: letterPulse 3s ease-in-out infinite;
-        }
-
-        @keyframes letterPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
         }
 
         .letter-name {
             font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
         }
 
         .letter-sound {
             font-size: 1.2rem;
             opacity: 0.8;
-            position: relative;
-            z-index: 1;
         }
 
         .audio-btn, .btn {
@@ -295,7 +161,6 @@
             opacity: 0.8;
         }
 
-        /* VOICE RECORDING */
         .voice-section {
             background: rgba(34, 197, 94, 0.1);
             padding: 40px;
@@ -305,71 +170,12 @@
             text-align: center;
         }
 
-        .record-btn {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-            border: 4px solid white;
-            color: white;
-            font-size: 3rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.4);
-            margin: 20px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .record-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 15px 40px rgba(239, 68, 68, 0.6);
-        }
-
-        .record-btn.recording {
-            animation: recordPulse 1.5s infinite;
-            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-        }
-
-        @keyframes recordPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-        }
-
         .recording-status {
             font-size: 1.2rem;
             margin: 20px 0;
             min-height: 30px;
         }
 
-        .playback-controls {
-            display: none;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .playback-controls.show {
-            display: flex;
-        }
-
-        .canvas-btn {
-            padding: 12px 24px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 12px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .canvas-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        /* GAMES */
         .game-section {
             background: rgba(251, 146, 60, 0.1);
             padding: 40px;
@@ -380,7 +186,7 @@
 
         .game-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 15px;
             margin: 30px 0;
         }
@@ -414,7 +220,6 @@
             pointer-events: none;
         }
 
-        /* PRACTICE QUIZ */
         .practice-section {
             background: rgba(168, 85, 247, 0.1);
             padding: 40px;
@@ -452,11 +257,6 @@
             transform: translateX(10px);
         }
 
-        .option.selected {
-            background: rgba(168, 85, 247, 0.3);
-            border-color: #a78bfa;
-        }
-
         .option.correct {
             background: rgba(34, 197, 94, 0.3);
             border-color: #22c55e;
@@ -479,12 +279,6 @@
 
         .feedback-message.show {
             display: block;
-            animation: slideIn 0.5s ease;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .feedback-message.correct {
@@ -521,25 +315,14 @@
             border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
         .btn-primary {
             background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
             color: white;
-            box-shadow: 0 10px 25px rgba(168, 85, 247, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(168, 85, 247, 0.5);
         }
 
         .btn-primary:disabled {
             opacity: 0.5;
             cursor: not-allowed;
-            transform: none;
         }
 
         .celebration-modal {
@@ -561,79 +344,19 @@
 
         .celebration-modal.show {
             display: block;
-            animation: popIn 0.6s ease;
-        }
-
-        @keyframes popIn {
-            0% { transform: translate(-50%, -50%) scale(0); }
-            50% { transform: translate(-50%, -50%) scale(1.1); }
-            100% { transform: translate(-50%, -50%) scale(1); }
-        }
-
-        .celebration-emoji {
-            font-size: 5rem;
-            margin-bottom: 20px;
-        }
-
-        .celebration-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .celebration-text {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 30px;
-        }
-
-        .completion-checklist {
-            text-align: left;
-            margin: 20px 0;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-        }
-
-        .completion-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 10px 0;
-            font-size: 1rem;
         }
 
         @media (max-width: 768px) {
             .lesson-card {
                 padding: 30px 20px;
             }
-
             .hebrew-letter-big {
                 font-size: 6rem;
-            }
-
-            .lesson-title {
-                font-size: 2rem;
-            }
-
-            .lesson-nav {
-                flex-direction: column;
-            }
-
-            .game-grid {
-                grid-template-columns: repeat(3, 1fr);
             }
         }
     </style>
 </head>
-<body class="dark-theme">
-    <div class="mesh-gradient">
-        <div class="orb orb1"></div>
-        <div class="orb orb2"></div>
-    </div>
-
-    <audio id="background-audio" loop></audio>
-
+<body>
     <div class="container">
         <div class="lesson-header">
             <div class="user-greeting">
@@ -643,62 +366,55 @@
                     <div style="font-size: 0.9rem; opacity: 0.7; margin-top: 5px;">Lesson 1 of 60</div>
                 </div>
             </div>
-
-            <div class="lesson-info">
-                <div class="streak-counter" id="streak-display" style="display: none;">
-                    <span>🔥</span>
-                    <span id="streak-count">0</span>
-                </div>
-                <div class="progress-badge" id="progress-display" style="display: none;">
-                    <span id="progress-text">0%</span>
-                </div>
-            </div>
         </div>
 
         <div class="lesson-card">
             <h1 class="lesson-title">The Letter Aleph</h1>
             <p class="lesson-subtitle">Your Hebrew journey begins here!</p>
 
-            <!-- INTRODUCTION -->
             <div class="hebrew-showcase">
                 <div class="hebrew-letter-big">א</div>
                 <div class="letter-name">Aleph (אָלֶף)</div>
                 <div class="letter-sound">Sound: "ah" (silent or glottal stop)</div>
-                <button class="audio-btn" onclick="playLetterSound()">🔊 Hear it</button>
+                <button class="audio-btn" onclick="playSound()">🔊 Hear it</button>
             </div>
 
-            <!-- EXAMPLES -->
             <h2 class="section-heading">See Aleph in Action</h2>
-            <div class="examples-grid" id="examples-container"></div>
-
-            <!-- VOICE RECORDING -->
-            <div class="voice-section">
-                <h2 class="section-heading">🗣️ Speaking Practice</h2>
-                <p style="opacity: 0.9; margin-bottom: 20px;">Say "Aleph" out loud and record yourself:</p>
-                
-                <button class="record-btn" id="record-btn" onclick="toggleRecording()">
-                    <span id="record-icon">🎤</span>
-                </button>
-                
-                <div class="recording-status" id="recording-status">Click to start recording</div>
-                
-                <div class="playback-controls" id="playback-controls">
-                    <button class="canvas-btn" onclick="playRecording()">▶️ Play</button>
-                    <button class="canvas-btn" onclick="deleteRecording()">🗑️ Delete</button>
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="hebrew-text">אני אוהב אוכל</div>
+                    <div class="translation">I love food</div>
+                </div>
+                <div class="example-card">
+                    <div class="hebrew-text">אבא אופה עוגה</div>
+                    <div class="translation">Dad bakes a cake</div>
+                </div>
+                <div class="example-card">
+                    <div class="hebrew-text">אמא אוכלת תפוח</div>
+                    <div class="translation">Mom eats an apple</div>
                 </div>
             </div>
 
-            <!-- MEMORY GAME -->
+            <div class="voice-section">
+                <h2 class="section-heading">🗣️ Speaking Practice</h2>
+                <p style="opacity: 0.9; margin-bottom: 20px;">Say "Aleph" out loud 3 times, then click "I practiced!"</p>
+                
+                <button class="btn audio-btn" onclick="markSpeakingComplete()" id="practice-btn">
+                    ✓ I practiced!
+                </button>
+                
+                <div class="recording-status" id="recording-status"></div>
+            </div>
+
             <div class="game-section">
                 <h2 class="section-heading">🎮 Memory Matching Game</h2>
-                <p style="text-align: center; opacity: 0.9; margin-bottom: 20px;">Match the Hebrew letter with its English name:</p>
+                <p style="text-align: center; opacity: 0.9; margin-bottom: 20px;">Match the Hebrew letters with their names:</p>
                 
                 <div class="game-grid" id="memory-game"></div>
                 
                 <div class="feedback-message" id="game-feedback"></div>
             </div>
 
-            <!-- QUIZ -->
             <div class="practice-section">
                 <h2 class="section-heading">📝 Quick Quiz</h2>
                 <p class="question-text">Which letter is this?</p>
@@ -725,238 +441,44 @@
     </div>
 
     <div class="celebration-modal" id="celebration">
-        <div class="celebration-emoji" id="celebration-emoji">🎉</div>
-        <h2 class="celebration-title" id="celebration-title">Amazing!</h2>
-        <p class="celebration-text" id="celebration-text">You completed Lesson 1!</p>
-        
-        <div class="completion-checklist" id="completion-checklist"></div>
+        <div style="font-size: 5rem; margin-bottom: 20px;">🎉</div>
+        <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 15px;">Amazing!</h2>
+        <p style="font-size: 1.2rem; opacity: 0.9; margin-bottom: 30px;">You completed Lesson 1!</p>
         
         <button class="nav-btn btn-primary" onclick="nextLesson()">Next Lesson →</button>
     </div>
 
     <script>
-        let userProfile = null;
         let completedActivities = {
             quiz: false,
             speaking: false,
             game: false
         };
 
-        let mediaRecorder, audioChunks = [], recordedBlob = null;
         let gameCards = [];
         let flippedCards = [];
         let matchedPairs = 0;
 
-        function loadUserProfile() {
-            const saved = localStorage.getItem('hebrewMasterProfile');
-            userProfile = saved ? JSON.parse(saved) : {
-                name: 'Friend',
-                persona: { emoji: '🦉', name: 'Zen Owl' },
-                visualTheme: ['dark'],
-                atmosphere: ['silence'],
-                interests: ['food'],
-                humorIntensity: 5,
-                encouragementStyle: ['gentle'],
-                rewards: []
-            };
-            applyPersonalization();
+        const saved = localStorage.getItem('hebrewMasterProfile');
+        const userProfile = saved ? JSON.parse(saved) : { name: 'Friend' };
+        document.getElementById('greeting-text').textContent = 'Hey ' + userProfile.name + '!';
+
+        function playSound() {
+            const utterance = new SpeechSynthesisUtterance('Aleph');
+            utterance.lang = 'en-US';
+            utterance.rate = 0.8;
+            speechSynthesis.speak(utterance);
         }
 
-        function applyPersonalization() {
-            document.getElementById('greeting-text').textContent = `Hey ${userProfile.name}! ${userProfile.persona.emoji}`;
-            document.getElementById('persona-icon').textContent = userProfile.persona.emoji;
-
-            document.body.className = '';
-            document.body.classList.add(`${userProfile.visualTheme[0] || 'dark'}-theme`);
-
-            if (userProfile.atmosphere && userProfile.atmosphere[0] !== 'silence') {
-                playBackgroundSound(userProfile.atmosphere[0]);
-            }
-
-            if (userProfile.rewards && userProfile.rewards.includes('streaks')) {
-                document.getElementById('streak-display').style.display = 'flex';
-                updateStreak();
-            }
-
-            if (userProfile.rewards && userProfile.rewards.includes('progress')) {
-                document.getElementById('progress-display').style.display = 'block';
-                document.getElementById('progress-text').textContent = '2%';
-            }
-
-            generateExamples();
-            initializeMemoryGame();
-        }
-
-        function playBackgroundSound(atmosphere) {
-            const audio = document.getElementById('background-audio');
-            const sounds = {
-                'ocean': 'https://cdn.pixabay.com/audio/2022/03/10/audio_c8c8e2d37f.mp3',
-                'lofi': 'https://cdn.pixabay.com/audio/2022/03/15/audio_7c0b4b1e15.mp3',
-                'rain': 'https://cdn.pixabay.com/audio/2022/03/10/audio_24681e28e6.mp3'
-            };
-            if (sounds[atmosphere]) {
-                audio.src = sounds[atmosphere];
-                audio.volume = 0.2;
-                audio.play().catch(() => {});
-            }
-        }
-
-        function generateExamples() {
-            const sets = {
-                food: [
-                    { hebrew: 'אני אוהב אוכל', translation: 'I love food' },
-                    { hebrew: 'אבא אופה עוגה', translation: 'Dad bakes a cake' },
-                    { hebrew: 'אמא אוכלת תפוח', translation: 'Mom eats an apple' }
-                ],
-                tech: [
-                    { hebrew: 'אני אוהב מחשבים', translation: 'I love computers' },
-                    { hebrew: 'אבא אוהב אפליקציות', translation: 'Dad loves apps' },
-                    { hebrew: 'אמא אוהבת אינטרנט', translation: 'Mom loves internet' }
-                ],
-                music: [
-                    { hebrew: 'אני אוהב מוזיקה', translation: 'I love music' },
-                    { hebrew: 'אבא משחק גיטרה', translation: 'Dad plays guitar' },
-                    { hebrew: 'אמא אוהבת שירים', translation: 'Mom loves songs' }
-                ],
-                sports: [
-                    { hebrew: 'אני אוהב ספורט', translation: 'I love sports' },
-                    { hebrew: 'אבא אוהב כדורגל', translation: 'Dad loves soccer' },
-                    { hebrew: 'אמא אוהבת ריצה', translation: 'Mom loves running' }
-                ],
-                gaming: [
-                    { hebrew: 'אני אוהב משחקים', translation: 'I love games' },
-                    { hebrew: 'אבא משחק וידאו', translation: 'Dad plays video' },
-                    { hebrew: 'אמא אוהבת אפליקציות', translation: 'Mom loves apps' }
-                ]
-            };
-
-            const interest = (userProfile.interests && userProfile.interests[0]) || 'food';
-            const examples = sets[interest] || sets.food;
-
-            document.getElementById('examples-container').innerHTML = examples.map(ex => `
-                <div class="example-card">
-                    <div class="hebrew-text">${ex.hebrew}</div>
-                    <div class="translation">${ex.translation}</div>
-                </div>
-            `).join('');
-        }
-
-        // VOICE RECORDING WITH SPEECH RECOGNITION
-        async function toggleRecording() {
-            const btn = document.getElementById('record-btn');
-            const status = document.getElementById('recording-status');
-            const icon = document.getElementById('record-icon');
-
-            if (!mediaRecorder || mediaRecorder.state === 'inactive') {
-                try {
-                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                    mediaRecorder = new MediaRecorder(stream);
-                    audioChunks = [];
-
-                    mediaRecorder.ondataavailable = (e) => audioChunks.push(e.data);
-                    mediaRecorder.onstop = async () => {
-                        recordedBlob = new Blob(audioChunks, { type: 'audio/wav' });
-                        
-                        // Try to transcribe what was said
-                        await analyzeRecording();
-                        
-                        document.getElementById('playback-controls').classList.add('show');
-                    };
-
-                    mediaRecorder.start();
-                    btn.classList.add('recording');
-                    icon.textContent = '⏹️';
-                    status.textContent = '🔴 Recording... Say "Aleph" now!';
-
-                } catch (err) {
-                    status.textContent = '⚠️ Microphone access needed';
-                }
-            } else {
-                mediaRecorder.stop();
-                mediaRecorder.stream.getTracks().forEach(track => track.stop());
-                btn.classList.remove('recording');
-                icon.textContent = '🎤';
-            }
-        }
-
-        async function analyzeRecording() {
-            const status = document.getElementById('recording-status');
-            
-            // Check if browser supports speech recognition
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            
-            if (!SpeechRecognition) {
-                // If no speech recognition, just mark as complete
-                completedActivities.speaking = true;
-                status.textContent = '✓ Recording saved! Great effort!';
-                updateCompletionButton();
-                return;
-            }
-
-            try {
-                // Create new recognition instance for playback analysis
-                const recognition = new SpeechRecognition();
-                recognition.lang = 'en-US';
-                recognition.continuous = false;
-                recognition.interimResults = false;
-
-                // Play the recording and try to recognize it
-                const audio = new Audio(URL.createObjectURL(recordedBlob));
-                
-                recognition.onresult = (event) => {
-                    const transcript = event.results[0][0].transcript.toLowerCase();
-                    const letterName = 'aleph';
-                    
-                    // Check if they said something close to "Aleph"
-                    if (transcript.includes('aleph') || transcript.includes('alef') || 
-                        transcript.includes('alfa') || transcript.includes('alpha')) {
-                        completedActivities.speaking = true;
-                        status.innerHTML = '🎉 <strong>Perfect!</strong> You said it correctly!';
-                        status.style.color = '#22c55e';
-                    } else {
-                        status.innerHTML = `🤔 You said: "${transcript}"<br>Try saying "Aleph" (sounds like "AH-lef")`;
-                        status.style.color = '#fb923c';
-                    }
-                    updateCompletionButton();
-                };
-
-                recognition.onerror = () => {
-                    // If recognition fails, just mark as complete
-                    completedActivities.speaking = true;
-                    status.textContent = '✓ Recording saved! Keep practicing!';
-                    updateCompletionButton();
-                };
-
-                recognition.start();
-                audio.play();
-
-            } catch (err) {
-                // Fallback if anything fails
-                completedActivities.speaking = true;
-                status.textContent = '✓ Recording saved! Great job!';
-                updateCompletionButton();
-            }
-        }
-
-        function playRecording() {
-            if (recordedBlob) {
-                const audio = new Audio(URL.createObjectURL(recordedBlob));
-                audio.play();
-            }
-        }
-
-        function deleteRecording() {
-            recordedBlob = null;
-            completedActivities.speaking = false;
-            const status = document.getElementById('recording-status');
-            document.getElementById('playback-controls').classList.remove('show');
-            status.textContent = 'Click to start recording';
-            status.style.color = '';
-            document.getElementById('record-icon').textContent = '🎤';
+        function markSpeakingComplete() {
+            completedActivities.speaking = true;
+            document.getElementById('recording-status').innerHTML = '✓ <strong>Great job practicing!</strong>';
+            document.getElementById('recording-status').style.color = '#22c55e';
+            document.getElementById('practice-btn').disabled = true;
+            document.getElementById('practice-btn').style.opacity = '0.5';
             updateCompletionButton();
         }
 
-        // MEMORY GAME
         function initializeMemoryGame() {
             const pairs = [
                 { id: 1, content: 'א', type: 'hebrew' },
@@ -970,15 +492,9 @@
             gameCards = pairs.sort(() => Math.random() - 0.5);
             const gameGrid = document.getElementById('memory-game');
 
-            gameGrid.innerHTML = gameCards.map((card, index) => `
-                <div class="game-card" data-id="${card.id}" data-index="${index}">
-                    <span>${card.content}</span>
-                </div>
-            `).join('');
-
-            gameGrid.querySelectorAll('.game-card').forEach(card => {
-                card.addEventListener('click', () => flipCard(card));
-            });
+            gameGrid.innerHTML = gameCards.map((card, index) => 
+                '<div class="game-card" data-id="' + card.id + '" data-index="' + index + '" onclick="flipCard(this)"><span>' + card.content + '</span></div>'
+            ).join('');
         }
 
         function flipCard(card) {
@@ -993,7 +509,8 @@
         }
 
         function checkMatch() {
-            const [card1, card2] = flippedCards;
+            const card1 = flippedCards[0];
+            const card2 = flippedCards[1];
             const id1 = card1.getAttribute('data-id');
             const id2 = card2.getAttribute('data-id');
 
@@ -1017,114 +534,33 @@
             flippedCards = [];
         }
 
-        // QUIZ
         function checkAnswer(index) {
             const options = document.querySelectorAll('.option');
             const feedback = document.getElementById('feedback');
 
-            options.forEach(opt => opt.classList.remove('selected', 'correct', 'incorrect'));
-            options[index].classList.add('selected');
-
             if (index === 0) {
                 options[0].classList.add('correct');
                 feedback.className = 'feedback-message correct show';
-                feedback.textContent = getPersonalizedFeedback('correct');
+                feedback.textContent = '🌟 Perfect! You got it right!';
                 completedActivities.quiz = true;
                 updateCompletionButton();
             } else {
                 options[index].classList.add('incorrect');
                 feedback.className = 'feedback-message incorrect show';
-                feedback.textContent = getPersonalizedFeedback('incorrect');
-            }
-        }
-
-        function getPersonalizedFeedback(type) {
-            const intensity = userProfile.humorIntensity || 5;
-            const style = (userProfile.encouragementStyle && userProfile.encouragementStyle[0]) || 'gentle';
-
-            if (type === 'correct') {
-                if (style === 'joke' && intensity >= 8) {
-                    return "🎉 Sababa! Even Moses would high five you!";
-                } else if (style === 'challenge') {
-                    return "💪 Correct! Ready for the next challenge?";
-                } else {
-                    return "🌟 Perfect! You got it right!";
-                }
-            } else {
-                return "💙 Not quite, but great try! Give it another go!";
+                feedback.textContent = '💙 Not quite, try again!';
             }
         }
 
         function updateCompletionButton() {
-            const allCompleted = Object.values(completedActivities).every(v => v);
+            const allCompleted = completedActivities.quiz && completedActivities.speaking && completedActivities.game;
             document.getElementById('complete-btn').disabled = !allCompleted;
         }
 
         function completeLesson() {
-            const modal = document.getElementById('celebration');
-            document.getElementById('celebration-emoji').textContent = userProfile.persona.emoji;
-            document.getElementById('celebration-title').textContent = '🎉 Lesson Complete!';
-            document.getElementById('celebration-text').textContent = `Amazing work, ${userProfile.name}! You mastered Aleph!`;
-
-            document.getElementById('completion-checklist').innerHTML = `
-                <div class="completion-item">✓ Learned Aleph letter</div>
-                <div class="completion-item">✓ Heard pronunciation</div>
-                <div class="completion-item">✓ Recorded your voice</div>
-                <div class="completion-item">✓ Played memory game</div>
-                <div class="completion-item">✓ Passed the quiz</div>
-            `;
-
-            modal.classList.add('show');
-            updateProgress();
-        }
-
-        function updateProgress() {
+            document.getElementById('celebration').classList.add('show');
             let progress = JSON.parse(localStorage.getItem('hebrewProgress') || '{}');
             progress.lesson1 = true;
-            progress.completedLessons = (progress.completedLessons || 0) + 1;
             localStorage.setItem('hebrewProgress', JSON.stringify(progress));
-        }
-
-        function updateStreak() {
-            const lastStudy = localStorage.getItem('lastStudyDate');
-            const today = new Date().toDateString();
-            let streak = parseInt(localStorage.getItem('studyStreak') || '0');
-
-            if (lastStudy !== today) {
-                streak++;
-                localStorage.setItem('studyStreak', streak);
-                localStorage.setItem('lastStudyDate', today);
-            }
-
-            document.getElementById('streak-count').textContent = streak;
-        }
-
-        function playLetterSound() {
-            // Try multiple methods to ensure audio plays
-            const letter = 'Aleph';
-            
-            // Method 1: Hebrew with better settings
-            const utterance = new SpeechSynthesisUtterance(letter);
-            utterance.lang = 'en-US'; // Use English for better pronunciation
-            utterance.rate = 0.6;
-            utterance.pitch = 1.0;
-            utterance.volume = 1.0;
-            
-            // Wait for voices to load
-            if (speechSynthesis.getVoices().length === 0) {
-                speechSynthesis.addEventListener('voiceschanged', () => {
-                    speechSynthesis.speak(utterance);
-                });
-            } else {
-                speechSynthesis.speak(utterance);
-            }
-            
-            // Provide visual feedback
-            const btn = event.target;
-            btn.textContent = '🔊 Playing...';
-            setTimeout(() => {
-                btn.textContent = '🔊 Hear it';
-            }, 1500);
         }
 
         function goHome() {
@@ -1135,7 +571,7 @@
             window.location.href = 'lesson-2.html';
         }
 
-        window.addEventListener('DOMContentLoaded', loadUserProfile);
+        initializeMemoryGame();
     </script>
 </body>
 </html>

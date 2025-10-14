@@ -16,7 +16,15 @@
       "dest": "/public/signup.html"
     },
     {
+      "src": "/signup.html",
+      "dest": "/public/signup.html"
+    },
+    {
       "src": "/login",
+      "dest": "/public/login.html"
+    },
+    {
+      "src": "/login.html",
       "dest": "/public/login.html"
     },
     {
@@ -24,7 +32,15 @@
       "dest": "/public/dashboard.html"
     },
     {
+      "src": "/dashboard.html",
+      "dest": "/public/dashboard.html"
+    },
+    {
       "src": "/lesson",
+      "dest": "/public/lesson.html"
+    },
+    {
+      "src": "/lesson.html",
       "dest": "/public/lesson.html"
     },
     {
@@ -32,71 +48,25 @@
       "dest": "/public/lesson2.html"
     },
     {
+      "src": "/lesson2.html",
+      "dest": "/public/lesson2.html"
+    },
+    {
       "src": "/lesson3",
       "dest": "/public/lesson3.html"
     },
     {
-      "src": "/onboarding",
-      "dest": "/public/onboarding.html"
+      "src": "/lesson3.html",
+      "dest": "/public/lesson3.html"
     },
     {
-      "src": "/pricing",
-      "dest": "/public/pricing.html"
-    },
-    {
-      "src": "/success",
-      "dest": "/public/success.html"
+      "src": "/firebase-config.js",
+      "dest": "/public/firebase-config.js"
     },
     {
       "src": "/(.*)",
       "dest": "/public/$1"
     }
   ],
-  "cleanUrls": true,
-  "trailingSlash": false,
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600, must-revalidate"
-        },
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        }
-      ]
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/index.html",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/signup.html",
-      "destination": "/signup",
-      "permanent": true
-    },
-    {
-      "source": "/login.html",
-      "destination": "/login",
-      "permanent": true
-    },
-    {
-      "source": "/dashboard.html",
-      "destination": "/dashboard",
-      "permanent": true
-    }
-  ]
+  "cleanUrls": false
 }

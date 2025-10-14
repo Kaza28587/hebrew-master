@@ -116,6 +116,27 @@
             text-transform: uppercase;
             letter-spacing: 2px;
         }
+
+        .logout-btn {
+            padding: 10px 25px;
+            border-radius: 50px;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-white);
+            color: var(--text-primary);
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 68, 68, 0.2);
+            border-color: #ff4444;
+            color: #ff4444;
+            transform: translateY(-2px);
+        }
         
         .container {
             max-width: 1400px;
@@ -432,6 +453,7 @@
                 <div class="logo-hologram">א</div>
                 <span class="logo-text">Hebrew Master</span>
             </a>
+            <button class="logout-btn" onclick="handleLogout()">🚪 Logout</button>
         </div>
     </header>
     
@@ -468,6 +490,13 @@
             <button class="action-btn btn-secondary" onclick="resetProgress()">🔄 Reset Progress</button>
         </div>
     </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    
+    <!-- Firebase Config -->
+    <script src="firebase-config.js"></script>
 
     <script>
         const lessons = [
@@ -520,6 +549,14 @@
                 file: null
             }
         ];
+
+        // Protect this page - require authentication
+        requireAuth().then(user => {
+            console.log('User authenticated:', user.email);
+            loadUserData();
+        }).catch(() => {
+            window.location.href = '/login';
+        });
 
         function loadUserData() {
             const saved = localStorage.getItem('hebrewMasterProfile');
@@ -583,6 +620,12 @@
             }).join('');
         }
 
+        function handleLogout() {
+            if (confirm('Are you sure you want to logout?')) {
+                signOut();
+            }
+        }
+
         function resetProgress() {
             if (confirm('Are you sure you want to reset all your progress?')) {
                 localStorage.removeItem('hebrewProgress');
@@ -622,7 +665,6 @@
             starsContainer.appendChild(star);
         }
 
-        loadUserData();
         updateStreak();
     </script>
 </body>

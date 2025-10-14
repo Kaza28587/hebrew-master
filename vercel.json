@@ -1,21 +1,7 @@
 {
-  "rewrites": [
-    { "source": "/", "destination": "/public/index.html" },
-    { "source": "/signup", "destination": "/public/signup.html" },
-    { "source": "/signup.html", "destination": "/public/signup.html" },
-    { "source": "/login", "destination": "/public/login.html" },
-    { "source": "/login.html", "destination": "/public/login.html" },
-    { "source": "/dashboard", "destination": "/public/dashboard.html" },
-    { "source": "/dashboard.html", "destination": "/public/dashboard.html" },
-    { "source": "/lesson", "destination": "/public/lesson.html" },
-    { "source": "/lesson.html", "destination": "/public/lesson.html" },
-    { "source": "/lesson2", "destination": "/public/lesson2.html" },
-    { "source": "/lesson2.html", "destination": "/public/lesson2.html" },
-    { "source": "/lesson3", "destination": "/public/lesson3.html" },
-    { "source": "/lesson3.html", "destination": "/public/lesson3.html" },
-    { "source": "/firebase-config.js", "destination": "/public/firebase-config.js" },
-    { "source": "/:path*", "destination": "/public/:path*" }
-  ],
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "public": true,
   "headers": [
     {
       "source": "/(.*)",

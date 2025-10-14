@@ -24,15 +24,15 @@
       "dest": "/public/dashboard.html"
     },
     {
-      "src": "/lesson-1",
+      "src": "/lesson",
       "dest": "/public/lesson.html"
     },
     {
-      "src": "/lesson-2",
+      "src": "/lesson2",
       "dest": "/public/lesson2.html"
     },
     {
-      "src": "/lesson-3",
+      "src": "/lesson3",
       "dest": "/public/lesson3.html"
     },
     {

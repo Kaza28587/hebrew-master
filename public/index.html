@@ -2,7 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Master Hebrew with AI-powered personalized learning. GPT-4 curriculum, natural ElevenLabs voices, and proven results. Start free today!">
+    <meta name="theme-color" content="#0A0E27">
+    
+    <!-- iOS Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Hebrew Master">
+    
+    <!-- Android Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes">
+    
     <title>Hebrew Master - The Future of Language Learning</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
@@ -2488,7 +2499,10 @@
         const particlesContainer = document.getElementById('particles');
         const particleTypes = ['particle-blue', 'particle-purple', 'particle-pink'];
         
-        for (let i = 0; i < 80; i++) {
+        // Adjust particle count based on screen size
+        const particleCount = window.innerWidth < 768 ? 40 : window.innerWidth < 1024 ? 60 : 80;
+        
+        for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
             particle.className = 'particle ' + particleTypes[Math.floor(Math.random() * particleTypes.length)];
             
@@ -2509,7 +2523,14 @@
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Optimize for performance
         camera.position.z = 15;
+
+        // Adjust shape count based on device
+        const isMobileDevice = window.innerWidth < 768;
+        const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+        const shapeCount = isMobileDevice ? 15 : isTablet ? 25 : 40;
+        const lightCount = isMobileDevice ? 3 : isTablet ? 4 : 5;
 
         // Create exotic geometry types
         const geometries = [
@@ -2539,7 +2560,7 @@
         const shapes = [];
         
         // Create floating 3D shapes
-        for (let i = 0; i < 40; i++) {
+        for (let i = 0; i < shapeCount; i++) {
             const geometry = geometries[Math.floor(Math.random() * geometries.length)];
             const color = colors[Math.floor(Math.random() * colors.length)];
             const material = createMaterial(color);
@@ -2576,7 +2597,7 @@
         scene.add(ambientLight);
 
         // Multiple dynamic lights with different behaviors
-        const lights = [
+        const lightConfigs = [
             { color: 0x00D4FF, intensity: 2.5, distance: 120, offset: 0 },
             { color: 0x9D4EDD, intensity: 2.5, distance: 120, offset: Math.PI / 2 },
             { color: 0xFF10F0, intensity: 2, distance: 100, offset: Math.PI },
@@ -2584,7 +2605,9 @@
             { color: 0xFFD700, intensity: 1.8, distance: 90, offset: Math.PI / 4 }
         ];
 
-        const lightMeshes = lights.map((lightData, index) => {
+        const lightMeshes = [];
+        for (let i = 0; i < Math.min(lightCount, lightConfigs.length); i++) {
+            const lightData = lightConfigs[i];
             const light = new THREE.PointLight(lightData.color, lightData.intensity, lightData.distance);
             light.position.set(
                 Math.cos(lightData.offset) * 15,
@@ -2592,13 +2615,22 @@
                 10
             );
             scene.add(light);
-            return { light, offset: lightData.offset, index };
-        });
+            lightMeshes.push({ light, offset: lightData.offset, index: i, config: lightData });
+        }
 
         let time = 0;
+        let isVisible = true;
+        
+        // Pause animation when tab is not visible (performance optimization)
+        document.addEventListener('visibilitychange', () => {
+            isVisible = !document.hidden;
+        });
         
         function animate() {
             requestAnimationFrame(animate);
+            
+            if (!isVisible) return; // Skip animation if tab not visible
+            
             time += 0.01;
             
             // Orbital light dance
@@ -2612,7 +2644,7 @@
                 lightData.light.position.z = Math.sin(time * speed * 0.5 + lightData.offset) * 10 + 8;
                 
                 // Pulsing intensity
-                lightData.light.intensity = lights[index].intensity + Math.sin(time * 2 + index) * 0.5;
+                lightData.light.intensity = lightData.config.intensity + Math.sin(time * 2 + index) * 0.5;
             });
 
             // Complex shape animations
@@ -2644,10 +2676,12 @@
                 shape.material.opacity = 0.3 + Math.sin(time * 1.5 + index) * 0.15;
             });
             
-            // Camera gentle drift
-            camera.position.x = Math.sin(time * 0.1) * 2;
-            camera.position.y = Math.cos(time * 0.15) * 1.5;
-            camera.lookAt(scene.position);
+            // Camera gentle drift (less on mobile)
+            if (!isMobileDevice) {
+                camera.position.x = Math.sin(time * 0.1) * 2;
+                camera.position.y = Math.cos(time * 0.15) * 1.5;
+                camera.lookAt(scene.position);
+            }
             
             renderer.render(scene, camera);
         }

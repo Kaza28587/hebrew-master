@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hebrew Level Assessment - Hebrew Master</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            min-height: 100vh;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .test-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-screen {
+            text-align: center;
+        }
+
+        .benefits {
+            display: grid;
+            gap: 1rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .benefit-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .benefit-text {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .question-screen {
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .question-content {
+            margin: 2rem 0;
+        }
+
+        .question-text {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .hebrew-example {
+            font-size: 3rem;
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(168, 85, 247, 0.1);
+            border-radius: 15px;
+            border: 2px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .options {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .option-btn {
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .option-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(168, 85, 247, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .option-btn.selected {
+            background: rgba(168, 85, 247, 0.2);
+            border-color: #a855f7;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            border: none;
+            border-radius: 15px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(168, 85, 247, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .results-screen {
+            display: none;
+            text-align: center;
+        }
+
+        .level-badge {
+            display: inline-block;
+            font-size: 4rem;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .level-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #a855f7;
+        }
+
+        .level-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .recommendation {
+            background: rgba(99, 102, 241, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            margin: 2rem 0;
+        }
+
+        .recommendation h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #6366f1;
+        }
+
+        @media (max-width: 768px) {
+            .test-card {
+                padding: 2rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .question-text {
+                font-size: 1.2rem;
+            }
+
+            .hebrew-example {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="test-card">
+            <!-- Welcome Screen -->
+            <div id="welcomeScreen" class="welcome-screen">
+                <div class="logo">🕊️</div>
+                <h1>Hebrew Level Assessment</h1>
+                <p class="subtitle">Let's find your perfect starting point!</p>
+
+                <div class="benefits">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">⏱️</div>
+                        <div class="benefit-text"><strong>5 minutes</strong> - Quick and easy assessment</div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🎯</div>
+                        <div class="benefit-text"><strong>Personalized path</strong> - Start at your exact level</div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">📊</div>
+                        <div class="benefit-text"><strong>15 questions</strong> - From beginner to advanced</div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🚀</div>
+                        <div class="benefit-text"><strong>Skip what you know</strong> - Don't waste time</div>
+                    </div>
+                </div>
+
+                <button class="btn-primary" onclick="startTest()">Start Assessment 🎯</button>
+                <p style="text-align: center; margin-top: 1rem; color: rgba(255,255,255,0.5); font-size: 0.9rem;">
+                    No account required • Takes 5 minutes
+                </p>
+            </div>
+
+            <!-- Question Screen -->
+            <div id="questionScreen" class="question-screen">
+                <div class="progress-text">
+                    Question <span id="currentQuestion">1</span> of 15
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+
+                <div class="question-content">
+                    <div class="question-text" id="questionText"></div>
+                    <div class="hebrew-example" id="hebrewExample" style="display: none;"></div>
+                    <div class="options" id="optionsContainer"></div>
+                </div>
+
+                <button class="btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>
+                    Next Question →
+                </button>
+            </div>
+
+            <!-- Results Screen -->
+            <div id="resultsScreen" class="results-screen">
+                <div class="logo">🎉</div>
+                <h1>Assessment Complete!</h1>
+                
+                <div class="level-badge" id="levelBadge">🌟</div>
+                <div class="level-title" id="levelTitle"></div>
+                <div class="level-description" id="levelDescription"></div>
+
+                <div class="recommendation">
+                    <h3>📚 Your Learning Path</h3>
+                    <p id="recommendedPath"></p>
+                </div>
+
+                <button class="btn-primary" onclick="goToDashboard()">
+                    Start Learning! 🚀
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getFirestore, doc, setDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        // Firebase config - REPLACE WITH YOURS
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+        });
+
+        // Test Questions
+        const questions = [
+            // Level 1: Absolute Beginner (0-3 correct)
+            {
+                question: "Can you recognize this Hebrew letter?",
+                hebrew: "א",
+                options: ["Alef", "Bet", "Gimel", "I don't know"],
+                correct: 0,
+                level: 1
+            },
+            {
+                question: "What is this Hebrew letter?",
+                hebrew: "ב",
+                options: ["Alef", "Bet", "Dalet", "I don't know"],
+                correct: 1,
+                level: 1
+            },
+            {
+                question: "Which word means 'Hello' in Hebrew?",
+                hebrew: "",
+                options: ["שלום (Shalom)", "תודה (Toda)", "בוקר (Boker)", "I don't know"],
+                correct: 0,
+                level: 1
+            },
+
+            // Level 2: Beginner (4-6 correct)
+            {
+                question: "Read this word. What does it mean?",
+                hebrew: "מים",
+                options: ["Water", "Bread", "House", "I don't know"],
+                correct: 0,
+                level: 2
+            },
+            {
+                question: "What does 'תודה' mean?",
+                hebrew: "תודה",
+                options: ["Hello", "Thank you", "Goodbye", "I don't know"],
+                correct: 1,
+                level: 2
+            },
+            {
+                question: "Complete: 'אני _____ ישראלי' (I am Israeli)",
+                hebrew: "",
+                options: ["הוא", "היא", "אני", "I don't know"],
+                correct: 2,
+                level: 2
+            },
+
+            // Level 3: Elementary (7-9 correct)
+            {
+                question: "What is the past tense of 'to go' (הלך)?",
+                hebrew: "",
+                options: ["הלכתי (I went)", "הולך (I go)", "אלך (I will go)", "I don't know"],
+                correct: 0,
+                level: 3
+            },
+            {
+                question: "How do you say 'I want to eat'?",
+                hebrew: "",
+                options: ["אני רוצה לאכול", "אני אוכל", "אני אכלתי", "I don't know"],
+                correct: 0,
+                level: 3
+            },
+            {
+                question: "What does 'איפה השירותים?' mean?",
+                hebrew: "איפה השירותים?",
+                options: ["Where is the bathroom?", "What time is it?", "How are you?", "I don't know"],
+                correct: 0,
+                level: 3
+            },
+
+            // Level 4: Intermediate (10-12 correct)
+            {
+                question: "Choose the correct form: 'הם _____ לקולנוע אתמול'",
+                hebrew: "",
+                options: ["הלכו", "הולכים", "ילכו", "I don't know"],
+                correct: 0,
+                level: 4
+            },
+            {
+                question: "What does 'נראה לי ש...' express?",
+                hebrew: "",
+                options: ["It seems to me that...", "I know that...", "I hope that...", "I don't know"],
+                correct: 0,
+                level: 4
+            },
+            {
+                question: "Translate: 'If I had time, I would travel'",
+                hebrew: "",
+                options: ["אם היה לי זמן, הייתי נוסע", "כשיש לי זמן, אני נוסע", "אם יהיה לי זמן, אסע", "I don't know"],
+                correct: 0,
+                level: 4
+            },
+
+            // Level 5: Advanced (13-15 correct)
+            {
+                question: "What does the idiom 'לשים את היד על הפצע' mean?",
+                hebrew: "",
+                options: ["To hit the nail on the head", "To be in pain", "To help someone", "I don't know"],
+                correct: 0,
+                level: 5
+            },
+            {
+                question: "Choose the correct binyan for 'להתקשר' (to call)",
+                hebrew: "",
+                options: ["התפעל", "פיעל", "נפעל", "I don't know"],
+                correct: 0,
+                level: 5
+            },
+            {
+                question: "Complete the sentence with proper smichut: 'בית _____'",
+                hebrew: "",
+                options: ["הספר", "ספר", "של ספר", "I don't know"],
+                correct: 0,
+                level: 5
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedAnswer = null;
+
+        window.startTest = function() {
+            document.getElementById('welcomeScreen').style.display = 'none';
+            document.getElementById('questionScreen').style.display = 'block';
+            showQuestion();
+        };
+
+        function showQuestion() {
+            const question = questions[currentQuestionIndex];
+            
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+            document.getElementById('progressFill').style.width = ((currentQuestionIndex + 1) / questions.length * 100) + '%';
+            document.getElementById('questionText').textContent = question.question;
+            
+            const hebrewExample = document.getElementById('hebrewExample');
+            if (question.hebrew) {
+                hebrewExample.textContent = question.hebrew;
+                hebrewExample.style.display = 'block';
+            } else {
+                hebrewExample.style.display = 'none';
+            }
+
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = option;
+                btn.onclick = () => selectAnswer(index);
+                optionsContainer.appendChild(btn);
+            });
+
+            selectedAnswer = null;
+            document.getElementById('nextBtn').disabled = true;
+        }
+
+        window.selectAnswer = function(index) {
+            selectedAnswer = index;
+            document.querySelectorAll('.option-btn').forEach((btn, i) => {
+                btn.classList.toggle('selected', i === index);
+            });
+            document.getElementById('nextBtn').disabled = false;
+        };
+
+        window.nextQuestion = function() {
+            const question = questions[currentQuestionIndex];
+            
+            if (selectedAnswer === question.correct) {
+                score++;
+            }
+
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < questions.length) {
+                showQuestion();
+            } else {
+                showResults();
+            }
+        };
+
+        async function showResults() {
+            document.getElementById('questionScreen').style.display = 'none';
+            document.getElementById('resultsScreen').style.display = 'block';
+
+            let level, levelName, description, startLesson, badge;
+
+            if (score <= 3) {
+                level = 1;
+                levelName = "Complete Beginner";
+                badge = "🌱";
+                description = "You're just starting your Hebrew journey! That's perfect - everyone starts here.";
+                startLesson = 1;
+            } else if (score <= 6) {
+                level = 2;
+                levelName = "Beginner";
+                badge = "🌿";
+                description = "You know some basics! Let's build on that foundation.";
+                startLesson = 11;
+            } else if (score <= 9) {
+                level = 3;
+                levelName = "Elementary";
+                badge = "🌳";
+                description = "You have a good grasp of basic Hebrew! Time to expand your skills.";
+                startLesson = 21;
+            } else if (score <= 12) {
+                level = 4;
+                levelName = "Intermediate";
+                badge = "🌟";
+                description = "Impressive! You can handle conversations and complex grammar.";
+                startLesson = 31;
+            } else {
+                level = 5;
+                levelName = "Advanced";
+                badge = "🏆";
+                description = "Wow! You're nearly fluent. Let's perfect your Hebrew!";
+                startLesson = 41;
+            }
+
+            document.getElementById('levelBadge').textContent = badge;
+            document.getElementById('levelTitle').textContent = levelName;
+            document.getElementById('levelDescription').textContent = description;
+            document.getElementById('recommendedPath').innerHTML = `
+                You scored <strong>${score}/15</strong><br>
+                We recommend starting at <strong>Lesson ${startLesson}</strong><br>
+                Estimated time to fluency: <strong>${6 - level} months</strong>
+            `;
+
+            // Save to Firestore if user is logged in
+            if (currentUser) {
+                try {
+                    await setDoc(doc(db, 'users', currentUser.uid), {
+                        placementTestScore: score,
+                        hebrewLevel: level,
+                        recommendedStartLesson: startLesson,
+                        testCompletedAt: new Date().toISOString()
+                    }, { merge: true });
+                } catch (error) {
+                    console.error('Error saving test results:', error);
+                }
+            }
+
+            // Save to sessionStorage for non-logged users
+            sessionStorage.setItem('placementTestResults', JSON.stringify({
+                score,
+                level,
+                startLesson
+            }));
+        }
+
+        window.goToDashboard = function() {
+            if (currentUser) {
+                window.location.href = '/dashboard.html';
+            } else {
+                alert('Please login or create an account to start learning!');
+                window.location.href = '/login.html';
+            }
+        };
+    </script>
+</body>
+</html>

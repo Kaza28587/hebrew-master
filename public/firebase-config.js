@@ -24,6 +24,8 @@ async function signInWithGoogle() {
     const result = await auth.signInWithPopup(googleProvider);
     const user = result.user;
     
+    console.log('Google sign-in successful:', user.email);
+    
     // Save user profile
     const userProfile = {
       uid: user.uid,
@@ -41,6 +43,7 @@ async function signInWithGoogle() {
     
   } catch (error) {
     console.error('Google sign-in error:', error);
+    alert('Sign-in failed: ' + error.message);
     throw error;
   }
 }
@@ -50,6 +53,8 @@ async function signUpWithEmail(email, password, name) {
   try {
     const result = await auth.createUserWithEmailAndPassword(email, password);
     const user = result.user;
+    
+    console.log('Email sign-up successful:', user.email);
     
     // Update profile with name
     await user.updateProfile({
@@ -82,6 +87,8 @@ async function loginWithEmail(email, password) {
     const result = await auth.signInWithEmailAndPassword(email, password);
     const user = result.user;
     
+    console.log('Email login successful:', user.email);
+    
     // Save user profile
     const userProfile = {
       uid: user.uid,
@@ -107,12 +114,16 @@ async function loginWithEmail(email, password) {
 async function signOut() {
   try {
     await auth.signOut();
+    console.log('Sign-out successful');
+    
     localStorage.removeItem('hebrewMasterProfile');
     localStorage.removeItem('hebrewMasterAuth');
     localStorage.removeItem('hebrewProgress');
+    
     window.location.href = '/';
   } catch (error) {
     console.error('Sign-out error:', error);
+    alert('Sign-out failed: ' + error.message);
   }
 }
 
@@ -121,6 +132,8 @@ function checkAuth() {
   return new Promise((resolve) => {
     auth.onAuthStateChanged((user) => {
       if (user) {
+        console.log('Auth check: User authenticated -', user.email);
+        
         const userProfile = {
           uid: user.uid,
           name: user.displayName || 'User',
@@ -128,10 +141,12 @@ function checkAuth() {
           photoURL: user.photoURL,
           lastLogin: new Date().toISOString()
         };
+        
         localStorage.setItem('hebrewMasterProfile', JSON.stringify(userProfile));
         localStorage.setItem('hebrewMasterAuth', 'true');
         resolve(user);
       } else {
+        console.log('Auth check: No user authenticated');
         localStorage.removeItem('hebrewMasterAuth');
         resolve(null);
       }
@@ -143,7 +158,22 @@ function checkAuth() {
 async function requireAuth() {
   const user = await checkAuth();
   if (!user) {
+    console.log('Access denied: User not authenticated, redirecting to login');
     window.location.href = '/login';
+    return null;
   }
+  console.log('Access granted: User authenticated');
   return user;
 }
+
+// Get current user
+function getCurrentUser() {
+  return auth.currentUser;
+}
+
+// Check if user is authenticated (sync)
+function isAuthenticated() {
+  return auth.currentUser !== null;
+}
+
+console.log('Firebase config loaded successfully');

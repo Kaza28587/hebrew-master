@@ -295,6 +295,7 @@
             opacity: 0.8;
         }
 
+        /* VOICE RECORDING */
         .voice-section {
             background: rgba(34, 197, 94, 0.1);
             padding: 40px;
@@ -368,6 +369,7 @@
             transform: translateY(-2px);
         }
 
+        /* GAMES */
         .game-section {
             background: rgba(251, 146, 60, 0.1);
             padding: 40px;
@@ -412,6 +414,7 @@
             pointer-events: none;
         }
 
+        /* PRACTICE QUIZ */
         .practice-section {
             background: rgba(168, 85, 247, 0.1);
             padding: 40px;
@@ -654,7 +657,7 @@
 
         <div class="lesson-card">
             <h1 class="lesson-title">The Letter Bet</h1>
-            <p class="lesson-subtitle">The second letter of the Hebrew alphabet!</p>
+            <p class="lesson-subtitle">Your second letter! You're building momentum! 🚀</p>
 
             <!-- INTRODUCTION -->
             <div class="hebrew-showcase">
@@ -705,8 +708,8 @@
                 </div>
 
                 <div class="options">
-                    <div class="option" onclick="checkAnswer(0)">Bet (ב)</div>
-                    <div class="option" onclick="checkAnswer(1)">Aleph (א)</div>
+                    <div class="option" onclick="checkAnswer(0)">Aleph (א)</div>
+                    <div class="option" onclick="checkAnswer(1)">Bet (ב)</div>
                     <div class="option" onclick="checkAnswer(2)">Gimel (ג)</div>
                     <div class="option" onclick="checkAnswer(3)">Dalet (ד)</div>
                 </div>
@@ -715,7 +718,7 @@
             </div>
 
             <div class="lesson-nav">
-                <button class="nav-btn btn-secondary" onclick="goBack()">← Previous Lesson</button>
+                <button class="nav-btn btn-secondary" onclick="goBack()">← Lesson 1</button>
                 <button class="nav-btn btn-primary" id="complete-btn" onclick="completeLesson()" disabled>Complete Lesson →</button>
             </div>
         </div>
@@ -777,10 +780,7 @@
 
             if (userProfile.rewards && userProfile.rewards.includes('progress')) {
                 document.getElementById('progress-display').style.display = 'block';
-                const progress = JSON.parse(localStorage.getItem('hebrewProgress') || '{}');
-                const completedCount = progress.completedLessons || 0;
-                const percentage = Math.round((completedCount / 60) * 100);
-                document.getElementById('progress-text').textContent = `${percentage}%`;
+                document.getElementById('progress-text').textContent = '3%';
             }
 
             generateExamples();
@@ -804,29 +804,29 @@
         function generateExamples() {
             const sets = {
                 food: [
-                    { hebrew: 'בננה', translation: 'Banana (starts with Bet)' },
-                    { hebrew: 'בצל', translation: 'Onion (starts with Bet)' },
-                    { hebrew: 'בשר', translation: 'Meat (starts with Bet)' }
+                    { hebrew: 'בננה', translation: 'Banana' },
+                    { hebrew: 'בשר', translation: 'Meat' },
+                    { hebrew: 'ביצה', translation: 'Egg' }
                 ],
                 tech: [
-                    { hebrew: 'בלוג', translation: 'Blog (starts with Bet)' },
-                    { hebrew: 'ביט', translation: 'Bit (starts with Bet)' },
-                    { hebrew: 'בייט', translation: 'Byte (starts with Bet)' }
+                    { hebrew: 'בלוג', translation: 'Blog' },
+                    { hebrew: 'ביטים', translation: 'Bytes' },
+                    { hebrew: 'בסיס נתונים', translation: 'Database' }
                 ],
                 music: [
-                    { hebrew: 'בס', translation: 'Bass (starts with Bet)' },
-                    { hebrew: 'ביט', translation: 'Beat (starts with Bet)' },
-                    { hebrew: 'בנד', translation: 'Band (starts with Bet)' }
+                    { hebrew: 'בס', translation: 'Bass' },
+                    { hebrew: 'ביט', translation: 'Beat' },
+                    { hebrew: 'בלדה', translation: 'Ballad' }
                 ],
                 sports: [
-                    { hebrew: 'בייסבול', translation: 'Baseball (starts with Bet)' },
-                    { hebrew: 'בוקסר', translation: 'Boxer (starts with Bet)' },
-                    { hebrew: 'בריכה', translation: 'Pool (starts with Bet)' }
+                    { hebrew: 'בייסבול', translation: 'Baseball' },
+                    { hebrew: 'בוקסינג', translation: 'Boxing' },
+                    { hebrew: 'ביליארד', translation: 'Billiards' }
                 ],
                 gaming: [
-                    { hebrew: 'בוס', translation: 'Boss (starts with Bet)' },
-                    { hebrew: 'באג', translation: 'Bug (starts with Bet)' },
-                    { hebrew: 'בונוס', translation: 'Bonus (starts with Bet)' }
+                    { hebrew: 'בונוס', translation: 'Bonus' },
+                    { hebrew: 'בוס', translation: 'Boss' },
+                    { hebrew: 'באג', translation: 'Bug' }
                 ]
             };
 
@@ -841,6 +841,7 @@
             `).join('');
         }
 
+        // VOICE RECORDING
         async function toggleRecording() {
             const btn = document.getElementById('record-btn');
             const status = document.getElementById('recording-status');
@@ -892,12 +893,13 @@
             updateCompletionButton();
         }
 
+        // MEMORY GAME
         function initializeMemoryGame() {
             const pairs = [
-                { id: 1, content: 'ב', type: 'hebrew' },
-                { id: 1, content: 'Bet', type: 'english' },
-                { id: 2, content: 'א', type: 'hebrew' },
-                { id: 2, content: 'Aleph', type: 'english' },
+                { id: 1, content: 'א', type: 'hebrew' },
+                { id: 1, content: 'Aleph', type: 'english' },
+                { id: 2, content: 'ב', type: 'hebrew' },
+                { id: 2, content: 'Bet', type: 'english' },
                 { id: 3, content: 'ג', type: 'hebrew' },
                 { id: 3, content: 'Gimel', type: 'english' }
             ];
@@ -952,6 +954,7 @@
             flippedCards = [];
         }
 
+        // QUIZ
         function checkAnswer(index) {
             const options = document.querySelectorAll('.option');
             const feedback = document.getElementById('feedback');
@@ -959,8 +962,8 @@
             options.forEach(opt => opt.classList.remove('selected', 'correct', 'incorrect'));
             options[index].classList.add('selected');
 
-            if (index === 0) {
-                options[0].classList.add('correct');
+            if (index === 1) {
+                options[1].classList.add('correct');
                 feedback.className = 'feedback-message correct show';
                 feedback.textContent = getPersonalizedFeedback('correct');
                 completedActivities.quiz = true;
@@ -978,14 +981,14 @@
 
             if (type === 'correct') {
                 if (style === 'joke' && intensity >= 8) {
-                    return "🎉 Boom! You're on fire! Bet you feel good! 😄";
+                    return "🎉 Bet you got it right! (See what I did there? 😄)";
                 } else if (style === 'challenge') {
-                    return "💪 Correct! Two down, fifty-eight to go!";
+                    return "💪 Correct! You're crushing it!";
                 } else {
-                    return "🌟 Perfect! You're mastering Hebrew!";
+                    return "🌟 Perfect! You got it right!";
                 }
             } else {
-                return "💙 Not quite, but keep going! You've got this!";
+                return "💙 Not quite, but great try! Give it another go!";
             }
         }
 
@@ -997,8 +1000,8 @@
         function completeLesson() {
             const modal = document.getElementById('celebration');
             document.getElementById('celebration-emoji').textContent = userProfile.persona.emoji;
-            document.getElementById('celebration-title').textContent = '🎉 Lesson 2 Complete!';
-            document.getElementById('celebration-text').textContent = `Fantastic work, ${userProfile.name}! You mastered Bet!`;
+            document.getElementById('celebration-title').textContent = '🎉 Lesson Complete!';
+            document.getElementById('celebration-text').textContent = `Amazing work, ${userProfile.name}! You mastered Bet!`;
 
             document.getElementById('completion-checklist').innerHTML = `
                 <div class="completion-item">✓ Learned Bet letter</div>
@@ -1016,7 +1019,6 @@
             let progress = JSON.parse(localStorage.getItem('hebrewProgress') || '{}');
             progress.lesson2 = true;
             progress.completedLessons = (progress.completedLessons || 0) + 1;
-            progress.lastLesson = 2;
             localStorage.setItem('hebrewProgress', JSON.stringify(progress));
         }
 

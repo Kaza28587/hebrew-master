@@ -854,26 +854,87 @@
                     audioChunks = [];
 
                     mediaRecorder.ondataavailable = (e) => audioChunks.push(e.data);
-                    mediaRecorder.onstop = () => {
+                    mediaRecorder.onstop = async () => {
                         recordedBlob = new Blob(audioChunks, { type: 'audio/wav' });
-                        completedActivities.speaking = true;
+                        
+                        // Try to transcribe what was said
+                        await analyzeRecording();
+                        
                         document.getElementById('playback-controls').classList.add('show');
-                        status.textContent = '✓ Recording saved! Great job!';
-                        updateCompletionButton();
                     };
 
                     mediaRecorder.start();
                     btn.classList.add('recording');
                     icon.textContent = '⏹️';
-                    status.textContent = '🔴 Recording... Click to stop';
+                    status.textContent = '🔴 Recording... Say "Gimel" now!';
 
                 } catch (err) {
                     status.textContent = '⚠️ Microphone access needed';
                 }
             } else {
                 mediaRecorder.stop();
+                mediaRecorder.stream.getTracks().forEach(track => track.stop());
                 btn.classList.remove('recording');
                 icon.textContent = '🎤';
+            }
+        }
+
+        async function analyzeRecording() {
+            const status = document.getElementById('recording-status');
+            
+            // Check if browser supports speech recognition
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            
+            if (!SpeechRecognition) {
+                // If no speech recognition, just mark as complete
+                completedActivities.speaking = true;
+                status.textContent = '✓ Recording saved! Great effort!';
+                updateCompletionButton();
+                return;
+            }
+
+            try {
+                // Create new recognition instance for playback analysis
+                const recognition = new SpeechRecognition();
+                recognition.lang = 'en-US';
+                recognition.continuous = false;
+                recognition.interimResults = false;
+
+                // Play the recording and try to recognize it
+                const audio = new Audio(URL.createObjectURL(recordedBlob));
+                
+                recognition.onresult = (event) => {
+                    const transcript = event.results[0][0].transcript.toLowerCase();
+                    const letterName = 'gimel';
+                    
+                    // Check if they said something close to "Gimel"
+                    if (transcript.includes('gim') || transcript.includes('jim') || 
+                        transcript.includes('gimel') || transcript.includes('jimmel')) {
+                        completedActivities.speaking = true;
+                        status.innerHTML = '🎉 <strong>Perfect!</strong> You said it correctly!';
+                        status.style.color = '#22c55e';
+                    } else {
+                        status.innerHTML = `🤔 You said: "${transcript}"<br>Try saying "Gimel" (sounds like "GIH-mel")`;
+                        status.style.color = '#fb923c';
+                    }
+                    updateCompletionButton();
+                };
+
+                recognition.onerror = () => {
+                    // If recognition fails, just mark as complete
+                    completedActivities.speaking = true;
+                    status.textContent = '✓ Recording saved! Keep practicing!';
+                    updateCompletionButton();
+                };
+
+                recognition.start();
+                audio.play();
+
+            } catch (err) {
+                // Fallback if anything fails
+                completedActivities.speaking = true;
+                status.textContent = '✓ Recording saved! Great job!';
+                updateCompletionButton();
             }
         }
 
@@ -1037,10 +1098,31 @@
         }
 
         function playLetterSound() {
-            const utterance = new SpeechSynthesisUtterance('גִּימֶל');
-            utterance.lang = 'he-IL';
-            utterance.rate = 0.7;
-            speechSynthesis.speak(utterance);
+            // Try multiple methods to ensure audio plays
+            const letter = 'Gimel';
+            
+            // Method 1: Hebrew with better settings
+            const utterance = new SpeechSynthesisUtterance(letter);
+            utterance.lang = 'en-US'; // Use English for better pronunciation
+            utterance.rate = 0.6;
+            utterance.pitch = 1.0;
+            utterance.volume = 1.0;
+            
+            // Wait for voices to load
+            if (speechSynthesis.getVoices().length === 0) {
+                speechSynthesis.addEventListener('voiceschanged', () => {
+                    speechSynthesis.speak(utterance);
+                });
+            } else {
+                speechSynthesis.speak(utterance);
+            }
+            
+            // Provide visual feedback
+            const btn = event.target;
+            btn.textContent = '🔊 Playing...';
+            setTimeout(() => {
+                btn.textContent = '🔊 Hear it';
+            }, 1500);
         }
 
         function goBack() {

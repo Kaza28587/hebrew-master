@@ -1,67 +1,25 @@
-// Firebase Configuration
-// Note: These keys are restricted in Firebase Console to only work from authorized domains
-const firebaseConfig = {
-  apiKey: "AIzaSyCZtiVXvMKX3FodLchIQzIUUqg15htdwyA",
-  authDomain: "ai-hebrew.firebaseapp.com",
-  projectId: "ai-hebrew",
-  storageBucket: "ai-hebrew.firebasestorage.app",
-  messagingSenderId: "63571235516",
-  appId: "1:63571235516:web:6b81c388fca7d4fc39f6b9"
-};
+<!-- Add these scripts RIGHT BEFORE the closing </body> tag in dashboard.html -->
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 
-// Initialize Auth
-const auth = firebase.auth();
-const googleProvider = new firebase.auth.GoogleAuthProvider();
+<!-- Firebase Config -->
+<script src="firebase-config.js"></script>
 
-// Auth state observer
-auth.onAuthStateChanged((user) => {
-  if (user) {
-    console.log('User signed in:', user.email);
-    localStorage.setItem('user', JSON.stringify({
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL
-    }));
-  } else {
-    console.log('User signed out');
-    localStorage.removeItem('user');
-  }
-});
+<!-- Auth Protection Script -->
+<script>
+    // Protect this page - redirect to login if not authenticated
+    requireAuth().then(user => {
+        console.log('User authenticated:', user.email);
+        // Page loads normally for authenticated users
+    }).catch(() => {
+        // Redirect to login if not authenticated
+        window.location.href = '/login';
+    });
 
-// Sign in with Google
-async function signInWithGoogle() {
-  try {
-    const result = await auth.signInWithPopup(googleProvider);
-    console.log('Signed in successfully:', result.user.email);
-    window.location.href = '/dashboard.html';
-    return result.user;
-  } catch (error) {
-    console.error('Sign in error:', error);
-    alert('Sign in failed: ' + error.message);
-  }
-}
-
-// Sign out
-async function signOut() {
-  try {
-    await auth.signOut();
-    console.log('Signed out successfully');
-    window.location.href = '/index.html';
-  } catch (error) {
-    console.error('Sign out error:', error);
-  }
-}
-
-// Check if user is authenticated
-function isAuthenticated() {
-  return auth.currentUser !== null;
-}
-
-// Get current user
-function getCurrentUser() {
-  return auth.currentUser;
-}
+    // Add logout button functionality if you have one
+    function logout() {
+        signOut();
+    }
+</script>

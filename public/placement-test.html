@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hebrew Level Assessment - Hebrew Master</title>
+    <title>Hebrew Master - Your Perfect Match Assessment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
         * {
             margin: 0;
             padding: 0;
@@ -14,971 +13,1420 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #0a0a0f;
-            color: #fff;
+            font-family: 'Inter', sans-serif;
+            background: #0a0b0d;
             min-height: 100vh;
             overflow-x: hidden;
+            color: white;
+            position: relative;
         }
 
-        /* 3D Background Canvas */
-        #canvas3d {
+        .mesh-gradient {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: 0;
-        }
-
-        /* Animated Gradient Overlay */
-        .gradient-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
             background: 
-                radial-gradient(circle at 20% 30%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
-            animation: gradientMove 20s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 1;
+                radial-gradient(at 20% 30%, rgba(120, 119, 198, 0.3) 0px, transparent 50%),
+                radial-gradient(at 80% 70%, rgba(74, 47, 189, 0.3) 0px, transparent 50%),
+                radial-gradient(at 40% 80%, rgba(168, 85, 247, 0.2) 0px, transparent 50%),
+                radial-gradient(at 90% 10%, rgba(59, 130, 246, 0.3) 0px, transparent 50%),
+                linear-gradient(135deg, #0a0b0d 0%, #1a1b26 100%);
+            animation: meshMove 20s ease infinite;
         }
 
-        @keyframes gradientMove {
-            0%, 100% { 
-                opacity: 0.8;
-                transform: scale(1);
-            }
-            50% { 
-                opacity: 1;
-                transform: scale(1.1);
-            }
+        @keyframes meshMove {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(30deg); }
         }
 
-        /* Floating Particles */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.4;
+            animation: float 25s infinite ease-in-out;
+        }
+
+        .orb1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.3), transparent);
+            top: -200px;
+            left: -200px;
+        }
+
+        .orb2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.25), transparent);
+            bottom: -250px;
+            right: -250px;
+            animation-delay: 7s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(50px, -50px); }
+            66% { transform: translate(-30px, 30px); }
+        }
+
         .particles {
             position: fixed;
-            width: 100%;
-            height: 100%;
             top: 0;
             left: 0;
+            width: 100%;
+            height: 100%;
             z-index: 1;
             pointer-events: none;
         }
 
         .particle {
             position: absolute;
-            width: 3px;
-            height: 3px;
-            background: rgba(168, 85, 247, 0.6);
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 50%;
-            animation: float 15s infinite ease-in-out;
-            box-shadow: 0 0 10px rgba(168, 85, 247, 0.8);
+            animation: particleFloat 15s infinite ease-in-out;
         }
 
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) translateX(0) scale(1);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) translateX(50px) scale(0);
-                opacity: 0;
-            }
+        @keyframes particleFloat {
+            0%, 100% { transform: translateY(0); opacity: 0; }
+            10%, 90% { opacity: 1; }
+            50% { transform: translateY(-80vh); }
         }
 
-        /* Main Container */
         .container {
             position: relative;
             z-index: 10;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 1rem;
+            padding: 80px 30px;
             min-height: 100vh;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
         }
 
-        /* Glassmorphism Card */
-        .test-card {
-            background: rgba(17, 17, 27, 0.6);
-            backdrop-filter: blur(40px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            padding: 3rem 2rem;
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1),
-                0 0 80px rgba(168, 85, 247, 0.1);
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            max-width: 700px;
-        }
-
-        .test-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                45deg,
-                transparent,
-                rgba(168, 85, 247, 0.05),
-                transparent
-            );
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% {
-                transform: translateX(-100%) translateY(-100%) rotate(45deg);
-            }
-            100% {
-                transform: translateX(100%) translateY(100%) rotate(45deg);
-            }
-        }
-
-        /* Logo Animation */
         .logo {
             text-align: center;
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            animation: logoFloat 3s ease-in-out infinite;
-            filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.6));
+            margin-bottom: 60px;
+            animation: fadeInDown 1s ease;
         }
 
-        @keyframes logoFloat {
-            0%, 100% {
-                transform: translateY(0px) scale(1);
-            }
-            50% {
-                transform: translateY(-15px) scale(1.05);
-            }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Title */
-        h1 {
-            text-align: center;
-            font-size: clamp(2rem, 5vw, 2.8rem);
-            font-weight: 900;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #fff 0%, #a855f7 50%, #ec4899 100%);
-            background-size: 200% 200%;
+        .logo-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: inline-block;
+            animation: gentleFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, #a78bfa 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientFlow 5s ease infinite;
-            letter-spacing: -1px;
+            letter-spacing: -0.5px;
         }
 
-        @keyframes gradientFlow {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
+        .logo p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.95rem;
+            margin-top: 8px;
         }
 
-        .subtitle {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            margin-bottom: 2rem;
-            font-weight: 300;
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(40px);
+            border-radius: 24px;
+            padding: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease 0.2s both;
         }
 
-        /* Benefits */
-        .benefits {
-            display: grid;
-            gap: 1rem;
-            margin: 2rem 0;
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .benefit-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.2rem;
-            background: rgba(99, 102, 241, 0.05);
-            border-radius: 15px;
-            border: 1px solid rgba(99, 102, 241, 0.1);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-40px); }
         }
 
-        .benefit-item:hover {
-            transform: translateX(5px);
-            background: rgba(99, 102, 241, 0.1);
-            border-color: rgba(168, 85, 247, 0.3);
-        }
-
-        .benefit-icon {
-            font-size: 2rem;
-            flex-shrink: 0;
-        }
-
-        .benefit-text {
-            font-size: clamp(0.9rem, 2vw, 1.05rem);
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        /* Primary Button */
-        .btn-primary {
-            width: 100%;
-            padding: 1.3rem;
-            background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
-            background-size: 200% 200%;
-            border: none;
-            border-radius: 18px;
-            color: white;
+        .section-title {
+            font-size: 1.8rem;
             font-weight: 700;
-            font-size: clamp(1rem, 2vw, 1.2rem);
+            margin-bottom: 12px;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .input-grid {
+            display: grid;
+            gap: 24px;
+            margin-bottom: 35px;
+        }
+
+        .input-group label {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.88rem;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .input-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: rgba(168, 85, 247, 0.5);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+        }
+
+        .input-group input::placeholder,
+        .input-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .input-group select option {
+            background: #1a1b26;
+        }
+
+        .input-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .input-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .preference-section {
+            margin: 40px 0;
+        }
+
+        .preference-section h3 {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 40px rgba(168, 85, 247, 0.4);
-            animation: gradientFlow 5s ease infinite;
-            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
         }
 
-        .btn-primary:hover:not(:disabled) {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 50px rgba(168, 85, 247, 0.6);
+        .tag:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
         }
 
-        .btn-primary:active:not(:disabled) {
-            transform: translateY(-1px);
+        .tag.selected {
+            background: rgba(168, 85, 247, 0.15);
+            border-color: rgba(168, 85, 247, 0.4);
+            color: #c4b5fd;
         }
 
-        .btn-primary:disabled {
+        .slider-container {
+            margin: 25px 0;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.4);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3);
+            margin-top: 30px;
+        }
+
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(168, 85, 247, 0.4);
+        }
+
+        .btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
         }
 
-        /* Question Screen */
-        .question-screen {
+        #question-screen {
             display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 40px;
         }
 
         .progress-bar {
             width: 100%;
-            height: 8px;
+            height: 6px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
-            margin-bottom: 2rem;
             overflow: hidden;
+            margin-bottom: 12px;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
-            background-size: 200% 200%;
-            border-radius: 10px;
-            transition: width 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: gradientFlow 3s ease infinite;
+            background: linear-gradient(90deg, #a78bfa 0%, #8b5cf6 100%);
+            width: 0%;
+            transition: width 0.6s ease;
             box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
         }
 
         .progress-text {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
             text-align: center;
-            margin-bottom: 1rem;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: clamp(0.85rem, 2vw, 0.95rem);
             font-weight: 500;
         }
 
-        .question-text {
-            font-size: clamp(1.2rem, 3vw, 1.6rem);
-            margin-bottom: 2rem;
+        .question-header {
             text-align: center;
-            line-height: 1.6;
-            font-weight: 600;
+            margin-bottom: 40px;
         }
 
-        .hebrew-example {
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            text-align: center;
-            margin: 2rem auto;
-            padding: 2rem;
+        .question-type {
+            display: inline-block;
+            padding: 6px 16px;
             background: rgba(168, 85, 247, 0.1);
+            border: 1px solid rgba(168, 85, 247, 0.2);
             border-radius: 20px;
-            border: 2px solid rgba(168, 85, 247, 0.3);
-            transition: all 0.4s ease;
-            animation: hebrewFloat 4s ease-in-out infinite;
-            text-shadow: 0 0 30px rgba(168, 85, 247, 0.8);
-            max-width: 300px;
+            font-size: 0.82rem;
+            margin-bottom: 20px;
+            color: #c4b5fd;
+            font-weight: 600;
+            text-transform: uppercase;
         }
 
-        @keyframes hebrewFloat {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
+        .question-text {
+            font-size: 1.6rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 8px;
         }
 
-        /* Audio Button */
-        .audio-btn {
-            display: block;
-            margin: 1.5rem auto;
-            padding: 1rem 2rem;
-            background: rgba(99, 102, 241, 0.2);
-            border: 2px solid rgba(99, 102, 241, 0.4);
-            border-radius: 50px;
-            color: white;
-            font-size: 1.1rem;
+        .question-subtitle {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+        }
+
+        .hebrew-display {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .hebrew-letter {
+            font-size: 6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .audio-button,
+        .record-button {
+            padding: 12px 28px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
             cursor: pointer;
+            font-size: 0.95rem;
             transition: all 0.3s ease;
+            font-weight: 500;
+            margin: 8px;
         }
 
-        .audio-btn:hover {
-            background: rgba(99, 102, 241, 0.3);
+        .audio-button:hover,
+        .record-button:hover {
+            background: rgba(255, 255, 255, 0.1);
             transform: scale(1.05);
         }
 
-        /* Options */
+        .record-button.recording {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.5);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
         .options {
             display: grid;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 12px;
+            margin-bottom: 35px;
         }
 
-        .option-btn {
-            padding: 1.3rem;
+        .option {
             background: rgba(255, 255, 255, 0.03);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            color: white;
-            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            border: 1.5px solid rgba(255, 255, 255, 0.08);
+            padding: 18px 24px;
+            border-radius: 12px;
             cursor: pointer;
+            font-size: 1rem;
             transition: all 0.3s ease;
-            text-align: left;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
         }
 
-        .option-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
+        .option:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(8px);
+        }
+
+        .option.selected {
+            background: rgba(168, 85, 247, 0.15);
+            border-color: rgba(168, 85, 247, 0.4);
+            color: #c4b5fd;
+        }
+
+        .writing-input {
+            width: 100%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            font-size: 3rem;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            direction: rtl;
+            margin: 30px 0;
+        }
+
+        .writing-input:focus {
+            outline: none;
             border-color: rgba(168, 85, 247, 0.5);
-            transform: translateX(5px);
+            background: rgba(255, 255, 255, 0.06);
         }
 
-        .option-btn.selected {
-            background: rgba(168, 85, 247, 0.2);
-            border-color: #a855f7;
-            box-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
-        }
-
-        /* Results */
-        .results-screen {
+        #results-screen {
             display: none;
             text-align: center;
         }
 
-        .level-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            margin: 2rem auto;
-            padding: 2.5rem;
-            background: linear-gradient(135deg, #6366f1, #a855f7);
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            animation: badgePulse 2s ease-in-out infinite;
-            box-shadow: 0 0 60px rgba(168, 85, 247, 0.6);
+        .celebration {
+            font-size: 5rem;
+            margin-bottom: 25px;
+            animation: celebrationPop 0.6s ease;
         }
 
-        @keyframes badgePulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
+        @keyframes celebrationPop {
+            0% { transform: scale(0) rotate(-180deg); }
+            100% { transform: scale(1) rotate(0deg); }
         }
 
-        .level-title {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #a855f7, #ec4899);
+        .persona-badge {
+            display: inline-block;
+            padding: 20px 40px;
+            background: rgba(168, 85, 247, 0.15);
+            border: 2px solid rgba(168, 85, 247, 0.4);
+            border-radius: 20px;
+            margin: 30px 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #c4b5fd;
+        }
+
+        .results-title {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: 900;
+            font-weight: 700;
         }
 
-        .level-description {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: clamp(1rem, 2vw, 1.15rem);
-            margin-bottom: 2rem;
+        .results-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 40px;
             line-height: 1.6;
         }
 
-        .recommendation {
-            background: rgba(99, 102, 241, 0.1);
-            padding: 2rem;
+        .results-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin: 35px 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.88rem;
+        }
+
+        .study-plan {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 40px;
             border-radius: 20px;
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            margin: 2rem 0;
+            margin: 35px 0;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            text-align: left;
         }
 
-        .recommendation h3 {
-            font-size: clamp(1.3rem, 3vw, 1.5rem);
-            margin-bottom: 1rem;
-            color: #6366f1;
+        .study-plan h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: #c4b5fd;
+            text-align: center;
         }
 
-        .recommendation p {
+        .study-section {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            border-left: 3px solid #a78bfa;
+        }
+
+        .study-section h4 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
             color: rgba(255, 255, 255, 0.9);
-            font-size: clamp(1rem, 2vw, 1.1rem);
-            line-height: 1.8;
         }
 
-        /* Mobile Optimizations */
+        .study-section p {
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .personalized-message {
+            background: rgba(168, 85, 247, 0.1);
+            padding: 30px;
+            border-radius: 16px;
+            margin: 35px 0;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
         @media (max-width: 768px) {
             .container {
-                padding: 0.5rem;
+                padding: 60px 20px;
             }
 
-            .test-card {
-                padding: 2rem 1.5rem;
-                border-radius: 20px;
+            .card {
+                padding: 35px 25px;
             }
 
-            .logo {
-                font-size: 2.5rem;
+            .logo h1 {
+                font-size: 1.6rem;
             }
 
-            .benefits {
-                gap: 0.8rem;
+            .question-text {
+                font-size: 1.3rem;
             }
 
-            .benefit-item {
-                padding: 1rem;
+            .hebrew-letter {
+                font-size: 4rem;
             }
 
-            .benefit-icon {
-                font-size: 1.5rem;
+            .input-grid-2,
+            .input-grid-3 {
+                grid-template-columns: 1fr;
             }
 
-            .options {
-                gap: 0.8rem;
-            }
-
-            .option-btn {
-                padding: 1.1rem;
-            }
-
-            .hebrew-example {
-                margin: 1.5rem auto;
-                padding: 1.5rem;
-            }
-
-            .level-badge {
-                width: 120px;
-                height: 120px;
-                font-size: 3rem;
-                padding: 2rem;
-            }
-
-            .recommendation {
-                padding: 1.5rem;
-            }
-        }
-
-        /* Tablet */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .container {
-                padding: 1.5rem;
-            }
-
-            .test-card {
-                max-width: 650px;
+            .writing-input {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- 3D Canvas Background -->
-    <canvas id="canvas3d"></canvas>
+    <div class="mesh-gradient">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+    </div>
 
-    <!-- Animated Gradient Overlay -->
-    <div class="gradient-overlay"></div>
-
-    <!-- Floating Particles -->
     <div class="particles" id="particles"></div>
 
     <div class="container">
-        <div class="test-card">
-            <!-- Welcome Screen -->
-            <div id="welcomeScreen" class="welcome-screen">
-                <div class="logo">🕊️</div>
-                <h1>Hebrew Level Assessment</h1>
-                <p class="subtitle">Let's find your perfect starting point!</p>
+        <div class="logo">
+            <div class="logo-icon">✨</div>
+            <h1>Hebrew Master</h1>
+            <p>Your Perfect Learning Match</p>
+        </div>
 
-                <div class="benefits">
-                    <div class="benefit-item">
-                        <div class="benefit-icon">⏱️</div>
-                        <div class="benefit-text"><strong>5 minutes</strong> - Quick assessment</div>
+        <!-- Welcome Screen -->
+        <div id="welcome-screen" class="card">
+            <h2 class="section-title">Let's find your perfect learning style!</h2>
+            <p class="section-subtitle">This isn't just a test - it's about understanding YOU so we can create the most fun, relaxing, and perfectly-matched Hebrew learning experience ever!</p>
+
+            <!-- BASIC INFO -->
+            <div class="input-grid">
+                <div class="input-group">
+                    <label>✨ What should I call you?</label>
+                    <input type="text" id="user-name" placeholder="Your name or nickname" required>
+                </div>
+
+                <div class="input-grid-3">
+                    <div class="input-group">
+                        <label>🌍 Country</label>
+                        <select id="user-location" required>
+                            <option value="">Select</option>
+                            <option value="USA">🇺🇸 USA</option>
+                            <option value="UK">🇬🇧 UK</option>
+                            <option value="Canada">🇨🇦 Canada</option>
+                            <option value="Australia">🇦🇺 Australia</option>
+                            <option value="Israel">🇮🇱 Israel</option>
+                            <option value="Other">🌍 Other</option>
+                        </select>
                     </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">🎯</div>
-                        <div class="benefit-text"><strong>Personalized path</strong> - Start at your level</div>
+
+                    <div class="input-group">
+                        <label>🎂 Age</label>
+                        <select id="user-age" required>
+                            <option value="">Select</option>
+                            <option value="13-17">13-17</option>
+                            <option value="18-25">18-25</option>
+                            <option value="26-35">26-35</option>
+                            <option value="36-50">36-50</option>
+                            <option value="51+">51+</option>
+                        </select>
                     </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">🎧</div>
-                        <div class="benefit-text"><strong>Audio + Visual</strong> - Complete assessment</div>
-                    </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">🚀</div>
-                        <div class="benefit-text"><strong>Skip what you know</strong> - Save time</div>
+
+                    <div class="input-group">
+                        <label>📱 Device</label>
+                        <select id="user-device" required>
+                            <option value="">Prefer</option>
+                            <option value="mobile">📱 Mobile</option>
+                            <option value="desktop">💻 Desktop</option>
+                            <option value="both">🔄 Both</option>
+                        </select>
                     </div>
                 </div>
 
-                <button class="btn-primary" onclick="startTest()">Start Assessment 🎯</button>
-                <p style="text-align: center; margin-top: 1rem; color: rgba(255,255,255,0.4); font-size: 0.9rem;">
-                    No account required • 5 minutes
-                </p>
+                <div class="input-grid-2">
+                    <div class="input-group">
+                        <label>🎯 Why Hebrew?</label>
+                        <select id="user-goal" required>
+                            <option value="">Your goal</option>
+                            <option value="religious">📖 Religious</option>
+                            <option value="travel">✈️ Travel</option>
+                            <option value="culture">🎭 Culture</option>
+                            <option value="business">💼 Business</option>
+                            <option value="family">👨‍👩‍👧 Family</option>
+                            <option value="fun">🎯 Challenge</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>⏰ Best Time</label>
+                        <select id="user-time" required>
+                            <option value="">When?</option>
+                            <option value="morning">🌅 Morning</option>
+                            <option value="afternoon">☀️ Afternoon</option>
+                            <option value="evening">🌆 Evening</option>
+                            <option value="night">🌙 Night</option>
+                            <option value="flexible">🔄 Flexible</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-grid-2">
+                    <div class="input-group">
+                        <label>⏱️ Daily Time</label>
+                        <select id="user-commitment" required>
+                            <option value="">How much?</option>
+                            <option value="5-10">5-10 min</option>
+                            <option value="15-20">15-20 min</option>
+                            <option value="30-45">30-45 min</option>
+                            <option value="60+">1+ hour</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>🔥 Challenge</label>
+                        <select id="user-difficulty" required>
+                            <option value="">Level?</option>
+                            <option value="easy">😌 Relaxed</option>
+                            <option value="medium">😊 Balanced</option>
+                            <option value="hard">🔥 Intense</option>
+                            <option value="adaptive">🎯 Adaptive</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
-            <!-- Question Screen -->
-            <div id="questionScreen" class="question-screen">
-                <div class="progress-text">
-                    Question <span id="currentQuestion">1</span> of 15
+            <!-- PERSONALITY -->
+            <div class="preference-section">
+                <h3>😊 What describes you best?</h3>
+                <div class="tag-container">
+                    <div class="tag" data-personality="calm">🧘 Calm & Zen</div>
+                    <div class="tag" data-personality="energetic">⚡ Energetic & Playful</div>
+                    <div class="tag" data-personality="competitive">🏆 Competitive Achiever</div>
+                    <div class="tag" data-personality="thinker">🧠 Deep Thinker</div>
+                    <div class="tag" data-personality="social">👥 Social Learner</div>
+                    <div class="tag" data-personality="curious">🔍 Curious Explorer</div>
                 </div>
+            </div>
+
+            <!-- HUMOR STYLE -->
+            <div class="preference-section">
+                <h3>😂 What makes you laugh?</h3>
+                <div class="tag-container">
+                    <div class="tag" data-humor="wordplay">🧩 Wordplay & Puns</div>
+                    <div class="tag" data-humor="situational">🎭 Situational Comedy</div>
+                    <div class="tag" data-humor="sarcasm">😏 Sarcasm & Irony</div>
+                    <div class="tag" data-humor="cute">🤗 Cute & Friendly</div>
+                    <div class="tag" data-humor="absurd">🤪 Absurd & Random</div>
+                    <div class="tag" data-humor="none">😐 Keep it serious</div>
+                </div>
+            </div>
+
+            <!-- HUMOR INTENSITY SLIDER -->
+            <div class="slider-container">
+                <div class="slider-label">
+                    <span>Serious 😐</span>
+                    <span id="humor-value">5</span>
+                    <span>Hilarious 😂</span>
+                </div>
+                <input type="range" id="humor-slider" min="1" max="10" value="5">
+            </div>
+
+            <!-- ENCOURAGEMENT STYLE -->
+            <div class="preference-section">
+                <h3>💬 When you make a mistake, how should I react?</h3>
+                <div class="tag-container">
+                    <div class="tag" data-encouragement="gentle">😊 Be gentle & supportive</div>
+                    <div class="tag" data-encouragement="joke">😂 Make a joke about it</div>
+                    <div class="tag" data-encouragement="challenge">💪 Challenge me harder</div>
+                    <div class="tag" data-encouragement="silent">🤐 Just show the answer</div>
+                </div>
+            </div>
+
+            <!-- ATMOSPHERE -->
+            <div class="preference-section">
+                <h3>🎵 What atmosphere helps you focus?</h3>
+                <div class="tag-container">
+                    <div class="tag" data-atmosphere="ocean">🌊 Ocean waves</div>
+                    <div class="tag" data-atmosphere="fireplace">🔥 Fireplace</div>
+                    <div class="tag" data-atmosphere="lofi">🎵 Lo-fi beats</div>
+                    <div class="tag" data-atmosphere="cafe">☕ Coffee shop</div>
+                    <div class="tag" data-atmosphere="rain">🌧️ Rain sounds</div>
+                    <div class="tag" data-atmosphere="silence">🤫 Silence</div>
+                </div>
+            </div>
+
+            <!-- VISUAL THEME -->
+            <div class="preference-section">
+                <h3>🎨 Which design makes you happy?</h3>
+                <div class="tag-container">
+                    <div class="tag" data-theme="dark">🌙 Dark & Calm</div>
+                    <div class="tag" data-theme="light">☀️ Light & Colorful</div>
+                    <div class="tag" data-theme="neon">💫 Futuristic Neon</div>
+                    <div class="tag" data-theme="nature">🌿 Natural Soft</div>
+                    <div class="tag" data-theme="minimalist">⚪ Minimalist</div>
+                </div>
+            </div>
+
+            <!-- LEARNING FORMAT -->
+            <div class="preference-section">
+                <h3>📚 How do you learn best?</h3>
+                <div class="tag-container">
+                    <div class="tag" data-format="visual">👁️ Visual & Images</div>
+                    <div class="tag" data-format="audio">👂 Audio & Listening</div>
+                    <div class="tag" data-format="games">🎮 Games & Challenges</div>
+                    <div class="tag" data-format="stories">📖 Stories & Context</div>
+                    <div class="tag" data-format="repetition">🔁 Repetition & Practice</div>
+                    <div class="tag" data-format="conversation">💬 Conversation & Speaking</div>
+                </div>
+            </div>
+
+            <!-- REWARDS -->
+            <div class="preference-section">
+                <h3>🏆 What motivates you most?</h3>
+                <div class="tag-container">
+                    <div class="tag" data-reward="streaks">🔥 Daily Streaks</div>
+                    <div class="tag" data-reward="badges">🏅 Badges & Achievements</div>
+                    <div class="tag" data-reward="leaderboard">📊 Leaderboards</div>
+                    <div class="tag" data-reward="progress">📈 Progress Bars</div>
+                    <div class="tag" data-reward="unlocks">🎁 Unlock Content</div>
+                    <div class="tag" data-reward="social">👥 Community Support</div>
+                </div>
+            </div>
+
+            <!-- INTERESTS -->
+            <div class="preference-section">
+                <h3>💖 Your passions (we'll use Hebrew examples from these!)</h3>
+                <div class="tag-container">
+                    <div class="tag" data-interest="music">🎵 Music</div>
+                    <div class="tag" data-interest="food">🍕 Food</div>
+                    <div class="tag" data-interest="sports">⚽ Sports</div>
+                    <div class="tag" data-interest="tech">💻 Tech</div>
+                    <div class="tag" data-interest="art">🎨 Art</div>
+                    <div class="tag" data-interest="history">📚 History</div>
+                    <div class="tag" data-interest="movies">🎬 Movies</div>
+                    <div class="tag" data-interest="nature">🌿 Nature</div>
+                    <div class="tag" data-interest="fashion">👗 Fashion</div>
+                    <div class="tag" data-interest="gaming">🎮 Gaming</div>
+                </div>
+            </div>
+
+            <!-- OPEN ENDED -->
+            <div class="input-group">
+                <label>✨ What makes you smile when learning? (Tell us anything!)</label>
+                <textarea id="user-joy" placeholder="Jokes? Rewards? Surprises? Funny voices? Tell us what keeps you motivated and happy!" rows="3"></textarea>
+            </div>
+
+            <div class="input-group">
+                <label>🎯 What Hebrew word would you LOVE to say perfectly first?</label>
+                <input type="text" id="dream-word" placeholder="e.g., Shalom, L'chaim, Sababa...">
+            </div>
+
+            <button class="btn" id="start-btn">Begin My Personalized Journey ✨</button>
+        </div>
+
+        <!-- Question Screen -->
+        <div id="question-screen" class="card">
+            <div class="progress-container">
                 <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill"></div>
+                    <div class="progress-fill" id="progress"></div>
                 </div>
-
-                <div class="question-content">
-                    <div class="question-text" id="questionText"></div>
-                    <div class="hebrew-example" id="hebrewExample" style="display: none;"></div>
-                    <button class="audio-btn" id="audioBtn" style="display: none;" onclick="playAudio()">
-                        🔊 Listen
-                    </button>
-                    <div class="options" id="optionsContainer"></div>
-                </div>
-
-                <button class="btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>
-                    Next Question →
-                </button>
+                <div class="progress-text" id="progress-text">Testing your skills...</div>
             </div>
 
-            <!-- Results Screen -->
-            <div id="resultsScreen" class="results-screen">
-                <div class="logo">🎉</div>
-                <h1>Assessment Complete!</h1>
-                
-                <div class="level-badge" id="levelBadge">🌟</div>
-                <div class="level-title" id="levelTitle"></div>
-                <div class="level-description" id="levelDescription"></div>
-
-                <div class="recommendation">
-                    <h3>📚 Your Learning Path</h3>
-                    <p id="recommendedPath"></p>
-                </div>
-
-                <button class="btn-primary" onclick="goToDashboard()">
-                    Start Learning! 🚀
-                </button>
+            <div class="question-header">
+                <div class="question-type" id="question-type">📖 Reading</div>
+                <div class="question-text" id="question-text"></div>
+                <div class="question-subtitle" id="question-subtitle"></div>
             </div>
+
+            <div id="question-content"></div>
+
+            <div class="options" id="options"></div>
+
+            <button class="btn" id="next-btn" disabled>Continue →</button>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="card">
+            <div class="celebration" id="celebration">🎉</div>
+            
+            <div class="persona-badge" id="persona-badge">🦉 Zen Owl</div>
+
+            <h2 class="results-title" id="results-title"></h2>
+            <p class="results-subtitle" id="results-subtitle"></p>
+
+            <div class="results-stats" id="results-stats"></div>
+
+            <div class="personalized-message" id="personalized-message"></div>
+
+            <div class="study-plan" id="study-plan"></div>
+
+            <button class="btn" onclick="saveAndContinue()">Start My Perfect Hebrew Journey 🚀</button>
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script type="module">
-        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getFirestore, doc, setDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+    <script>
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 40; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
 
-        // REPLACE WITH YOUR FIREBASE CONFIG
-        const firebaseConfig = {
-FIREBASE_API_KEY=AIzaSyCZtiVXvMKX3FodLchIQzIUUqg15htdwyA
-FIREBASE_AUTH_DOMAIN=ai-hebrew.firebaseapp.com
-FIREBASE_PROJECT_ID=ai-hebrew
-FIREBASE_STORAGE_BUCKET=ai-hebrew.firebasestorage.app
-FIREBASE_MESSAGING_SENDER_ID=63571235516
-FIREBASE_APP_ID=1:63571235516:web:6b81c388fca7d4fc39f6b9
+        // Complete user profile data
+        let userData = {
+            // Basic info
+            name: '',
+            location: '',
+            age: '',
+            device: '',
+            goal: '',
+            time: '',
+            commitment: '',
+            difficulty: '',
+            
+            // Personality & Style
+            personality: [],
+            humorStyle: [],
+            humorIntensity: 5,
+            encouragementStyle: [],
+            atmosphere: [],
+            visualTheme: [],
+            learningFormat: [],
+            rewards: [],
+            interests: [],
+            
+            // Open-ended
+            joy: '',
+            dreamWord: '',
+            
+            // Skills (tested)
+            voiceRecorded: false
         };
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
+        let skillScores = {
+            reading: 0,
+            writing: 0,
+            listening: 0,
+            speaking: 0,
+            voice: 0
+        };
 
-        let currentUser = null;
-
-        onAuthStateChanged(auth, (user) => {
-            currentUser = user;
+        // Humor slider
+        const humorSlider = document.getElementById('humor-slider');
+        const humorValue = document.getElementById('humor-value');
+        humorSlider.addEventListener('input', (e) => {
+            humorValue.textContent = e.target.value;
+            userData.humorIntensity = parseInt(e.target.value);
         });
 
-        // 3D Background
-        const canvas = document.getElementById('canvas3d');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        camera.position.z = 15;
-
-        const particles = [];
-
-        for (let i = 0; i < 50; i++) {
-            const geometry = new THREE.SphereGeometry(0.1, 16, 16);
-            const material = new THREE.MeshPhongMaterial({ 
-                color: Math.random() > 0.5 ? 0x6366f1 : 0xa855f7,
-                transparent: true,
-                opacity: 0.6
+        // Tag selection handlers
+        document.querySelectorAll('[data-personality]').forEach(tag => {
+            tag.addEventListener('click', function() {
+                handleTagSelection(this, 'personality');
             });
-            const sphere = new THREE.Mesh(geometry, material);
-            
-            sphere.position.x = (Math.random() - 0.5) * 30;
-            sphere.position.y = (Math.random() - 0.5) * 30;
-            sphere.position.z = (Math.random() - 0.5) * 20;
-            
-            sphere.userData.velocity = {
-                x: (Math.random() - 0.5) * 0.02,
-                y: (Math.random() - 0.5) * 0.02,
-                z: (Math.random() - 0.5) * 0.02
-            };
-            
-            scene.add(sphere);
-            particles.push(sphere);
-        }
-
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-        scene.add(ambientLight);
-
-        const pointLight = new THREE.PointLight(0xa855f7, 2, 50);
-        pointLight.position.set(10, 10, 10);
-        scene.add(pointLight);
-
-        function animate() {
-            requestAnimationFrame(animate);
-
-            particles.forEach(particle => {
-                particle.position.x += particle.userData.velocity.x;
-                particle.position.y += particle.userData.velocity.y;
-                particle.position.z += particle.userData.velocity.z;
-
-                if (Math.abs(particle.position.x) > 15) particle.userData.velocity.x *= -1;
-                if (Math.abs(particle.position.y) > 15) particle.userData.velocity.y *= -1;
-                if (Math.abs(particle.position.z) > 10) particle.userData.velocity.z *= -1;
-
-                particle.rotation.x += 0.01;
-                particle.rotation.y += 0.01;
-            });
-
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // Floating Particles
-        const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 20; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 15 + 's';
-            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-            particlesContainer.appendChild(particle);
+        document.querySelectorAll('[data-humor]').forEach(tag => {
+            tag.addEventListener('click', function() {
+                handleTagSelection(this, 'humorStyle');
+            });
+        });
+
+        document.querySelectorAll('[data-encouragement]').forEach(tag => {
+            tag.addEventListener('click', function() {
+                handleSingleTagSelection(this, 'encouragementStyle');
+            });
+        });
+
+        document.querySelectorAll('[data-atmosphere]').forEach(tag => {
+            tag.addEventListener('click', function() {
+                handleSingleTagSelection(this, 'atmosphere');
+            });
+        });
+
+        document.querySelectorAll('[data-theme]').forEach(tag => {
+            tag.addEventListener('click', function() {
+                handleSingleTagSelection(this, 'visualTheme');
+            });
+        });
+
+        document.querySelectorAll('[data-format]').forEach(tag => {
+            tag.addEventListener('click', function() {
+                handleTagSelection(this, 'learningFormat');
+            });
+        });
+
+        document.querySelectorAll('[data-reward]').forEach(tag => {
+            tag.addEventListener('click', function() {
+                handleTagSelection(this, 'rewards');
+            });
+        });
+
+        document.querySelectorAll('[data-interest]').forEach(tag => {
+            tag.addEventListener('click', function() {
+                handleTagSelection(this, 'interests');
+            });
+        });
+
+        function handleTagSelection(element, dataKey) {
+            element.classList.toggle('selected');
+            const value = element.getAttribute(`data-${dataKey.replace(/([A-Z])/g, '-$1').toLowerCase()}`);
+            const index = userData[dataKey].indexOf(value);
+            
+            if (index > -1) {
+                userData[dataKey].splice(index, 1);
+            } else {
+                userData[dataKey].push(value);
+            }
         }
 
-        // Test Questions with audio
+        function handleSingleTagSelection(element, dataKey) {
+            // Remove previous selection
+            const siblings = element.parentElement.querySelectorAll('.tag');
+            siblings.forEach(s => s.classList.remove('selected'));
+            
+            element.classList.add('selected');
+            const attr = `data-${dataKey.replace(/([A-Z])/g, '-$1').toLowerCase()}`;
+            userData[dataKey] = [element.getAttribute(attr)];
+        }
+
+        // Quick skill test questions (simplified for demo)
         const questions = [
             {
-                question: "Can you recognize this Hebrew letter?",
-                hebrew: "א",
-                options: ["Alef", "Bet", "Gimel", "I don't know"],
-                correct: 0,
-                level: 1,
-                hasAudio: false
+                type: 'reading',
+                skill: 'reading',
+                icon: '📖',
+                question: 'Can you read Hebrew letters?',
+                options: ['Yes, fluently', 'With vowels', 'Know alphabet', 'Just starting'],
+                points: [10, 7, 4, 1]
             },
             {
-                question: "What is this Hebrew letter?",
-                hebrew: "ב",
-                options: ["Alef", "Bet", "Dalet", "I don't know"],
-                correct: 1,
-                level: 1,
-                hasAudio: false
+                type: 'reading',
+                skill: 'reading',
+                icon: '🔤',
+                question: 'What is this letter?',
+                hebrew: 'א',
+                options: ['Aleph', 'Bet', 'Gimel', 'Not sure'],
+                points: [10, 3, 3, 1],
+                audio: true
             },
             {
-                question: "Which word means 'Hello' in Hebrew?",
-                hebrew: "",
-                options: ["שלום (Shalom)", "תודה (Toda)", "בוקר (Boker)", "I don't know"],
-                correct: 0,
-                level: 1,
-                hasAudio: false
+                type: 'listening',
+                skill: 'listening',
+                icon: '👂',
+                question: 'Can you understand spoken Hebrew?',
+                options: ['Yes, conversations', 'Some words', 'Just sounds', 'Not yet'],
+                points: [10, 7, 4, 1]
             },
             {
-                question: "Listen to this word. What does it mean?",
-                hebrew: "",
-                audioText: "shalom",
-                options: ["Hello", "Thank you", "Goodbye", "I don't know"],
-                correct: 0,
-                level: 2,
-                hasAudio: true
+                type: 'writing',
+                skill: 'writing',
+                icon: '✍️',
+                question: 'Can you write Hebrew?',
+                options: ['Yes, fluently', 'Know letters', 'A few letters', 'Want to learn'],
+                points: [10, 7, 4, 1]
             },
             {
-                question: "Read this word. What does it mean?",
-                hebrew: "מים",
-                options: ["Water", "Bread", "House", "I don't know"],
-                correct: 0,
-                level: 2,
-                hasAudio: false
-            },
-            {
-                question: "What does 'תודה' mean?",
-                hebrew: "תודה",
-                options: ["Hello", "Thank you", "Goodbye", "I don't know"],
-                correct: 1,
-                level: 2,
-                hasAudio: false
-            },
-            {
-                question: "What is the past tense of 'to go' (הלך)?",
-                hebrew: "",
-                options: ["הלכתי (I went)", "הולך (I go)", "אלך (I will go)", "I don't know"],
-                correct: 0,
-                level: 3,
-                hasAudio: false
-            },
-            {
-                question: "How do you say 'I want to eat'?",
-                hebrew: "",
-                options: ["אני רוצה לאכול", "אני אוכל", "אני אכלתי", "I don't know"],
-                correct: 0,
-                level: 3,
-                hasAudio: false
-            },
-            {
-                question: "What does 'איפה השירותים?' mean?",
-                hebrew: "איפה השירותים?",
-                options: ["Where is the bathroom?", "What time is it?", "How are you?", "I don't know"],
-                correct: 0,
-                level: 3,
-                hasAudio: false
-            },
-            {
-                question: "Choose the correct form: 'הם _____ לקולנוע אתמול'",
-                hebrew: "",
-                options: ["הלכו", "הולכים", "ילכו", "I don't know"],
-                correct: 0,
-                level: 4,
-                hasAudio: false
-            },
-            {
-                question: "What does 'נראה לי ש...' express?",
-                hebrew: "",
-                options: ["It seems to me that...", "I know that...", "I hope that...", "I don't know"],
-                correct: 0,
-                level: 4,
-                hasAudio: false
-            },
-            {
-                question: "Translate: 'If I had time, I would travel'",
-                hebrew: "",
-                options: ["אם היה לי זמן, הייתי נוסע", "כשיש לי זמן, אני נוסע", "אם יהיה לי זמן, אסע", "I don't know"],
-                correct: 0,
-                level: 4,
-                hasAudio: false
-            },
-            {
-                question: "What does the idiom 'לשים את היד על הפצע' mean?",
-                hebrew: "",
-                options: ["To hit the nail on the head", "To be in pain", "To help someone", "I don't know"],
-                correct: 0,
-                level: 5,
-                hasAudio: false
-            },
-            {
-                question: "Choose the correct binyan for 'להתקשר' (to call)",
-                hebrew: "",
-                options: ["התפעל", "פיעל", "נפעל", "I don't know"],
-                correct: 0,
-                level: 5,
-                hasAudio: false
-            },
-            {
-                question: "Complete: 'בית _____' (smichut form)",
-                hebrew: "",
-                options: ["הספר", "ספר", "של ספר", "I don't know"],
-                correct: 0,
-                level: 5,
-                hasAudio: false
+                type: 'speaking',
+                skill: 'speaking',
+                icon: '🗣️',
+                question: 'Can you speak Hebrew?',
+                options: ['Yes, conversations', 'Basic phrases', 'Few words', 'Excited to learn'],
+                points: [10, 7, 4, 1]
             }
         ];
 
-        let currentQuestionIndex = 0;
-        let score = 0;
+        let currentQuestion = 0;
+        let totalScore = 0;
         let selectedAnswer = null;
 
-        window.startTest = function() {
-            document.getElementById('welcomeScreen').style.display = 'none';
-            document.getElementById('questionScreen').style.display = 'block';
-            showQuestion();
-        };
+        const startBtn = document.getElementById('start-btn');
+        const welcomeScreen = document.getElementById('welcome-screen');
+        const questionScreen = document.getElementById('question-screen');
+        const resultsScreen = document.getElementById('results-screen');
+        const nextBtn = document.getElementById('next-btn');
+
+        startBtn.addEventListener('click', function() {
+            // Collect basic data
+            userData.name = document.getElementById('user-name').value.trim();
+            userData.location = document.getElementById('user-location').value;
+            userData.age = document.getElementById('user-age').value;
+            userData.device = document.getElementById('user-device').value;
+            userData.goal = document.getElementById('user-goal').value;
+            userData.time = document.getElementById('user-time').value;
+            userData.commitment = document.getElementById('user-commitment').value;
+            userData.difficulty = document.getElementById('user-difficulty').value;
+            userData.joy = document.getElementById('user-joy').value.trim();
+            userData.dreamWord = document.getElementById('dream-word').value.trim();
+
+            if (!userData.name || !userData.location || !userData.age || !userData.device || 
+                !userData.goal || !userData.time || !userData.commitment || !userData.difficulty) {
+                alert('Please fill in all required fields! 😊');
+                return;
+            }
+
+            if (userData.personality.length === 0) {
+                alert('Please select at least one personality type! 😊');
+                return;
+            }
+
+            welcomeScreen.style.animation = 'fadeOut 0.5s ease forwards';
+            setTimeout(() => {
+                welcomeScreen.style.display = 'none';
+                questionScreen.style.display = 'block';
+                questionScreen.style.animation = 'fadeInUp 0.8s ease forwards';
+                showQuestion();
+            }, 500);
+        });
 
         function showQuestion() {
-            const question = questions[currentQuestionIndex];
+            const q = questions[currentQuestion];
             
-            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
-            document.getElementById('progressFill').style.width = ((currentQuestionIndex + 1) / questions.length * 100) + '%';
-            document.getElementById('questionText').textContent = question.question;
+            document.getElementById('progress').style.width = ((currentQuestion + 1) / questions.length * 100) + '%';
+            document.getElementById('progress-text').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
             
-            const hebrewExample = document.getElementById('hebrewExample');
-            const audioBtn = document.getElementById('audioBtn');
-            
-            if (question.hebrew) {
-                hebrewExample.textContent = question.hebrew;
-                hebrewExample.style.display = 'block';
-            } else {
-                hebrewExample.style.display = 'none';
+            document.getElementById('question-type').innerHTML = `${q.icon} ${q.type}`;
+            document.getElementById('question-text').textContent = q.question;
+            document.getElementById('question-subtitle').textContent = q.subtitle || '';
+
+            const contentDiv = document.getElementById('question-content');
+            contentDiv.innerHTML = '';
+
+            if (q.hebrew) {
+                const hebrewDisplay = document.createElement('div');
+                hebrewDisplay.className = 'hebrew-display';
+                hebrewDisplay.innerHTML = `
+                    <div class="hebrew-letter">${q.hebrew}</div>
+                    ${q.audio ? '<button class="audio-button" onclick="playAudio()">🔊 Listen</button>' : ''}
+                `;
+                contentDiv.appendChild(hebrewDisplay);
             }
 
-            if (question.hasAudio) {
-                audioBtn.style.display = 'block';
-            } else {
-                audioBtn.style.display = 'none';
-            }
-
-            const optionsContainer = document.getElementById('optionsContainer');
-            optionsContainer.innerHTML = '';
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
             
-            question.options.forEach((option, index) => {
-                const btn = document.createElement('button');
-                btn.className = 'option-btn';
-                btn.textContent = option;
-                btn.onclick = () => selectAnswer(index);
-                optionsContainer.appendChild(btn);
+            q.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                optionDiv.textContent = option;
+                optionDiv.onclick = () => selectOption(index);
+                optionsDiv.appendChild(optionDiv);
             });
 
             selectedAnswer = null;
-            document.getElementById('nextBtn').disabled = true;
+            nextBtn.disabled = true;
         }
 
-        window.playAudio = function() {
-            // Placeholder for audio - would use ElevenLabs API in production
-            const utterance = new SpeechSynthesisUtterance(questions[currentQuestionIndex].audioText || 'shalom');
-            utterance.lang = 'he-IL';
-            speechSynthesis.speak(utterance);
-        };
-
-        window.selectAnswer = function(index) {
+        function selectOption(index) {
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelectorAll('.option')[index].classList.add('selected');
             selectedAnswer = index;
-            document.querySelectorAll('.option-btn').forEach((btn, i) => {
-                btn.classList.toggle('selected', i === index);
-            });
-            document.getElementById('nextBtn').disabled = false;
-        };
+            nextBtn.disabled = false;
+        }
 
-        window.nextQuestion = function() {
-            const question = questions[currentQuestionIndex];
-            
-            if (selectedAnswer === question.correct) {
-                score++;
+        function playAudio() {
+            const q = questions[currentQuestion];
+            if (q.hebrew) {
+                const utterance = new SpeechSynthesisUtterance(q.hebrew);
+                utterance.lang = 'he-IL';
+                utterance.rate = 0.8;
+                speechSynthesis.speak(utterance);
             }
+        }
 
-            currentQuestionIndex++;
+        nextBtn.addEventListener('click', function() {
+            if (selectedAnswer !== null) {
+                const q = questions[currentQuestion];
+                const points = q.points[selectedAnswer];
+                totalScore += points;
+                skillScores[q.skill] += points;
 
-            if (currentQuestionIndex < questions.length) {
-                showQuestion();
-            } else {
-                showResults();
-            }
-        };
-
-        async function showResults() {
-            document.getElementById('questionScreen').style.display = 'none';
-            document.getElementById('resultsScreen').style.display = 'block';
-
-            let level, levelName, description, startLesson, badge;
-
-            if (score <= 3) {
-                level = 1;
-                levelName = "Complete Beginner";
-                badge = "🌱";
-                description = "You're just starting your Hebrew journey! Perfect - everyone starts here.";
-                startLesson = 1;
-            } else if (score <= 6) {
-                level = 2;
-                levelName = "Beginner";
-                badge = "🌿";
-                description = "You know some basics! Let's build on that foundation.";
-                startLesson = 11;
-            } else if (score <= 9) {
-                level = 3;
-                levelName = "Elementary";
-                badge = "🌳";
-                description = "You have a good grasp of basic Hebrew! Time to expand.";
-                startLesson = 21;
-            } else if (score <= 12) {
-                level = 4;
-                levelName = "Intermediate";
-                badge = "🌟";
-                description = "Impressive! You can handle conversations and complex grammar.";
-                startLesson = 31;
-            } else {
-                level = 5;
-                levelName = "Advanced";
-                badge = "🏆";
-                description = "Wow! You're nearly fluent. Let's perfect your Hebrew!";
-                startLesson = 41;
-            }
-
-            document.getElementById('levelBadge').textContent = badge;
-            document.getElementById('levelTitle').textContent = levelName;
-            document.getElementById('levelDescription').textContent = description;
-            document.getElementById('recommendedPath').innerHTML = `
-                You scored <strong>${score}/15</strong><br>
-                We recommend starting at <strong>Lesson ${startLesson}</strong><br>
-                Estimated time to fluency: <strong>${6 - level} months</strong>
-            `;
-
-            if (currentUser) {
-                try {
-                    await setDoc(doc(db, 'users', currentUser.uid), {
-                        placementTestScore: score,
-                        hebrewLevel: level,
-                        recommendedStartLesson: startLesson,
-                        testCompletedAt: new Date().toISOString()
-                    }, { merge: true });
-                } catch (error) {
-                    console.error('Error saving results:', error);
+                currentQuestion++;
+                
+                if (currentQuestion < questions.length) {
+                    showQuestion();
+                } else {
+                    showResults();
                 }
             }
+        });
 
-            sessionStorage.setItem('placementTestResults', JSON.stringify({
-                score,
-                level,
-                startLesson
-            }));
+        function showResults() {
+            questionScreen.style.animation = 'fadeOut 0.5s ease forwards';
+            
+            setTimeout(() => {
+                questionScreen.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                resultsScreen.style.animation = 'fadeInUp 0.8s ease forwards';
+
+                const maxScore = 50;
+                const percentage = (totalScore / maxScore) * 100;
+
+                // Generate learner persona
+                let persona = generatePersona(userData);
+                document.getElementById('celebration').textContent = persona.emoji;
+                document.getElementById('persona-badge').textContent = `${persona.emoji} ${persona.name}`;
+                
+                let level = percentage >= 70 ? 'Advanced' : percentage >= 40 ? 'Intermediate' : 'Beginner';
+                
+                document.getElementById('results-title').textContent = `You're a ${persona.name}!`;
+                document.getElementById('results-subtitle').textContent = `Level: ${level} - ${persona.description}`;
+
+                // Show stats
+                document.getElementById('results-stats').innerHTML = `
+                    <div class="stat-card">
+                        <div class="stat-value">${Math.round(percentage)}%</div>
+                        <div class="stat-label">Overall</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${Math.round((skillScores.reading / 20) * 100)}%</div>
+                        <div class="stat-label">📖 Reading</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${Math.round((skillScores.listening / 10) * 100)}%</div>
+                        <div class="stat-label">👂 Listening</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${Math.round((skillScores.writing / 10) * 100)}%</div>
+                        <div class="stat-label">✍️ Writing</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${Math.round((skillScores.speaking / 10) * 100)}%</div>
+                        <div class="stat-label">🗣️ Speaking</div>
+                    </div>
+                `;
+
+                // Ultra personalized message
+                let personalMsg = generatePersonalMessage(userData, persona, level);
+                document.getElementById('personalized-message').innerHTML = personalMsg;
+
+                // Custom study plan
+                let studyPlan = generateStudyPlan(userData, skillScores, persona);
+                document.getElementById('study-plan').innerHTML = studyPlan;
+
+                // Save complete profile
+                const completeProfile = {
+                    ...userData,
+                    persona,
+                    level,
+                    skillScores,
+                    totalScore,
+                    percentage: Math.round(percentage),
+                    completedAt: new Date().toISOString()
+                };
+
+                localStorage.setItem('hebrewMasterProfile', JSON.stringify(completeProfile));
+                console.log('=== COMPLETE USER PROFILE ===');
+                console.log(completeProfile);
+
+            }, 500);
         }
 
-        window.goToDashboard = function() {
-            if (currentUser) {
-                window.location.href = '/dashboard.html';
-            } else {
-                alert('Please login or create an account to start learning!');
-                window.location.href = '/login.html';
+        function generatePersona(data) {
+            const personas = {
+                calm: { emoji: '🦉', name: 'Zen Owl', description: 'Calm, thoughtful, loves peaceful learning' },
+                energetic: { emoji: '🦊', name: 'Playful Fox', description: 'Energetic, fun, loves interactive games' },
+                competitive: { emoji: '🦁', name: 'Champion Lion', description: 'Competitive, goal-driven, loves challenges' },
+                thinker: { emoji: '🐬', name: 'Smart Dolphin', description: 'Analytical, loves understanding deeply' },
+                social: { emoji: '🐝', name: 'Social Bee', description: 'Social, loves learning with others' },
+                curious: { emoji: '🐱', name: 'Curious Cat', description: 'Curious, loves exploring new things' }
+            };
+
+            const mainPersonality = data.personality[0] || 'curious';
+            return personas[mainPersonality] || personas.curious;
+        }
+
+        function generatePersonalMessage(data, persona, level) {
+            let msg = `<strong>Hey ${data.name}! 👋</strong><br><br>`;
+            
+            msg += `You're a <strong>${persona.name}</strong> - ${persona.description}!<br><br>`;
+
+            if (data.humorStyle.includes('sarcasm')) {
+                msg += `Oh, you like sarcasm? 😏 Well, aren't YOU special! (Just kidding - we'll add witty banter to your lessons!)<br><br>`;
+            } else if (data.humorStyle.includes('cute')) {
+                msg += `Aww, you like cute humor! 🤗 Get ready for adorable Hebrew characters and sweet encouragement!<br><br>`;
             }
-        };
+
+            if (data.atmosphere.includes('lofi')) {
+                msg += `🎵 Lo-fi beats lover! Your lessons will have chill background music perfect for focus.<br><br>`;
+            } else if (data.atmosphere.includes('ocean')) {
+                msg += `🌊 Ocean sounds it is! Every lesson will feel like studying by the beach.<br><br>`;
+            }
+
+            if (data.commitment === '60+') {
+                msg += `WOW! 1+ hour daily?! 🔥 You're SERIOUS! We're building you an intensive program!<br><br>`;
+            }
+
+            if (data.dreamWord) {
+                msg += `Your dream word: "<strong>${data.dreamWord}</strong>" - We'll make sure you nail it! 🎯<br><br>`;
+            }
+
+            msg += `Based on your preferences, every lesson will be perfectly matched to YOUR style!`;
+
+            return msg;
+        }
+
+        function generateStudyPlan(data, scores, persona) {
+            let plan = '<h3>🎯 Your AI-Generated Perfect Study Plan</h3>';
+
+            plan += `
+                <div class="study-section">
+                    <h4>🎨 Your Visual Experience</h4>
+                    <p>Theme: ${data.visualTheme[0] || 'personalized'} | Background: ${data.atmosphere[0] || 'adaptive'} | Style: ${persona.name} themed interface!</p>
+                </div>
+            `;
+
+            plan += `
+                <div class="study-section">
+                    <h4>😊 Your Personality Match</h4>
+                    <p>Humor: ${data.humorIntensity}/10 intensity | Encouragement: ${data.encouragementStyle[0] || 'adaptive'} | Tone: Perfectly matched to you!</p>
+                </div>
+            `;
+
+            if (data.learningFormat.length > 0) {
+                plan += `
+                    <div class="study-section">
+                        <h4>📚 Your Learning Methods</h4>
+                        <p>We'll use: ${data.learningFormat.map(f => {
+                            const icons = {visual: '👁️ Visual', audio: '👂 Audio', games: '🎮 Games', stories: '📖 Stories', repetition: '🔁 Practice', conversation: '💬 Conversation'};
+                            return icons[f];
+                        }).join(', ')} - exactly how YOU learn best!</p>
+                    </div>
+                `;
+            }
+
+            if (data.rewards.length > 0) {
+                plan += `
+                    <div class="study-section">
+                        <h4>🏆 Your Rewards System</h4>
+                        <p>You'll get: ${data.rewards.map(r => {
+                            const icons = {streaks: '🔥 Daily Streaks', badges: '🏅 Badges', leaderboard: '📊 Rankings', progress: '📈 Progress Tracking', unlocks: '🎁 Unlockables', social: '👥 Community'};
+                            return icons[r];
+                        }).join(', ')}</p>
+                    </div>
+                `;
+            }
+
+            if (data.interests.length > 0) {
+                plan += `
+                    <div class="study-section">
+                        <h4>💖 Personalized Content</h4>
+                        <p>All Hebrew examples will be about: ${data.interests.map(i => {
+                            const icons = {music: '🎵 music', food: '🍕 food', sports: '⚽ sports', tech: '💻 tech', art: '🎨 art', history: '📚 history', movies: '🎬 movies', nature: '🌿 nature', fashion: '👗 fashion', gaming: '🎮 gaming'};
+                            return icons[i];
+                        }).join(', ')}!</p>
+                    </div>
+                `;
+            }
+
+            plan += `
+                <div class="study-section">
+                    <h4>⏰ Your Perfect Schedule</h4>
+                    <p>${data.commitment}/day at ${data.time} - We'll remind you with ${data.encouragementStyle[0] || 'friendly'} notifications!</p>
+                </div>
+            `;
+
+            return plan;
+        }
+
+        function saveAndContinue() {
+            alert('Profile saved! Ready to start your perfectly personalized Hebrew journey! 🚀');
+            // window.location.href = 'index.html';
+        }
     </script>
 </body>
 </html>

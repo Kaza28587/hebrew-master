@@ -3,3177 +3,498 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Master Hebrew in 90 days with revolutionary ASMR + AI technology. Personalized neural learning, whisper-soft voice coaching, and gamified practice. Join 50K+ successful learners. Start free trial - no credit card required.">
-    <title>Hebrew Master - Speak Hebrew in 90 Days with ASMR AI</title>
-    
+    <title>Login - Hebrew Master</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap');
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
-        :root {
-            --neon-purple: #9D4EDD;
-            --neon-blue: #00D4FF;
-            --neon-pink: #FF10F0;
-            --neon-green: #39FF14;
-            --dark-bg: #0A0E27;
-            --darker-bg: #050714;
-            --glass-white: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text-primary: #FFFFFF;
-            --text-secondary: #B8BCC8;
-            --gold-accent: #FFD700;
-        }
-        
+
         body {
-            font-family: 'Inter', sans-serif;
-            background: #000;
-            color: var(--text-primary);
-            overflow-x: hidden;
-        }
-        
-        .universe-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(125deg, #0A0E27 0%, #050714 25%, #0F0C29 50%, #24243e 100%);
-            z-index: -2;
-        }
-        
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-        
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 3s infinite;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-        
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-        
-        .particle {
-            position: fixed;
-            pointer-events: none;
-            opacity: 0.5;
-            animation: float-up 10s linear infinite;
-        }
-        
-        @keyframes float-up {
-            0% {
-                transform: translateY(100vh) translateX(0) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.5;
-            }
-            90% {
-                opacity: 0.5;
-            }
-            100% {
-                transform: translateY(-100vh) translateX(100px) scale(1);
-                opacity: 0;
-            }
-        }
-        
-        .cursor-trail {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: screen;
-            transition: transform 0.15s ease-out;
-        }
-        
-        .live-counter {
-            position: fixed;
-            bottom: 40px;
-            left: 40px;
-            background: rgba(10, 14, 39, 0.85);
-            backdrop-filter: blur(30px);
-            border: 2px solid var(--neon-green);
-            border-radius: 25px;
-            padding: 15px 25px;
-            z-index: 999;
-            animation: slideInLeft 0.5s ease-out, glow-pulse 2s infinite;
-            box-shadow: 0 0 30px rgba(57, 255, 20, 0.4);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        @keyframes slideInLeft {
-            from { transform: translateX(-100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        @keyframes glow-pulse {
-            0%, 100% { box-shadow: 0 0 30px rgba(57, 255, 20, 0.4); }
-            50% { box-shadow: 0 0 45px rgba(57, 255, 20, 0.7); }
-        }
-        
-        .counter-icon-3d {
-            width: 45px;
-            height: 45px;
-            position: relative;
-            transform-style: preserve-3d;
-            animation: mesmerizing-rotate 20s ease-in-out infinite;
-        }
-        
-        @keyframes mesmerizing-rotate {
-            0% { transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg); }
-            25% { transform: rotateY(180deg) rotateX(90deg) rotateZ(0deg); }
-            50% { transform: rotateY(180deg) rotateX(180deg) rotateZ(90deg); }
-            75% { transform: rotateY(270deg) rotateX(270deg) rotateZ(180deg); }
-            100% { transform: rotateY(360deg) rotateX(360deg) rotateZ(360deg); }
-        }
-        
-        .icon-face-counter {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            border: 1px solid rgba(57, 255, 20, 0.4);
-            backdrop-filter: blur(15px);
-            box-shadow: 0 8px 32px rgba(57, 255, 20, 0.25);
-        }
-        
-        .icon-face-counter.front {
-            background: linear-gradient(135deg, rgba(57, 255, 20, 0.95) 0%, rgba(0, 212, 255, 0.85) 100%);
-            transform: translateZ(20px);
-            box-shadow: 0 0 30px rgba(57, 255, 20, 0.7), inset 0 2px 15px rgba(255, 255, 255, 0.3);
-        }
-        
-        .icon-face-counter.back {
-            background: linear-gradient(315deg, rgba(0, 212, 255, 0.85) 0%, rgba(57, 255, 20, 0.75) 100%);
-            transform: translateZ(-20px) rotateY(180deg);
-            box-shadow: inset 0 2px 15px rgba(255, 255, 255, 0.2);
-        }
-        
-        .icon-face-counter.top {
-            background: linear-gradient(45deg, rgba(57, 255, 20, 0.9) 0%, rgba(255, 215, 0, 0.7) 100%);
-            transform: rotateX(90deg) translateZ(20px);
-            box-shadow: inset 0 2px 15px rgba(255, 255, 255, 0.2);
-        }
-        
-        .icon-face-counter.bottom {
-            background: linear-gradient(225deg, rgba(0, 212, 255, 0.85) 0%, rgba(57, 255, 20, 0.7) 100%);
-            transform: rotateX(-90deg) translateZ(20px);
-            box-shadow: inset 0 2px 15px rgba(255, 255, 255, 0.2);
-        }
-        
-        .icon-face-counter.left {
-            background: linear-gradient(135deg, rgba(57, 255, 20, 0.85) 0%, rgba(0, 212, 255, 0.7) 100%);
-            transform: rotateY(-90deg) translateZ(20px);
-            box-shadow: inset 0 2px 15px rgba(255, 255, 255, 0.2);
-        }
-        
-        .icon-face-counter.right {
-            background: linear-gradient(45deg, rgba(0, 212, 255, 0.85) 0%, rgba(57, 255, 20, 0.7) 100%);
-            transform: rotateY(90deg) translateZ(20px);
-            box-shadow: inset 0 2px 15px rgba(255, 255, 255, 0.2);
-        }
-        
-        .counter-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-        
-        .counter-text {
-            font-size: 11px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .counter-number-row {
-            display: flex;
-            align-items: baseline;
-            gap: 5px;
-        }
-        
-        .counter-number {
-            color: var(--neon-green);
-            font-weight: 900;
-            font-size: 24px;
-            font-family: 'Orbitron', monospace;
-            text-shadow: 0 0 10px rgba(57, 255, 20, 0.8);
-        }
-        
-        .counter-label {
-            color: var(--text-primary);
-            font-size: 14px;
-            font-weight: 600;
-        }
-        
-        .hebrew-showcase {
-            position: fixed;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .hebrew-letter-circle {
-            width: 60px;
-            height: 60px;
-            background: var(--glass-white);
-            backdrop-filter: blur(20px);
-            border: 2px solid var(--glass-border);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            cursor: pointer;
-            transition: all 0.3s;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        .hebrew-letter-circle:hover {
-            transform: scale(1.2) rotate(15deg);
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 30px var(--neon-blue);
-        }
-        
-        .hebrew-letter-circle:nth-child(1) { animation-delay: 0s; }
-        .hebrew-letter-circle:nth-child(2) { animation-delay: 0.5s; }
-        .hebrew-letter-circle:nth-child(3) { animation-delay: 1s; }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .voice-guide-btn {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            width: 140px;
-            height: 140px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            z-index: 999;
-            transition: all 0.3s;
-        }
-        
-        .voice-guide-btn:hover {
-            transform: scale(1.05);
-        }
-        
-        .play-button-3d {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            animation: float-button 4s ease-in-out infinite;
-        }
-        
-        .button-sphere {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .sphere-layer {
-            position: absolute;
-            border-radius: 50%;
-            border: 3px solid;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        
-        .sphere-layer:nth-child(1) {
-            width: 100%;
-            height: 100%;
-            border-color: rgba(0, 212, 255, 0.3);
-            animation: ring-pulse-1 3s ease-in-out infinite;
-        }
-        
-        .sphere-layer:nth-child(2) {
-            width: 75%;
-            height: 75%;
-            border-color: rgba(157, 78, 221, 0.4);
-            animation: ring-pulse-2 3s ease-in-out infinite 0.3s;
-        }
-        
-        .sphere-layer:nth-child(3) {
-            width: 50%;
-            height: 50%;
-            border-color: rgba(0, 212, 255, 0.5);
-            animation: ring-pulse-3 3s ease-in-out infinite 0.6s;
-        }
-        
-        .play-icon-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(0, 212, 255, 0.95) 30%, rgba(0, 212, 255, 0.85) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.8), 0 0 60px rgba(0, 212, 255, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.4);
-            animation: core-pulse 2s ease-in-out infinite;
-            z-index: 10;
-        }
-        
-        .play-icon {
-            width: 0;
-            height: 0;
-            border-left: 16px solid white;
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            margin-left: 3px;
-            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
-        }
-        
-        .voice-guide-btn.playing .play-icon {
-            width: 14px;
-            height: 14px;
-            border: none;
-            background: transparent;
-            position: relative;
-            margin-left: 0;
-        }
-        
-        .voice-guide-btn.playing .play-icon::before,
-        .voice-guide-btn.playing .play-icon::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            height: 100%;
-            background: white;
-            filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.9));
-        }
-        
-        .voice-guide-btn.playing .play-icon::before { left: 0; }
-        .voice-guide-btn.playing .play-icon::after { right: 0; }
-        
-        .voice-guide-btn.playing .play-icon-container {
-            background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(57, 255, 20, 0.95) 30%, rgba(57, 255, 20, 0.85) 100%);
-            box-shadow: 0 0 40px rgba(57, 255, 20, 0.9), 0 0 80px rgba(57, 255, 20, 0.6), inset 0 0 25px rgba(255, 255, 255, 0.5);
-            animation: core-pulse-playing 1.5s ease-in-out infinite;
-        }
-        
-        .outer-glow {
-            position: absolute;
-            top: -50px;
-            left: -50px;
-            right: -50px;
-            bottom: -50px;
-            border-radius: 50%;
-            background: radial-gradient(circle at center, transparent 30%, rgba(0, 212, 255, 0.2) 40%, rgba(157, 78, 221, 0.15) 50%, transparent 70%);
-            animation: expand-glow 4s ease-in-out infinite;
-            z-index: -1;
-            filter: blur(25px);
-        }
-        
-        @keyframes float-button {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        @keyframes ring-pulse-1 {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
-            50% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.6; }
-        }
-        
-        @keyframes ring-pulse-2 {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.4; }
-            50% { transform: translate(-50%, -50%) scale(1.08); opacity: 0.7; }
-        }
-        
-        @keyframes ring-pulse-3 {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
-        }
-        
-        @keyframes core-pulse {
-            0%, 100% { 
-                transform: translate(-50%, -50%) scale(1);
-                box-shadow: 0 0 30px rgba(0, 212, 255, 0.8), 0 0 60px rgba(0, 212, 255, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.4);
-            }
-            50% { 
-                transform: translate(-50%, -50%) scale(1.05);
-                box-shadow: 0 0 40px rgba(0, 212, 255, 1), 0 0 80px rgba(0, 212, 255, 0.7), inset 0 0 30px rgba(255, 255, 255, 0.6);
-            }
-        }
-        
-        @keyframes core-pulse-playing {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -50%) scale(1.08); }
-        }
-        
-        .voice-settings {
-            position: fixed;
-            bottom: 200px;
-            right: 40px;
-            background: rgba(10, 14, 39, 0.95);
-            backdrop-filter: blur(30px);
-            border: 2px solid var(--glass-border);
-            border-radius: 25px;
-            padding: 25px;
-            z-index: 1001;
-            min-width: 320px;
-            max-width: 400px;
-            max-height: 500px;
-            overflow-y: auto;
-            opacity: 0;
-            transform: translateY(20px);
-            pointer-events: none;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-        
-        .voice-settings.show {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: all;
-        }
-        
-        .voice-settings-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 16px;
-            font-weight: 700;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .voice-category {
-            margin-bottom: 20px;
-        }
-        
-        .category-header {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--neon-blue);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 8px 10px;
-            margin-bottom: 10px;
-            border-left: 3px solid var(--neon-blue);
-            background: rgba(0, 212, 255, 0.1);
-            border-radius: 5px;
-        }
-        
-        .voice-option {
-            background: var(--glass-white);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 12px 15px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .voice-option:hover {
-            background: rgba(0, 212, 255, 0.1);
-            border-color: var(--neon-blue);
-            transform: translateX(5px);
-        }
-        
-        .voice-option.selected {
-            background: linear-gradient(135deg, rgba(157, 78, 221, 0.2), rgba(0, 212, 255, 0.2));
-            border-color: var(--neon-purple);
-            box-shadow: 0 0 20px rgba(157, 78, 221, 0.3);
-        }
-        
-        .voice-icon {
-            font-size: 20px;
-        }
-        
-        .voice-info {
-            flex: 1;
-        }
-        
-        .voice-name {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 3px;
-        }
-        
-        .voice-desc {
-            font-size: 11px;
-            color: var(--text-secondary);
-        }
-        
-        .voice-settings-toggle {
-            position: fixed;
-            bottom: 110px;
-            right: 50px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            transition: all 0.3s;
-            box-shadow: 0 5px 20px rgba(157, 78, 221, 0.5);
-        }
-        
-        .voice-settings-toggle:hover {
-            transform: scale(1.1) rotate(15deg);
-            box-shadow: 0 8px 30px rgba(157, 78, 221, 0.7);
-        }
-        
-        .progress-tracker {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--glass-white);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 25px;
-            padding: 10px 25px;
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            z-index: 998;
-            animation: slideInBottom 0.5s ease-out 1s;
-            opacity: 0;
-            animation-fill-mode: forwards;
-        }
-        
-        @keyframes slideInBottom {
-            from { transform: translateX(-50%) translateY(100%); opacity: 0; }
-            to { transform: translateX(-50%) translateY(0); opacity: 1; }
-        }
-        
-        .progress-step {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid var(--glass-border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            position: relative;
-        }
-        
-        .progress-step::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 2px solid transparent;
-            transition: all 0.5s;
-        }
-        
-        .progress-step.active {
-            background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 25px rgba(0, 212, 255, 0.6);
-            transform: scale(1.15);
-            font-weight: 900;
-        }
-        
-        .progress-step.active::after {
-            border-color: var(--neon-blue);
-            transform: scale(1.3);
-            opacity: 0.3;
-            animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
-        }
-        
-        @keyframes ping {
-            75%, 100% {
-                transform: scale(1.5);
-                opacity: 0;
-            }
-        }
-        
-        .progress-step.completed {
-            background: rgba(57, 255, 20, 0.2);
-            border-color: var(--neon-green);
-            color: var(--neon-green);
-        }
-        
-        .progress-step.completed::before {
-            content: '✓';
-            position: absolute;
-            font-size: 18px;
-            font-weight: 900;
-        }
-        
-        .progress-step:hover {
-            transform: scale(1.15);
-        }
-        
-        .quiz-section {
-            padding: 80px 20px;
-            background: linear-gradient(135deg, rgba(255, 16, 240, 0.05), rgba(255, 215, 0, 0.05));
-        }
-        
-        .quiz-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .quiz-title {
-            text-align: center;
-            font-family: 'Orbitron', monospace;
-            font-size: 36px;
-            font-weight: 700;
-            background: linear-gradient(90deg, var(--neon-pink), var(--gold-accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-        }
-        
-        .quiz-subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 16px;
-            margin-bottom: 50px;
-        }
-        
-        .quiz-interface {
-            background: var(--glass-white);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            padding: 40px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .quiz-question-container {
-            text-align: center;
-        }
-        
-        .quiz-progress {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .quiz-hebrew-word {
-            font-size: 72px;
-            margin-bottom: 20px;
-            animation: word-appear 0.5s ease-out;
-            color: var(--text-primary);
-        }
-        
-        .quiz-instruction {
-            font-size: 18px;
-            color: var(--neon-blue);
-            margin-bottom: 40px;
-            font-weight: 600;
-        }
-        
-        .quiz-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        
-        .quiz-option {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        
-        .quiz-option:hover {
-            background: rgba(0, 212, 255, 0.1);
-            border-color: var(--neon-blue);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
-        }
-        
-        .quiz-option.selected-correct {
-            background: linear-gradient(135deg, rgba(57, 255, 20, 0.3), rgba(57, 255, 20, 0.2));
-            border-color: var(--neon-green);
-            animation: pulse-correct 0.5s ease-out;
-        }
-        
-        .quiz-option.selected-wrong {
-            background: linear-gradient(135deg, rgba(255, 68, 68, 0.3), rgba(255, 68, 68, 0.2));
-            border-color: #ff4444;
-            animation: shake 0.5s ease-out;
-        }
-        
-        .quiz-option.correct-answer {
-            background: linear-gradient(135deg, rgba(57, 255, 20, 0.2), rgba(57, 255, 20, 0.1));
-            border-color: var(--neon-green);
-        }
-        
-        .quiz-option.disabled {
-            pointer-events: none;
-            opacity: 0.6;
-        }
-        
-        @keyframes pulse-correct {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
-        
-        .quiz-feedback {
-            text-align: center;
-            padding: 30px 20px;
-        }
-        
-        .feedback-icon {
-            font-size: 60px;
-            margin-bottom: 15px;
-            animation: bounce-in 0.5s ease-out;
-        }
-        
-        @keyframes bounce-in {
-            0% { transform: scale(0); opacity: 0; }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        
-        .feedback-text {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 25px;
-            color: var(--text-primary);
-            line-height: 1.5;
-        }
-        
-        .quiz-next-btn {
-            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
-            color: white;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 50px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .quiz-next-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 30px rgba(157, 78, 221, 0.6);
-        }
-        
-        .quiz-results {
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .results-icon {
-            font-size: 80px;
-            margin-bottom: 20px;
-            animation: bounce-in 0.6s ease-out;
-        }
-        
-        .results-score {
-            font-family: 'Orbitron', monospace;
-            font-size: 56px;
-            font-weight: 900;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-        }
-        
-        .results-message {
-            font-size: 24px;
-            color: var(--text-primary);
-            margin-bottom: 40px;
-            font-weight: 600;
-        }
-        
-        .results-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 40px;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .stat-item {
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 20px;
-        }
-        
-        .stat-value {
-            font-family: 'Orbitron', monospace;
-            font-size: 36px;
-            font-weight: 900;
-            color: var(--neon-green);
-            margin-bottom: 8px;
-        }
-        
-        .stat-label {
-            font-size: 12px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .interactive-demo {
-            padding: 80px 20px;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(157, 78, 221, 0.05));
-        }
-        
-        .demo-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .demo-title {
-            text-align: center;
-            font-family: 'Orbitron', monospace;
-            font-size: 36px;
-            font-weight: 700;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 50px;
-        }
-        
-        .demo-interface {
-            background: var(--glass-white);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            padding: 40px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .demo-screen {
-            background: rgba(10, 14, 39, 0.8);
-            border-radius: 20px;
-            padding: 30px;
-            min-height: 300px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        
-        .demo-word {
-            font-size: 80px;
-            margin-bottom: 20px;
-            animation: word-appear 0.5s ease-out;
-        }
-        
-        @keyframes word-appear {
-            from { opacity: 0; transform: scale(0.5); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        
-        .demo-translation {
-            font-size: 24px;
-            color: var(--neon-blue);
-            margin-bottom: 10px;
-        }
-        
-        .demo-fun-fact {
-            font-size: 14px;
-            color: var(--text-secondary);
-            font-style: italic;
-            margin-bottom: 30px;
-            max-width: 400px;
-            text-align: center;
-        }
-        
-        .demo-audio-btn {
-            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
-            color: white;
-            padding: 15px 35px;
-            border: none;
-            border-radius: 50px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 16px;
-        }
-        
-        .demo-audio-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 40px rgba(157, 78, 221, 0.8);
-        }
-        
-        .demo-controls {
-            margin-top: 30px;
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .demo-control-btn {
-            background: var(--glass-white);
-            border: 1px solid var(--glass-border);
-            color: var(--text-primary);
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 14px;
-        }
-        
-        .demo-control-btn:hover {
-            background: rgba(0, 212, 255, 0.2);
-            border-color: var(--neon-blue);
-            transform: translateY(-2px);
-        }
-        
-        .limited-offer {
-            background: linear-gradient(135deg, rgba(255, 16, 240, 0.1), rgba(255, 215, 0, 0.1));
-            border: 2px solid var(--neon-pink);
-            border-radius: 25px;
-            padding: 30px;
-            margin: 60px auto;
-            max-width: 800px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .limited-offer::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 16, 240, 0.1), transparent);
-            animation: shine 3s infinite;
-        }
-        
-        @keyframes shine {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .offer-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 28px;
-            font-weight: 900;
-            color: var(--neon-pink);
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .countdown-timer {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 30px 0;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .countdown-box {
-            background: var(--glass-white);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            padding: 20px;
-            min-width: 80px;
-        }
-        
-        .countdown-number {
-            font-family: 'Orbitron', monospace;
-            font-size: 36px;
-            font-weight: 900;
-            color: var(--neon-green);
-            display: block;
-        }
-        
-        .countdown-label {
-            font-size: 12px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            margin-top: 5px;
-        }
-        
-        .comparison-section {
-            padding: 80px 20px;
-            background: linear-gradient(135deg, rgba(57, 255, 20, 0.05), rgba(255, 215, 0, 0.05));
-        }
-        
-        .comparison-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .comparison-title {
-            text-align: center;
-            font-family: 'Orbitron', monospace;
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 50px;
-            color: var(--text-primary);
-        }
-        
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .comparison-card {
-            background: var(--glass-white);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 25px;
-            padding: 35px 25px;
-            text-align: center;
-            position: relative;
-            transition: all 0.4s;
-        }
-        
-        .comparison-card.featured {
-            border: 2px solid var(--neon-green);
-            box-shadow: 0 0 40px rgba(57, 255, 20, 0.3);
-            transform: scale(1.05);
-        }
-        
-        .comparison-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .comparison-icon {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 25px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transform-style: preserve-3d;
-            animation: icon-float 6s ease-in-out infinite;
-        }
-        
-        .comparison-icon-3d {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            animation: hypnotic-rotation 24s ease-in-out infinite;
-        }
-        
-        @keyframes hypnotic-rotation {
-            0% { transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg); }
-            16.66% { transform: rotateY(60deg) rotateX(30deg) rotateZ(15deg); }
-            33.33% { transform: rotateY(120deg) rotateX(90deg) rotateZ(30deg); }
-            50% { transform: rotateY(180deg) rotateX(180deg) rotateZ(90deg); }
-            66.66% { transform: rotateY(240deg) rotateX(270deg) rotateZ(180deg); }
-            83.33% { transform: rotateY(300deg) rotateX(330deg) rotateZ(270deg); }
-            100% { transform: rotateY(360deg) rotateX(360deg) rotateZ(360deg); }
-        }
-        
-        .comparison-icon-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(20px);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-        }
-        
-        .comparison-icon-face.front {
-            background: linear-gradient(135deg, rgba(157, 78, 221, 0.95) 0%, rgba(0, 212, 255, 0.9) 50%, rgba(255, 16, 240, 0.85) 100%);
-            transform: translateZ(35px);
-            box-shadow: 0 0 50px rgba(157, 78, 221, 0.8), inset 0 5px 30px rgba(255, 255, 255, 0.2);
-        }
-        
-        .comparison-icon-face.back {
-            background: linear-gradient(315deg, rgba(57, 255, 20, 0.75) 0%, rgba(255, 215, 0, 0.7) 50%, rgba(255, 16, 240, 0.65) 100%);
-            transform: translateZ(-35px) rotateY(180deg);
-            box-shadow: inset 0 5px 30px rgba(255, 255, 255, 0.15);
-        }
-        
-        .comparison-icon-face.top {
-            background: linear-gradient(45deg, rgba(0, 212, 255, 0.9) 0%, rgba(255, 215, 0, 0.75) 100%);
-            transform: rotateX(90deg) translateZ(35px);
-            box-shadow: inset 0 5px 30px rgba(255, 255, 255, 0.15);
-        }
-        
-        .comparison-icon-face.bottom {
-            background: linear-gradient(225deg, rgba(255, 16, 240, 0.85) 0%, rgba(157, 78, 221, 0.7) 100%);
-            transform: rotateX(-90deg) translateZ(35px);
-            box-shadow: inset 0 5px 30px rgba(255, 255, 255, 0.15);
-        }
-        
-        .comparison-icon-face.left {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.85) 0%, rgba(157, 78, 221, 0.7) 100%);
-            transform: rotateY(-90deg) translateZ(35px);
-            box-shadow: inset 0 5px 30px rgba(255, 255, 255, 0.15);
-        }
-        
-        .comparison-icon-face.right {
-            background: linear-gradient(45deg, rgba(57, 255, 20, 0.85) 0%, rgba(0, 212, 255, 0.7) 100%);
-            transform: rotateY(90deg) translateZ(35px);
-            box-shadow: inset 0 5px 30px rgba(255, 255, 255, 0.15);
-        }
-        
-        .comparison-icon::before {
-            content: '';
-            position: absolute;
-            top: -25px;
-            left: -25px;
-            right: -25px;
-            bottom: -25px;
-            background: conic-gradient(from 0deg, transparent 0deg, rgba(157, 78, 221, 0.4) 90deg, rgba(0, 212, 255, 0.4) 180deg, rgba(255, 16, 240, 0.4) 270deg, transparent 360deg);
-            border-radius: 50%;
-            animation: smooth-spin 6s linear infinite;
-            z-index: -1;
-            filter: blur(15px);
-        }
-        
-        @keyframes smooth-spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .comparison-icon::after {
-            content: '';
-            position: absolute;
-            top: -15px;
-            left: -15px;
-            right: -15px;
-            bottom: -15px;
-            background: radial-gradient(circle at center, transparent 45%, rgba(255, 255, 255, 0.15) 46%, rgba(255, 255, 255, 0.15) 47%, transparent 48%);
-            border-radius: 50%;
-            animation: gentle-pulse 4s ease-in-out infinite;
-            z-index: -1;
-        }
-        
-        @keyframes gentle-pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-        }
-        
-        .comparison-name {
-            font-family: 'Orbitron', monospace;
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 15px;
-        }
-        
-        .comparison-features {
-            list-style: none;
-            text-align: left;
-            margin: 20px 0;
-        }
-        
-        .comparison-features li {
-            padding: 10px 0;
-            border-bottom: 1px solid var(--glass-border);
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-        
-        .comparison-features li.yes::before {
-            content: '✓ ';
-            color: var(--neon-green);
-            font-weight: 700;
-            margin-right: 8px;
-        }
-        
-        .comparison-features li.no::before {
-            content: '✗ ';
-            color: #ff4444;
-            font-weight: 700;
-            margin-right: 8px;
-        }
-        
-        .comparison-price {
-            font-size: 32px;
-            font-weight: 900;
-            color: var(--neon-blue);
-            margin: 20px 0;
-        }
-        
-        .featured-badge {
-            position: absolute;
-            top: -15px;
-            right: 20px;
-            background: linear-gradient(45deg, var(--neon-green), var(--gold-accent));
-            color: var(--dark-bg);
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .nav-header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 15px 20px;
-            background: linear-gradient(180deg, rgba(10, 14, 39, 0.95) 0%, rgba(10, 14, 39, 0) 100%);
-            backdrop-filter: blur(20px);
-            z-index: 1000;
-            border-bottom: 1px solid var(--glass-border);
-        }
-        
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo-futuristic {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            position: relative;
-        }
-        
-        .logo-hologram {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: white;
-            margin-right: 12px;
-            position: relative;
-            animation: hologram-pulse 2s infinite;
-            box-shadow: 0 0 25px var(--neon-purple);
-        }
-        
-        @keyframes hologram-pulse {
-            0%, 100% {
-                transform: rotateY(0deg) scale(1);
-                box-shadow: 0 0 25px var(--neon-purple);
-            }
-            50% {
-                transform: rotateY(180deg) scale(1.1);
-                box-shadow: 0 0 40px var(--neon-blue);
-            }
-        }
-        
-        .logo-text {
-            font-family: 'Orbitron', monospace;
-            font-size: 20px;
-            font-weight: 900;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        
-        .nav-cta {
-            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 50px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-        
-        .nav-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 40px rgba(157, 78, 221, 0.8);
-        }
-        
-        .content-wrapper {
-            padding-top: 80px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .hero-section {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
-            padding: 40px 20px;
-        }
-        
-        .hero-content {
-            text-align: center;
-            max-width: 1000px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .hero-badge {
-            display: inline-block;
-            background: rgba(57, 255, 20, 0.1);
-            border: 1px solid var(--neon-green);
-            color: var(--neon-green);
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 25px;
-            animation: glow-green 2s infinite;
-        }
-        
-        @keyframes glow-green {
-            0%, 100% { box-shadow: 0 0 20px rgba(57, 255, 20, 0.5); }
-            50% { box-shadow: 0 0 40px rgba(57, 255, 20, 0.8); }
-        }
-        
-        .hero-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 42px;
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 25px;
-            background: linear-gradient(180deg, var(--text-primary) 0%, var(--neon-blue) 50%, var(--neon-purple) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.5));
-            animation: title-glow 3s ease-in-out infinite;
-        }
-        
-        @keyframes title-glow {
-            0%, 100% { filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.5)); }
-            50% { filter: drop-shadow(0 0 50px rgba(157, 78, 221, 0.8)); }
-        }
-        
-        .hero-subtitle {
-            font-size: 18px;
-            color: var(--text-secondary);
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-            padding: 0 20px;
-            line-height: 1.6;
-        }
-        
-        .value-props {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 40px;
-        }
-        
-        .value-prop {
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid var(--glass-border);
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 13px;
-            color: var(--text-primary);
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        .value-prop:nth-child(1) { animation-delay: 0s; }
-        .value-prop:nth-child(2) { animation-delay: 0.5s; }
-        .value-prop:nth-child(3) { animation-delay: 1s; }
-        
-        .cta-section {
-            margin-bottom: 60px;
-        }
-        
-        .neural-button {
-            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
-            color: white;
-            padding: 18px 40px;
-            border: none;
-            border-radius: 50px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 0 30px rgba(157, 78, 221, 0.5);
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
-        
-        .neural-button::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
-            animation: neural-pulse 3s infinite;
-        }
-        
-        @keyframes neural-pulse {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            overflow-x: hidden;
         }
 
-        .neural-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 40px rgba(157, 78, 221, 0.8);
-        }
-        
-        .cta-note {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-top: 10px;
-        }
-        
-        .social-proof {
-            padding: 60px 20px;
-            background: linear-gradient(135deg, rgba(157, 78, 221, 0.05), rgba(0, 212, 255, 0.05));
-        }
-        
-        .social-proof-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .proof-title {
-            text-align: center;
-            font-family: 'Orbitron', monospace;
-            font-size: 36px;
-            font-weight: 700;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 50px;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-        
-        .stat-card {
-            background: var(--glass-white);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 25px;
-            padding: 30px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .stat-number {
-            font-family: 'Orbitron', monospace;
-            font-size: 48px;
-            font-weight: 900;
-            background: linear-gradient(180deg, var(--neon-blue), var(--neon-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-        }
-        
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-        
-        .testimonial-card {
-            background: var(--glass-white);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 25px;
-            padding: 30px;
-            position: relative;
-        }
-        
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 20px;
-            line-height: 1.6;
-            color: var(--text-primary);
-        }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 18px;
-        }
-        
-        .author-info {
-            flex: 1;
-        }
-        
-        .author-name {
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 5px;
-        }
-        
-        .author-title {
-            font-size: 12px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .footer {
-            margin-top: 100px;
-            background: linear-gradient(180deg, transparent 0%, rgba(10, 14, 39, 0.8) 30%, var(--darker-bg) 100%);
-border-top: 1px solid var(--glass-border);
-            position: relative;
-        }
-        
-        .footer::before {
-            content: '';
-            position: absolute;
+        #canvas3d {
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent 0%, var(--neon-blue) 50%, transparent 100%);
+            width: 100%;
+            height: 100%;
+            z-index: 0;
         }
-        
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            padding: 60px 20px 40px;
+
+        .login-container {
+            position: relative;
+            z-index: 2;
+            width: 90%;
+            max-width: 480px;
+            padding: 3rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
-        
-        .footer-section h3 {
-            font-family: 'Orbitron', monospace;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 14px;
-            font-weight: 700;
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-        
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: all 0.3s;
-            font-size: 14px;
-            display: block;
-            padding: 5px 0;
-        }
-        
-        .footer-links a:hover {
-            color: var(--neon-blue);
-            padding-left: 10px;
-        }
-        
-        .footer-divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent 0%, var(--glass-border) 20%, var(--glass-border) 80%, transparent 100%);
-            margin: 0 20px;
-        }
-        
-        .footer-bottom {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 30px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .footer-logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            animation: hologram-pulse 3s infinite;
-        }
-        
-        .footer-logo-text {
-            font-family: 'Orbitron', monospace;
-            font-size: 18px;
-            font-weight: 900;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-        }
-        
-        .footer-social {
-            display: flex;
-            gap: 12px;
-        }
-        
-        .social-link {
-            width: 40px;
-            height: 40px;
-            background: var(--glass-white);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-size: 18px;
-            transition: all 0.3s;
-        }
-        
-        .social-link:hover {
-            background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(157, 78, 221, 0.4);
-        }
-        
-        .footer-copyright {
+
+        .logo {
             text-align: center;
-            padding: 25px 20px;
-            border-top: 1px solid var(--glass-border);
-            background: rgba(5, 7, 20, 0.8);
+            margin-bottom: 2rem;
         }
-        
-        .footer-copyright p {
-            color: var(--text-secondary);
-            font-size: 12px;
-            margin: 0;
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #a8daff 0%, #6366f1 30%, #a855f7 60%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
-        
-        @media (min-width: 768px) {
-            .hero-title {
-                font-size: 72px;
-            }
-            
-            .hero-subtitle {
-                font-size: 20px;
-            }
-            
-            .demo-title,
-            .proof-title,
-            .comparison-title,
-            .quiz-title {
-                font-size: 48px;
-            }
+
+        h1 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        
+
+        .subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            text-align: center;
+            display: none;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            color: white;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: rgba(168, 85, 247, 0.5);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: -0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .forgot-password a {
+            color: #a855f7;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .forgot-password a:hover {
+            color: #ec4899;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+            background-size: 200% 200%;
+            animation: gradientShift 4s ease infinite;
+            border: none;
+            border-radius: 15px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+            margin-bottom: 1.5rem;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .divider span {
+            padding: 0 1rem;
+        }
+
+        .social-btn {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .social-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+        }
+
+        .signup-link a {
+            color: #a855f7;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .signup-link a:hover {
+            color: #ec4899;
+        }
+
         @media (max-width: 768px) {
-            .hebrew-showcase {
-                display: none;
+            .login-container {
+                padding: 2rem 1.5rem;
             }
-            
-            .live-counter {
-                bottom: 20px;
-                left: 20px;
-                right: auto;
-                padding: 12px 18px;
-            }
-            
-            .counter-icon-3d {
-                width: 35px;
-                height: 35px;
-            }
-            
-            .icon-face-counter {
-                font-size: 18px;
-            }
-            
-            .counter-number {
-                font-size: 20px;
-            }
-            
-            .counter-label {
-                font-size: 12px;
-            }
-            
-            .progress-tracker {
-                padding: 8px 15px;
-                gap: 8px;
-                bottom: 90px;
-            }
-            
-            .progress-step {
-                width: 30px;
-                height: 30px;
-                font-size: 11px;
-            }
-            
-            .countdown-timer {
-                gap: 10px;
-            }
-            
-            .countdown-box {
-                padding: 15px;
-                min-width: 60px;
-            }
-            
-            .countdown-number {
-                font-size: 24px;
-            }
-            
-            .voice-guide-btn {
-                width: 100px;
-                height: 100px;
-                bottom: 90px;
-                right: 20px;
-            }
-            
-            .voice-settings-toggle {
-                bottom: 150px;
-                right: 30px;
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
-            }
-            
-            .voice-settings {
-                right: 20px;
-                left: 20px;
-                bottom: 210px;
-                min-width: auto;
-            }
-            
-            .quiz-options {
-                grid-template-columns: 1fr;
-            }
-            
-            .quiz-hebrew-word {
-                font-size: 56px;
-            }
-            
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
+
+            h1 {
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="universe-bg"></div>
-    <div class="stars" id="stars"></div>
-    <div id="particles"></div>
-    
-    <div class="cursor-trail" id="cursorTrail"></div>
-    
-    <div class="live-counter">
-        <div class="counter-icon-3d">
-            <div class="icon-face-counter front">🎓</div>
-            <div class="icon-face-counter back">📖</div>
-            <div class="icon-face-counter top">✨</div>
-            <div class="icon-face-counter bottom">🌟</div>
-            <div class="icon-face-counter left">💡</div>
-            <div class="icon-face-counter right">🚀</div>
-        </div>
-        <div class="counter-info">
-            <div class="counter-text">Live Now</div>
-            <div class="counter-number-row">
-                <span class="counter-number" id="liveCount">237</span>
-                <span class="counter-label">learning</span>
+    <canvas id="canvas3d"></canvas>
+
+    <div class="login-container">
+        <div class="logo">
+            <div class="logo-text">
+                <span>🕊️</span>
+                <span>Hebrew Master</span>
             </div>
+        </div>
+
+        <h1>Welcome Back!</h1>
+        <p class="subtitle">Continue your Hebrew learning journey</p>
+
+        <div id="errorMessage" class="error-message"></div>
+
+        <button class="social-btn" id="googleBtn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+            Continue with Google
+        </button>
+
+        <div class="divider">
+            <span>Or login with email</span>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="your@email.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Your password" required>
+                <div class="forgot-password">
+                    <a id="forgotPasswordLink">Forgot password?</a>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="loginBtn">Sign In 🚀</button>
+        </form>
+
+        <div class="signup-link">
+            Don't have an account? <a href="/signup">Sign Up</a>
         </div>
     </div>
+
+    <!-- Load scripts in correct order -->
+    <!-- Three.js FIRST -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     
-    <div class="hebrew-showcase">
-        <div class="hebrew-letter-circle" onclick="playLetterSound('aleph')" title="Aleph">א</div>
-        <div class="hebrew-letter-circle" onclick="playLetterSound('bet')" title="Bet">ב</div>
-        <div class="hebrew-letter-circle" onclick="playLetterSound('gimel')" title="Gimel">ג</div>
-    </div>
+    <!-- Firebase SDKs SECOND -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     
-    <button class="voice-settings-toggle" id="voiceSettingsToggle" onclick="toggleVoiceSettings()" title="Voice Settings">
-        ⚙️
-    </button>
-    
-    <div class="voice-settings" id="voiceSettings">
-        <h3 class="voice-settings-title">Choose Your Voice Coach</h3>
-        <div id="voiceOptionsContainer"></div>
-    </div>
-    
-    <button class="voice-guide-btn" id="voiceBtn" onclick="toggleVoiceGuide()" title="Click for Voice Guide">
-        <div class="outer-glow"></div>
-        <div class="play-button-3d">
-            <div class="button-sphere">
-                <div class="sphere-layer"></div>
-                <div class="sphere-layer"></div>
-                <div class="sphere-layer"></div>
-            </div>
-            <div class="play-icon-container">
-                <div class="play-icon"></div>
-            </div>
-        </div>
-    </button>
-    
-    <div class="progress-tracker">
-        <div class="progress-step active" onclick="scrollToSection(0)" title="Welcome">1</div>
-        <div class="progress-step" onclick="scrollToSection(1)" title="Demo">2</div>
-        <div class="progress-step" onclick="scrollToSection(2)" title="Quiz">3</div>
-        <div class="progress-step" onclick="scrollToSection(3)" title="Pricing">4</div>
-        <div class="progress-step" onclick="scrollToSection(4)" title="Sign Up">5</div>
-    </div>
-    
-    <header class="nav-header">
-        <div class="nav-container">
-            <a href="/" class="logo-futuristic">
-                <div class="logo-hologram">א</div>
-                <span class="logo-text">Hebrew Master</span>
-            </a>
-            <a href="#cta" class="nav-cta">Start Free Trial</a>
-        </div>
-    </header>
-    
-    <div class="content-wrapper">
-        <section class="hero-section" data-section="0">
-            <div class="hero-content">
-                <div class="hero-badge">Revolutionary ASMR + AI Learning</div>
-                <h1 class="hero-title">SPEAK HEBREW<br>IN 90 DAYS</h1>
-                <p class="hero-subtitle">
-                    The world's first ASMR-powered AI language learning platform. 
-                    Master Hebrew through whisper-soft neural coaching and quantum gaming technology.
-                </p>
-                
-                <div class="value-props">
-                    <div class="value-prop">AI Neural Coach</div>
-                    <div class="value-prop">ASMR Voice Tech</div>
-                    <div class="value-prop">Gaming Platform</div>
-                </div>
-                
-                <div class="cta-section" id="cta">
-                    <button class="neural-button" onclick="startTrial()">
-                        START FREE TRIAL
-                    </button>
-                    <div class="cta-note">No credit card required</div>
-                </div>
-            </div>
-        </section>
-        
-        <div class="limited-offer">
-            <h3 class="offer-title">LIMITED TIME OFFER</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 20px; position: relative; z-index: 1;">Get 60% OFF Premium for the next 100 students</p>
-            <div class="countdown-timer">
-                <div class="countdown-box">
-                    <span class="countdown-number" id="hours">23</span>
-                    <span class="countdown-label">Hours</span>
-                </div>
-                <div class="countdown-box">
-                    <span class="countdown-number" id="minutes">47</span>
-                    <span class="countdown-label">Minutes</span>
-                </div>
-                <div class="countdown-box">
-                    <span class="countdown-number" id="seconds">32</span>
-                    <span class="countdown-label">Seconds</span>
-                </div>
-            </div>
-            <button class="neural-button" onclick="startTrial()">CLAIM YOUR DISCOUNT</button>
-        </div>
-        
-        <section class="interactive-demo" data-section="1">
-            <div class="demo-container">
-                <h2 class="demo-title">TRY IT NOW</h2>
-                <div class="demo-interface">
-                    <div class="demo-screen">
-                        <div class="demo-word" id="demoWord">שָׁלוֹם</div>
-                        <div class="demo-translation" id="demoTranslation">Shalom (Peace / Hello)</div>
-                        <div class="demo-fun-fact" id="demoFunFact">"Shalom" is used for hello, goodbye, and peace - talk about efficiency!</div>
-                        <button class="demo-audio-btn" onclick="playDemo()">🔊 HEAR PRONUNCIATION</button>
-                    </div>
-                    <div class="demo-controls">
-                        <button class="demo-control-btn" onclick="changeDemoWord(getRandomWordFromCategory('Greetings'))">Greetings</button>
-                        <button class="demo-control-btn" onclick="changeDemoWord(getRandomWordFromCategory('Numbers'))">Numbers</button>
-                        <button class="demo-control-btn" onclick="changeDemoWord(getRandomWordFromCategory('Family'))">Family</button>
-                        <button class="demo-control-btn" onclick="changeDemoWord(getRandomWordFromCategory('Food'))">Food</button>
-                        <button class="demo-control-btn" onclick="changeDemoWord(getRandomWordFromCategory('Common'))">Common Words</button>
-                        <button class="demo-control-btn" onclick="changeDemoWord(getRandomWordFromCategory('Travel'))">Travel</button>
-                        <button class="demo-control-btn" onclick="changeDemoWord(getRandomWordFromCategory('Questions'))">Questions</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="quiz-section" data-section="2">
-            <div class="quiz-container">
-                <h2 class="quiz-title">TEST YOUR KNOWLEDGE</h2>
-                <p class="quiz-subtitle">Think you're ready? Take a quick quiz to see what you've learned!</p>
-                
-                <div class="quiz-interface" id="quizInterface">
-                    <div class="quiz-question-container" id="quizQuestionContainer">
-                        <div class="quiz-progress">
-                            Question <span id="currentQuestion">1</span> of <span id="totalQuestions">5</span>
-                        </div>
-                        <div class="quiz-hebrew-word" id="quizWord">שָׁלוֹם</div>
-                        <div class="quiz-instruction">What does this word mean?</div>
-                        
-                        <div class="quiz-options" id="quizOptions">
-                            <!-- Options populated by JS -->
-                        </div>
-                        
-                        <div class="quiz-feedback" id="quizFeedback" style="display: none;">
-                            <div class="feedback-icon" id="feedbackIcon">✓</div>
-                            <div class="feedback-text" id="feedbackText">Correct!</div>
-                            <button class="quiz-next-btn" onclick="nextQuestion()">Next Question</button>
-                        </div>
-                    </div>
-                    
-                    <div class="quiz-results" id="quizResults" style="display: none;">
-                        <div class="results-icon">🎯</div>
-                        <div class="results-score" id="resultsScore">4/5</div>
-                        <div class="results-message" id="resultsMessage">Great job!</div>
-                        <div class="results-stats">
-                            <div class="stat-item">
-                                <div class="stat-value" id="accuracyRate">80%</div>
-                                <div class="stat-label">Accuracy</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value" id="wordsLearned">12</div>
-                                <div class="stat-label">Words Learned</div>
-                            </div>
-                        </div>
-                        <button class="neural-button" onclick="restartQuiz()">Take Another Quiz</button>
-                        <button class="demo-control-btn" onclick="startTrial()">Start Learning Now</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="social-proof">
-            <div class="social-proof-container">
-                <h2 class="proof-title">PROVEN RESULTS</h2>
-                
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number">50K+</div>
-                        <div class="stat-label">Active Learners</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">94%</div>
-                        <div class="stat-label">Success Rate</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">4.8★</div>
-                        <div class="stat-label">App Store Rating</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">90</div>
-                        <div class="stat-label">Days to Fluency</div>
-                    </div>
-                </div>
-                
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
-                        <div class="testimonial-text">
-                            "The ASMR voice coaching is incredible! I went from zero Hebrew to having conversations with my Israeli colleagues in just 2 months."
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">S</div>
-                            <div class="author-info">
-                                <div class="author-name">Sarah Chen</div>
-                                <div class="author-title">Software Engineer</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-text">
-                            "Nothing comes close to Hebrew Master's AI gaming approach. My 8-year-old son is now reading Hebrew fluently!"
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">M</div>
-                            <div class="author-info">
-                                <div class="author-name">Michael Rodriguez</div>
-                                <div class="author-title">Business Owner</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-text">
-                            "The ASMR method was a game-changer. I actually look forward to my Hebrew lessons now. It's like meditation."
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">L</div>
-                            <div class="author-info">
-                                <div class="author-name">Dr. Lisa Johnson</div>
-                                <div class="author-title">Neuroscientist</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="comparison-section" data-section="3">
-            <div class="comparison-container">
-                <h2 class="comparison-title">WHY WE'RE DIFFERENT</h2>
-                <div class="comparison-grid">
-                    <div class="comparison-card">
-                        <div class="comparison-icon">
-                            <div class="comparison-icon-3d">
-                                <div class="comparison-icon-face front">📚</div>
-                                <div class="comparison-icon-face back">📖</div>
-                                <div class="comparison-icon-face top">📝</div>
-                                <div class="comparison-icon-face bottom">📋</div>
-                                <div class="comparison-icon-face left">🎯</div>
-                                <div class="comparison-icon-face right">✏️</div>
-                            </div>
-                        </div>
-                        <h3 class="comparison-name">Traditional Apps</h3>
-                        <ul class="comparison-features">
-                            <li class="no">No ASMR Technology</li>
-                            <li class="no">Generic Lessons</li>
-                            <li class="yes">Basic Gamification</li>
-                            <li class="no">No AI Personalization</li>
-                            <li class="no">Limited Voice Practice</li>
-                        </ul>
-                        <div class="comparison-price">$15/mo</div>
-                    </div>
-                    
-                    <div class="comparison-card featured">
-                        <div class="featured-badge">BEST VALUE</div>
-                        <div class="comparison-icon">
-                            <div class="comparison-icon-3d">
-                                <div class="comparison-icon-face front">🚀</div>
-                                <div class="comparison-icon-face back">⚡</div>
-                                <div class="comparison-icon-face top">🌟</div>
-                                <div class="comparison-icon-face bottom">💫</div>
-                                <div class="comparison-icon-face left">✨</div>
-                                <div class="comparison-icon-face right">🎨</div>
-                            </div>
-                        </div>
-                        <h3 class="comparison-name">Hebrew Master</h3>
-                        <ul class="comparison-features">
-                            <li class="yes">ASMR Voice Technology</li>
-                            <li class="yes">AI Neural Learning</li>
-                            <li class="yes">Advanced Gaming</li>
-                            <li class="yes">Full Personalization</li>
-                            <li class="yes">Unlimited Practice</li>
-                        </ul>
-                        <div class="comparison-price">$9.99/mo</div>
-                        <button class="neural-button" onclick="startTrial()">START NOW</button>
-                    </div>
-                    
-                    <div class="comparison-card">
-                        <div class="comparison-icon">
-                            <div class="comparison-icon-3d">
-                                <div class="comparison-icon-face front">👨‍🏫</div>
-                                <div class="comparison-icon-face back">👩‍🏫</div>
-                                <div class="comparison-icon-face top">🎓</div>
-                                <div class="comparison-icon-face bottom">📚</div>
-                                <div class="comparison-icon-face left">💼</div>
-                                <div class="comparison-icon-face right">🖊️</div>
-                            </div>
-                        </div>
-                        <h3 class="comparison-name">Private Tutors</h3>
-                        <ul class="comparison-features">
-                            <li class="no">No ASMR Technology</li>
-                            <li class="yes">Personalized</li>
-                            <li class="no">No Gamification</li>
-                            <li class="no">No AI Support</li>
-                            <li class="yes">Live Practice</li>
-                        </ul>
-                        <div class="comparison-price">$50/hour</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="final-cta" data-section="4" style="padding: 80px 20px; text-align: center;">
-            <div style="max-width: 800px; margin: 0 auto; background: var(--glass-white); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 30px; padding: 50px 30px;">
-                <h2 style="font-family: 'Orbitron', monospace; font-size: 32px; font-weight: 900; background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px;">START YOUR HEBREW JOURNEY TODAY</h2>
-                <p style="color: var(--text-secondary); font-size: 16px; margin-bottom: 40px; line-height: 1.6;">
-                    Join thousands of successful learners who've mastered Hebrew in just 90 days.
-                </p>
-                
-                <button class="neural-button" onclick="startTrial()">BEGIN FREE TRIAL NOW</button>
-                <div class="cta-note">Get instant access • No credit card required</div>
-            </div>
-        </section>
-    </div>
-    
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Learning Platform</h3>
-                <ul class="footer-links">
-                    <li><a href="/lessons">Hebrew Lessons</a></li>
-                    <li><a href="/practice">Practice Mode</a></li>
-                    <li><a href="/asmr">ASMR Learning</a></li>
-                    <li><a href="/games">Language Games</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Resources</h3>
-                <ul class="footer-links">
-                    <li><a href="/dictionary">Hebrew Dictionary</a></li>
-                    <li><a href="/alphabet">Hebrew Alphabet</a></li>
-                    <li><a href="/grammar">Grammar Guide</a></li>
-                    <li><a href="/blog">Learning Blog</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Company</h3>
-                <ul class="footer-links">
-                    <li><a href="/about">About Us</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                    <li><a href="/careers">Careers</a></li>
-                    <li><a href="/press">Press</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Legal</h3>
-                <ul class="footer-links">
-                    <li><a href="/privacy">Privacy Policy</a></li>
-                    <li><a href="/terms">Terms of Service</a></li>
-                    <li><a href="/cookies">Cookie Policy</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="footer-divider"></div>
-        
-        <div class="footer-bottom">
-            <div class="footer-logo">
-                <div class="footer-logo-icon">א</div>
-                <span class="footer-logo-text">Hebrew Master</span>
-            </div>
-            
-            <div class="footer-social">
-                <a href="https://twitter.com/hebrewmaster" class="social-link" title="Twitter">🐦</a>
-                <a href="https://instagram.com/hebrewmaster" class="social-link" title="Instagram">📷</a>
-                <a href="https://youtube.com/hebrewmaster" class="social-link" title="YouTube">📹</a>
-                <a href="https://facebook.com/hebrewmaster" class="social-link" title="Facebook">👥</a>
-            </div>
-        </div>
-        
-        <div class="footer-copyright">
-            <p>&copy; 2024 Hebrew Master. All rights reserved. Made with innovation for the future of learning</p>
-        </div>
-    </footer>
-    
+    <!-- Firebase Config THIRD - Wait for Firebase to load -->
     <script>
-        // Configuration
-        const API_URL = 'http://localhost:3000';
-        
-        // Teaching scripts
-        const TEACHING_SCRIPTS = {
-            us_female_serena: "Hey there! Ready to crush Hebrew? I'm gonna make this super fun, I promise. We're talking conversational fluency in 90 days - no cap! Think of me as your bestie who just happens to be obsessed with Hebrew. Let's do this!",
-            us_female_bella: "What's up! I'm Bella, your Hebrew guide. This language might look crazy at first, but trust me - we'll break it down together and you'll be speaking like a pro before you know it!",
-            us_male_josh: "Hey friend, let's paint some happy little Hebrew letters together. There are no mistakes, only happy accidents. Just relax, take your time, and enjoy the journey of learning this beautiful language.",
-            us_male_adam: "What's up, language learner! Let's get real - Hebrew might look intimidating with all those squiggly letters, but dude, you've got this. We're gonna break it down nice and easy.",
-            uk_female_charlotte: "Right then, lovely! Fancy learning Hebrew? Brilliant! I'll be your mate through this journey, and trust me, it's gonna be proper ace. No need to stress - we'll take it step by step, yeah?",
-            uk_female_dorothy: "Hello there! I'm Dorothy, and I'm absolutely chuffed to be your Hebrew teacher. We'll have a lovely time learning together, I promise. Shall we get started?",
-            uk_male_george: "Good day. I'm George, and I'll be guiding you through the fascinating world of Hebrew. With proper dedication and my guidance, you'll master this ancient language in no time.",
-            uk_male_charlie: "Alright mate, let's have a go at Hebrew, shall we? No worries, I'll make sure you're not completely lost. By the time we're done, you'll be chatting away like you grew up in Tel Aviv!"
-        };
-        
-        const DEMO_WORDS = {
-            // Greetings
-            hello: {
-                hebrew: 'שָׁלוֹם',
-                translation: 'Shalom (Hello/Peace/Goodbye)',
-                funFact: 'The ultimate multitasker word - use it for hello, goodbye, and peace!',
-                audioText: 'Shalom. This word means hello, goodbye, and peace all in one.',
-                category: 'Greetings'
-            },
-            goodbye: {
-                hebrew: 'לְהִתְרָאוֹת',
-                translation: 'Lehitraot (Goodbye)',
-                funFact: 'Literally means "to see each other again" - how optimistic!',
-                audioText: 'Lehitraot. This means goodbye, literally "to see each other again".',
-                category: 'Greetings'
-            },
-            goodmorning: {
-                hebrew: 'בֹּקֶר טוֹב',
-                translation: 'Boker Tov (Good Morning)',
-                funFact: 'Say this before noon. After noon, switch to "Tzohorayim Tovim"!',
-                audioText: 'Boker tov. Good morning in Hebrew.',
-                category: 'Greetings'
-            },
-            goodnight: {
-                hebrew: 'לַיְלָה טוֹב',
-                translation: 'Layla Tov (Good Night)',
-                funFact: 'Perfect for ending conversations after sunset.',
-                audioText: 'Layla tov. Good night in Hebrew.',
-                category: 'Greetings'
-            },
-            thank: {
-                hebrew: 'תּוֹדָה',
-                translation: 'Todah (Thank You)',
-                funFact: 'Add "raba" to make it "todah raba" - thanks a lot!',
-                audioText: 'Todah. This means thank you. Add raba to emphasize - todah raba.',
-                category: 'Greetings'
-            },
-            please: {
-                hebrew: 'בְּבַקָּשָׁה',
-                translation: 'Bevakasha (Please/You\'re Welcome)',
-                funFact: 'Another multitasker - use it for both please AND you\'re welcome!',
-                audioText: 'Bevakasha. This means both please and you\'re welcome.',
-                category: 'Greetings'
-            },
-            yes: {
-                hebrew: 'כֵּן',
-                translation: 'Ken (Yes)',
-                funFact: 'Short, simple, and to the point!',
-                audioText: 'Ken. Yes in Hebrew.',
-                category: 'Greetings'
-            },
-            no: {
-                hebrew: 'לֹא',
-                translation: 'Lo (No)',
-                funFact: 'Pronounced like "low" - easy to remember!',
-                audioText: 'Lo. No in Hebrew.',
-                category: 'Greetings'
-            },
-            sorry: {
-                hebrew: 'סְלִיחָה',
-                translation: 'Slicha (Sorry/Excuse Me)',
-                funFact: 'Use this for apologies AND when you need to squeeze past someone.',
-                audioText: 'Slicha. This means sorry or excuse me.',
-                category: 'Greetings'
-            },
+        // Wait for Firebase to load before loading config
+        if (typeof firebase !== 'undefined') {
+            const script = document.createElement('script');
+            script.src = 'firebase-config.js';
+            script.onload = function() {
+                console.log('Firebase config loaded');
+                initializePage();
+            };
+            document.body.appendChild(script);
+        } else {
+            console.error('Firebase failed to load');
+        }
+    </script>
 
-            // Numbers 1-10
-            one: {
-                hebrew: 'אֶחָד',
-                translation: 'Echad (One)',
-                funFact: 'Hebrew numbers change based on gender. For feminine, say "achat".',
-                audioText: 'Echad. One in Hebrew.',
-                category: 'Numbers'
-            },
-            two: {
-                hebrew: 'שְׁנַיִם',
-                translation: 'Shnayim (Two)',
-                funFact: 'For two girls or feminine objects, say "shtayim".',
-                audioText: 'Shnayim. Two in Hebrew.',
-                category: 'Numbers'
-            },
-            three: {
-                hebrew: 'שְׁלוֹשָׁה',
-                translation: 'Shlosha (Three)',
-                funFact: 'Feminine form is "shalosh" - Hebrew loves gendered numbers!',
-                audioText: 'Shlosha. Three in Hebrew.',
-                category: 'Numbers'
-            },
-            four: {
-                hebrew: 'אַרְבָּעָה',
-                translation: 'Arba\'a (Four)',
-                funFact: 'Same root as the word for "square" - four sides!',
-                audioText: 'Arba\'a. Four in Hebrew.',
-                category: 'Numbers'
-            },
-            five: {
-                hebrew: 'חֲמִשָּׁה',
-                translation: 'Chamisha (Five)',
-                funFact: 'Think "high five" - chamisha!',
-                audioText: 'Chamisha. Five in Hebrew.',
-                category: 'Numbers'
-            },
-            six: {
-                hebrew: 'שִׁשָּׁה',
-                translation: 'Shisha (Six)',
-                funFact: 'Not related to hookah pipes, despite the similar sound!',
-                audioText: 'Shisha. Six in Hebrew.',
-                category: 'Numbers'
-            },
-            seven: {
-                hebrew: 'שִׁבְעָה',
-                translation: 'Shiv\'a (Seven)',
-                funFact: 'Also the name of the Jewish mourning period.',
-                audioText: 'Shiv\'a. Seven in Hebrew.',
-                category: 'Numbers'
-            },
-            eight: {
-                hebrew: 'שְׁמוֹנָה',
-                translation: 'Shmona (Eight)',
-                funFact: 'Hanukkah lasts eight nights - shmona yamim!',
-                audioText: 'Shmona. Eight in Hebrew.',
-                category: 'Numbers'
-            },
-            nine: {
-                hebrew: 'תִּשְׁעָה',
-                translation: 'Tish\'a (Nine)',
-                funFact: 'Almost there to ten - eser!',
-                audioText: 'Tish\'a. Nine in Hebrew.',
-                category: 'Numbers'
-            },
-            ten: {
-                hebrew: 'עֶשֶׂר',
-                translation: 'Eser (Ten)',
-                funFact: 'The Ten Commandments are "Aseret HaDibrot" in Hebrew.',
-                audioText: 'Eser. Ten in Hebrew.',
-                category: 'Numbers'
-            },
+    <script>
+        function initializePage() {
+            // 3D Background
+            const canvas = document.getElementById('canvas3d');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.position.z = 8;
 
-            // Family
-            family: {
-                hebrew: 'מִשְׁפָּחָה',
-                translation: 'Mishpacha (Family)',
-                funFact: 'Israeli culture is super family-oriented - mishpacha is everything!',
-                audioText: 'Mishpacha. Family in Hebrew.',
-                category: 'Family'
-            },
-            mother: {
-                hebrew: 'אִמָּא',
-                translation: 'Ima (Mother/Mom)',
-                funFact: 'One of the most universal sounds - similar across many languages!',
-                audioText: 'Ima. Mother or mom in Hebrew.',
-                category: 'Family'
-            },
-            father: {
-                hebrew: 'אַבָּא',
-                translation: 'Abba (Father/Dad)',
-                funFact: 'Yes, like the Swedish band! But this came first.',
-                audioText: 'Abba. Father or dad in Hebrew.',
-                category: 'Family'
-            },
-            brother: {
-                hebrew: 'אָח',
-                translation: 'Ach (Brother)',
-                funFact: 'Also used as slang like "bro" or "dude" in casual speech.',
-                audioText: 'Ach. Brother in Hebrew.',
-                category: 'Family'
-            },
-            sister: {
-                hebrew: 'אָחוֹת',
-                translation: 'Achot (Sister)',
-                funFact: 'Same root as "ach" (brother) with a feminine ending.',
-                audioText: 'Achot. Sister in Hebrew.',
-                category: 'Family'
-            },
-            child: {
-                hebrew: 'יֶלֶד',
-                translation: 'Yeled (Child/Boy)',
-                funFact: 'For a girl, say "yalda". Kids in general are "yeladim".',
-                audioText: 'Yeled. Child or boy in Hebrew.',
-                category: 'Family'
-            },
+            const geometries = [
+                new THREE.IcosahedronGeometry(0.6, 1),
+                new THREE.OctahedronGeometry(0.6, 2)
+            ];
 
-            // Food
-            food: {
-                hebrew: 'אֹכֶל',
-                translation: 'Ochel (Food)',
-                funFact: 'Israeli food culture is incredible - falafel, hummus, shakshuka!',
-                audioText: 'Ochel. Food in Hebrew.',
-                category: 'Food'
-            },
-            water: {
-                hebrew: 'מַיִם',
-                translation: 'Mayim (Water)',
-                funFact: 'Always plural in Hebrew - there\'s no singular form!',
-                audioText: 'Mayim. Water in Hebrew.',
-                category: 'Food'
-            },
-            bread: {
-                hebrew: 'לֶחֶם',
-                translation: 'Lechem (Bread)',
-                funFact: 'Bethlehem means "House of Bread" - Beit Lechem!',
-                audioText: 'Lechem. Bread in Hebrew.',
-                category: 'Food'
-            },
-            coffee: {
-                hebrew: 'קָפֶה',
-                translation: 'Cafe (Coffee)',
-                funFact: 'Israeli cafe culture is huge - everyone drinks Turkish coffee!',
-                audioText: 'Cafe. Coffee in Hebrew.',
-                category: 'Food'
-            },
-            wine: {
-                hebrew: 'יַיִן',
-                translation: 'Yayin (Wine)',
-                funFact: 'Israel has an ancient wine-making tradition going back thousands of years.',
-                audioText: 'Yayin. Wine in Hebrew.',
-                category: 'Food'
-            },
+            const materials = [
+                new THREE.MeshPhongMaterial({ color: 0x6366f1, wireframe: true, transparent: true, opacity: 0.4 }),
+                new THREE.MeshPhongMaterial({ color: 0xa855f7, wireframe: true, transparent: true, opacity: 0.35 })
+            ];
 
-            // Common Words
-            love: {
-                hebrew: 'אַהֲבָה',
-                translation: 'Ahava (Love)',
-                funFact: 'The root means "to give" - love is about giving!',
-                audioText: 'Ahava. Love in Hebrew.',
-                category: 'Common'
-            },
-            friend: {
-                hebrew: 'חָבֵר',
-                translation: 'Chaver (Friend)',
-                funFact: 'For a female friend, say "chavera". Friends are "chaverim".',
-                audioText: 'Chaver. Friend in Hebrew.',
-                category: 'Common'
-            },
-            house: {
-                hebrew: 'בַּיִת',
-                translation: 'Bayit (House/Home)',
-                funFact: 'Synagogues are called "Beit Knesset" - House of Assembly.',
-                audioText: 'Bayit. House or home in Hebrew.',
-                category: 'Common'
-            },
-            book: {
-                hebrew: 'סֵפֶר',
-                translation: 'Sefer (Book)',
-                funFact: 'Torah scrolls are called "Sefer Torah" - the Book of Torah.',
-                audioText: 'Sefer. Book in Hebrew.',
-                category: 'Common'
-            },
-            beautiful: {
-                hebrew: 'יָפֶה',
-                translation: 'Yafe (Beautiful)',
-                funFact: 'Tel Aviv\'s name includes Yafo (Jaffa) - the beautiful ancient port!',
-                audioText: 'Yafe. Beautiful in Hebrew.',
-                category: 'Common'
-            },
-            good: {
-                hebrew: 'טוֹב',
-                translation: 'Tov (Good)',
-                funFact: 'Used in tons of phrases - Boker Tov, Layla Tov, Mazel Tov!',
-                audioText: 'Tov. Good in Hebrew.',
-                category: 'Common'
-            },
-            big: {
-                hebrew: 'גָּדוֹל',
-                translation: 'Gadol (Big)',
-                funFact: 'Feminine form is "gdola". Israelis love using diminutives too!',
-                audioText: 'Gadol. Big in Hebrew.',
-                category: 'Common'
-            },
-            small: {
-                hebrew: 'קָטָן',
-                translation: 'Katan (Small)',
-                funFact: 'Kids are often called "ktanim" - the little ones!',
-                audioText: 'Katan. Small in Hebrew.',
-                category: 'Common'
-            },
-
-            // Travel
-            city: {
-                hebrew: 'עִיר',
-                translation: 'Ir (City)',
-                funFact: 'Tel Aviv is "The City" to most Israelis - Ha\'ir!',
-                audioText: 'Ir. City in Hebrew.',
-                category: 'Travel'
-            },
-            street: {
-                hebrew: 'רְחוֹב',
-                translation: 'Rechov (Street)',
-                funFact: 'Every Israeli city has a Rechov Herzl!',
-                audioText: 'Rechov. Street in Hebrew.',
-                category: 'Travel'
-            },
-            beach: {
-                hebrew: 'חוֹף',
-                translation: 'Chof (Beach)',
-                funFact: 'Tel Aviv\'s beaches are world-famous - chof ha\'yam!',
-                audioText: 'Chof. Beach in Hebrew.',
-                category: 'Travel'
-            },
-            hotel: {
-                hebrew: 'מָלוֹן',
-                translation: 'Malon (Hotel)',
-                funFact: 'Borrowed from the word for "lodging place" in ancient Hebrew.',
-                audioText: 'Malon. Hotel in Hebrew.',
-                category: 'Travel'
-            },
-            restaurant: {
-                hebrew: 'מִסְעָדָה',
-                translation: 'Mis\'ada (Restaurant)',
-                funFact: 'Israeli restaurants serve breakfast all day - hallelujah!',
-                audioText: 'Mis\'ada. Restaurant in Hebrew.',
-                category: 'Travel'
-            },
-
-            // Questions
-            what: {
-                hebrew: 'מָה',
-                translation: 'Ma (What)',
-                funFact: 'Start any question with "Ma" - Ma zeh? (What\'s this?)',
-                audioText: 'Ma. What in Hebrew.',
-                category: 'Questions'
-            },
-            where: {
-                hebrew: 'אֵיפֹה',
-                translation: 'Eifo (Where)',
-                funFact: 'Essential for tourists - Eifo ha\'sherutim? (Where\'s the bathroom?)',
-                audioText: 'Eifo. Where in Hebrew.',
-                category: 'Questions'
-            },
-            when: {
-                hebrew: 'מָתַי',
-                translation: 'Matai (When)',
-                funFact: 'Matai ha\'bait? - When are you coming home?',
-                audioText: 'Matai. When in Hebrew.',
-                category: 'Questions'
-            },
-            how: {
-                hebrew: 'אֵיךְ',
-                translation: 'Eich (How)',
-                funFact: 'Eich holech? - How\'s it going? Super common greeting!',
-                audioText: 'Eich. How in Hebrew.',
-                category: 'Questions'
-            },
-            howmuch: {
-                hebrew: 'כַּמָּה',
-                translation: 'Kama (How Much)',
-                funFact: 'Critical for shopping at the shuk - Kama ze oleh?',
-                audioText: 'Kama. How much in Hebrew.',
-                category: 'Questions'
+            const shapes = [];
+            for (let i = 0; i < 15; i++) {
+                const geometry = geometries[Math.floor(Math.random() * geometries.length)];
+                const material = materials[Math.floor(Math.random() * materials.length)].clone();
+                const mesh = new THREE.Mesh(geometry, material);
+                mesh.position.x = (Math.random() - 0.5) * 20;
+                mesh.position.y = (Math.random() - 0.5) * 20;
+                mesh.position.z = (Math.random() - 0.5) * 15;
+                mesh.rotation.x = Math.random() * Math.PI;
+                mesh.rotation.y = Math.random() * Math.PI;
+                mesh.userData.velocity = {
+                    x: (Math.random() - 0.5) * 0.003,
+                    y: (Math.random() - 0.5) * 0.003,
+                    rotationX: (Math.random() - 0.5) * 0.008,
+                    rotationY: (Math.random() - 0.5) * 0.008
+                };
+                scene.add(mesh);
+                shapes.push(mesh);
             }
-        };
-        
-        const VOICE_OPTIONS = [
-            {
-                id: 'us_female_serena',
-                name: 'Serena',
-                icon: '👩',
-                desc: 'Warm & Gentle ASMR (US Female)',
-                category: '🇺🇸 USA Voices'
-            },
-            {
-                id: 'us_female_bella',
-                name: 'Bella',
-                icon: '👩',
-                desc: 'Smooth & Reassuring (US Female)',
-                category: '🇺🇸 USA Voices'
-            },
-            {
-                id: 'us_male_josh',
-                name: 'Josh',
-                icon: '👨',
-                desc: 'Deep & Calm Bob Ross Style (US Male)',
-                category: '🇺🇸 USA Voices'
-            },
-            {
-                id: 'us_male_adam',
-                name: 'Adam',
-                icon: '👨',
-                desc: 'Confident & Clear (US Male)',
-                category: '🇺🇸 USA Voices'
-            },
-            {
-                id: 'uk_female_charlotte',
-                name: 'Charlotte',
-                icon: '👩',
-                desc: 'Elegant British ASMR (UK Female)',
-                category: '🇬🇧 UK Voices'
-            },
-            {
-                id: 'uk_female_dorothy',
-                name: 'Dorothy',
-                icon: '👩',
-                desc: 'Soft British Accent (UK Female)',
-                category: '🇬🇧 UK Voices'
-            },
-            {
-                id: 'uk_male_george',
-                name: 'George',
-                icon: '👨',
-                desc: 'BBC Documentary Quality (UK Male)',
-                category: '🇬🇧 UK Voices'
-            },
-            {
-                id: 'uk_male_charlie',
-                name: 'Charlie',
-                icon: '👨',
-                desc: 'Young British Friendly (UK Male)',
-                category: '🇬🇧 UK Voices'
-            }
-        ];
-        
-        let currentAudio = null;
-        let isPlaying = false;
-        let selectedVoiceId = 'us_female_serena';
-        
-        // Quiz System
-        let quizData = {
-            currentQuestion: 0,
-            totalQuestions: 5,
-            correctAnswers: 0,
-            questions: [],
-            totalWordsLearned: 0
-        };
-        
-        // Progress tracking
-        let progressData = {
-            sectionsVisited: new Set([0]),
-            currentSection: 0
-        };
-        
-        // Generate speech using ElevenLabs or fallback
-        async function generateSpeech(text, voiceId = 'us_female_serena') {
-            try {
-                const response = await fetch(`${API_URL}/api/speech`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ text, voiceId })
+
+            const light1 = new THREE.PointLight(0xa855f7, 1.5, 100);
+            light1.position.set(8, 8, 8);
+            scene.add(light1);
+
+            const light2 = new THREE.PointLight(0x6366f1, 1.5, 100);
+            light2.position.set(-8, -8, 8);
+            scene.add(light2);
+
+            let time = 0;
+            function animate() {
+                requestAnimationFrame(animate);
+                time += 0.01;
+                light1.position.x = Math.sin(time * 0.5) * 10;
+                light1.position.z = Math.cos(time * 0.5) * 10;
+                shapes.forEach(function(shape) {
+                    shape.rotation.x += shape.userData.velocity.rotationX;
+                    shape.rotation.y += shape.userData.velocity.rotationY;
+                    shape.position.x += shape.userData.velocity.x;
+                    shape.position.y += shape.userData.velocity.y;
+                    if (Math.abs(shape.position.x) > 10) shape.userData.velocity.x *= -1;
+                    if (Math.abs(shape.position.y) > 10) shape.userData.velocity.y *= -1;
                 });
+                renderer.render(scene, camera);
+            }
+            animate();
 
-                if (!response.ok) {
-                    throw new Error('Speech generation failed');
+            window.addEventListener('resize', function() {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            // Firebase Authentication
+            function showError(message) {
+                const errorDiv = document.getElementById('errorMessage');
+                errorDiv.textContent = message;
+                errorDiv.style.display = 'block';
+                setTimeout(() => {
+                    errorDiv.style.display = 'none';
+                }, 5000);
+            }
+
+            // Google Login Button
+            document.getElementById('googleBtn').addEventListener('click', async function() {
+                const googleBtn = document.getElementById('googleBtn');
+                googleBtn.disabled = true;
+                googleBtn.textContent = 'Signing in...';
+
+                try {
+                    await signInWithGoogle();
+                } catch (error) {
+                    console.error('Google login error:', error);
+                    showError(error.message);
+                    googleBtn.disabled = false;
+                    googleBtn.innerHTML = `
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                        </svg>
+                        Continue with Google
+                    `;
                 }
+            });
 
-                const audioBlob = await response.blob();
-                const audioUrl = URL.createObjectURL(audioBlob);
-                return new Audio(audioUrl);
+            // Email/Password Login
+            document.getElementById('loginForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
                 
-            } catch (error) {
-                console.error('Error generating speech:', error);
-                // Fallback to browser speech
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.rate = 0.85;
-                speechSynthesis.speak(utterance);
-                return null;
-            }
-        }
-        
-        // Toggle voice guide
-        async function toggleVoiceGuide() {
-            const btn = document.getElementById('voiceBtn');
-            
-            if (isPlaying && currentAudio) {
-                currentAudio.pause();
-                currentAudio.currentTime = 0;
-                isPlaying = false;
-                btn.classList.remove('playing');
-                return;
-            }
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+                const loginBtn = document.getElementById('loginBtn');
 
-            btn.classList.add('playing');
-            
-            const script = TEACHING_SCRIPTS[selectedVoiceId] || TEACHING_SCRIPTS.us_female_serena;
-            currentAudio = await generateSpeech(script, selectedVoiceId);
-            
-            if (currentAudio) {
-                currentAudio.onended = () => {
-                    isPlaying = false;
-                    btn.classList.remove('playing');
-                };
-                
-                currentAudio.onerror = () => {
-                    isPlaying = false;
-                    btn.classList.remove('playing');
-                };
-                
-                currentAudio.play();
-                isPlaying = true;
-            } else {
-                btn.classList.remove('playing');
-            }
-        }
-        
-        // Play demo word
-        async function playDemo() {
-            const wordKey = Object.keys(DEMO_WORDS).find(key => 
-                DEMO_WORDS[key].hebrew === document.getElementById('demoWord').textContent
-            ) || 'hello';
-            
-            const word = DEMO_WORDS[wordKey];
-            const audio = await generateSpeech(word.audioText, selectedVoiceId);
-            
-            if (audio) {
-                audio.play();
-            }
-        }
-        
-        // Play letter sounds
-        async function playLetterSound(letter) {
-            const letterSounds = {
-                'aleph': 'Aleph. This is the first letter of the Hebrew alphabet. It makes an "ah" sound.',
-                'bet': 'Bet. This is the second letter. It sounds like "beh", similar to the B in English.',
-                'gimel': 'Gimel. The third letter. It sounds like "gee-mel", similar to the G in English.'
-            };
-            
-            const audio = await generateSpeech(letterSounds[letter], selectedVoiceId);
-            if (audio) {
-                audio.play();
-            }
-        }
-        
-        // Change demo word
-        function changeDemoWord(wordKey) {
-            const demo = DEMO_WORDS[wordKey];
-            if (demo) {
-                document.getElementById('demoWord').textContent = demo.hebrew;
-                document.getElementById('demoTranslation').textContent = demo.translation;
-                document.getElementById('demoFunFact').textContent = demo.funFact;
-            }
-        }
+                loginBtn.disabled = true;
+                loginBtn.textContent = 'Signing in...';
 
-        // Get random word from category
-        function getRandomWordFromCategory(category) {
-            const wordsInCategory = Object.keys(DEMO_WORDS).filter(key => 
-                DEMO_WORDS[key].category === category
-            );
-            const randomKey = wordsInCategory[Math.floor(Math.random() * wordsInCategory.length)];
-            return randomKey;
-        }
-        
-        // Load voice options
-        function loadVoiceOptions() {
-            const container = document.getElementById('voiceOptionsContainer');
-            container.innerHTML = '';
-            
-            let currentCategory = '';
-            
-            VOICE_OPTIONS.forEach((voice, index) => {
-                if (voice.category !== currentCategory) {
-                    const categoryHeader = document.createElement('div');
-                    categoryHeader.className = 'category-header';
-                    categoryHeader.textContent = voice.category;
-                    container.appendChild(categoryHeader);
-                    currentCategory = voice.category;
-                }
-                
-                const voiceOption = document.createElement('div');
-                voiceOption.className = 'voice-option';
-                if (voice.id === selectedVoiceId) {
-                    voiceOption.classList.add('selected');
-                }
-                
-                voiceOption.innerHTML = `
-                    <span class="voice-icon">${voice.icon}</span>
-                    <div class="voice-info">
-                        <div class="voice-name">${voice.name}</div>
-                        <div class="voice-desc">${voice.desc}</div>
-                    </div>
-                `;
-                
-                voiceOption.onclick = async () => {
-                    document.querySelectorAll('.voice-option').forEach(opt => opt.classList.remove('selected'));
-                    voiceOption.classList.add('selected');
-                    selectedVoiceId = voice.id;
+                try {
+                    await loginWithEmail(email, password);
+                } catch (error) {
+                    console.error('Login error:', error);
+                    let errorMessage = 'Login failed. Please try again.';
                     
-                    // Test voice
-                    const testText = "Hi! I'm your Hebrew learning companion. Let's master Hebrew together!";
-                    const testAudio = await generateSpeech(testText, voice.id);
-                    if (testAudio) {
-                        testAudio.play();
+                    if (error.code === 'auth/user-not-found') {
+                        errorMessage = 'No account found with this email.';
+                    } else if (error.code === 'auth/wrong-password') {
+                        errorMessage = 'Incorrect password.';
+                    } else if (error.code === 'auth/invalid-email') {
+                        errorMessage = 'Invalid email address.';
+                    } else if (error.code === 'auth/too-many-requests') {
+                        errorMessage = 'Too many failed attempts. Try again later.';
                     }
-                };
-                
-                container.appendChild(voiceOption);
+                    
+                    showError(errorMessage);
+                    loginBtn.disabled = false;
+                    loginBtn.textContent = 'Sign In 🚀';
+                }
             });
-        }
-        
-        // Toggle voice settings
-        function toggleVoiceSettings() {
-            const panel = document.getElementById('voiceSettings');
-            panel.classList.toggle('show');
-        }
-        
-        // Quiz functions
-        function initializeQuiz() {
-            generateQuizQuestions();
-            displayQuestion();
-        }
-        
-        function generateQuizQuestions() {
-            const allWords = Object.keys(DEMO_WORDS);
-            const shuffled = allWords.sort(() => 0.5 - Math.random());
-            quizData.questions = shuffled.slice(0, quizData.totalQuestions);
-        }
-        
-        function displayQuestion() {
-            if (quizData.currentQuestion >= quizData.totalQuestions) {
-                showResults();
-                return;
-            }
-            
-            const questionKey = quizData.questions[quizData.currentQuestion];
-            const correctWord = DEMO_WORDS[questionKey];
-            
-            // Update display
-            document.getElementById('currentQuestion').textContent = quizData.currentQuestion + 1;
-            document.getElementById('totalQuestions').textContent = quizData.totalQuestions;
-            document.getElementById('quizWord').textContent = correctWord.hebrew;
-            
-            // Generate answer options
-            const options = generateOptions(questionKey);
-            const optionsContainer = document.getElementById('quizOptions');
-            optionsContainer.innerHTML = '';
-            
-            options.forEach((option, index) => {
-                const optionBtn = document.createElement('button');
-                optionBtn.className = 'quiz-option';
-                optionBtn.textContent = option.translation;
-                optionBtn.onclick = () => selectAnswer(option.key, questionKey);
-                optionsContainer.appendChild(optionBtn);
+
+            // Forgot Password
+            document.getElementById('forgotPasswordLink').addEventListener('click', async function() {
+                const email = document.getElementById('email').value.trim();
+                
+                if (!email) {
+                    showError('Please enter your email address first');
+                    return;
+                }
+
+                try {
+                    await firebase.auth().sendPasswordResetEmail(email);
+                    alert('Password reset email sent! Check your inbox.');
+                } catch (error) {
+                    console.error('Password reset error:', error);
+                    showError('Failed to send reset email. Please try again.');
+                }
             });
-            
-            // Hide feedback
-            document.getElementById('quizFeedback').style.display = 'none';
-        }
-        
-        function generateOptions(correctKey) {
-            const correctWord = DEMO_WORDS[correctKey];
-            const allWords = Object.keys(DEMO_WORDS);
-            
-            // Get 3 wrong answers
-            const wrongAnswers = allWords
-                .filter(key => key !== correctKey)
-                .sort(() => 0.5 - Math.random())
-                .slice(0, 3);
-            
-            // Combine and shuffle
-            const options = [
-                { key: correctKey, translation: correctWord.translation },
-                ...wrongAnswers.map(key => ({ 
-                    key: key, 
-                    translation: DEMO_WORDS[key].translation 
-                }))
-            ].sort(() => 0.5 - Math.random());
-            
-            return options;
-        }
-        
-async function selectAnswer(selectedKey, correctKey) {            const isCorrect = selectedKey === correctKey;
-            const options = document.querySelectorAll('.quiz-option');
-            
-            // Disable all options
-            options.forEach(opt => opt.classList.add('disabled'));
-            
-            // Highlight selected answer
-            const selectedOption = Array.from(options).find(opt => 
-                opt.textContent === DEMO_WORDS[selectedKey].translation
-            );
-            
-            if (isCorrect) {
-                selectedOption.classList.add('selected-correct');
-                quizData.correctAnswers++;
-                quizData.totalWordsLearned++;
-await showFeedback(true, DEMO_WORDS[correctKey].funFact);            } else {
-                selectedOption.classList.add('selected-wrong');
-                
-                // Show correct answer
-                const correctOption = Array.from(options).find(opt => 
-                    opt.textContent === DEMO_WORDS[correctKey].translation
-                );
-                correctOption.classList.add('correct-answer');
-                
-await showFeedback(false, `The correct answer is "${DEMO_WORDS[correctKey].translation}". ${DEMO_WORDS[correctKey].funFact}`);            }
-        }
-        
-async function showFeedback(isCorrect, message) {
-    const feedback = document.getElementById('quizFeedback');
-    const icon = document.getElementById('feedbackIcon');
-    const text = document.getElementById('feedbackText');
-    
-    icon.textContent = isCorrect ? '✓' : '✗';
-    icon.style.color = isCorrect ? 'var(--neon-green)' : '#ff4444';
-    text.textContent = message;
-    
-    feedback.style.display = 'block';
-    
-    // Play audio feedback
-    const audioMessage = isCorrect ? 
-        `Correct! ${message}` : 
-        `Not quite. ${message}`;
-    
-    const audio = await generateSpeech(audioMessage, selectedVoiceId);
-    if (audio) {
-        audio.play();
-    }
-}   
-        function nextQuestion() {
-            quizData.currentQuestion++;
-            displayQuestion();
-        }
-        
-        function showResults() {
-            document.getElementById('quizQuestionContainer').style.display = 'none';
-            document.getElementById('quizResults').style.display = 'block';
-            
-            const score = quizData.correctAnswers;
-            const total = quizData.totalQuestions;
-            const accuracy = Math.round((score / total) * 100);
-            
-            document.getElementById('resultsScore').textContent = `${score}/${total}`;
-            document.getElementById('accuracyRate').textContent = `${accuracy}%`;
-            document.getElementById('wordsLearned').textContent = quizData.totalWordsLearned;
-            
-            // Set motivational message
-            const messages = {
-                5: "Perfect! You're a natural! 🌟",
-                4: "Excellent work! Almost perfect! 🎯",
-                3: "Good job! Keep practicing! 💪",
-                2: "Not bad! You're learning! 📚",
-                1: "Keep going! Practice makes perfect! 🚀",
-                0: "Don't give up! Everyone starts somewhere! 💫"
-            };
-            document.getElementById('resultsMessage').textContent = messages[score];
-            
-            // Change icon based on score
-            const icons = {
-                5: '🏆',
-                4: '🎯',
-                3: '⭐',
-                2: '📖',
-                1: '💪',
-                0: '🌱'
-            };
-            document.querySelector('.results-icon').textContent = icons[score];
-        }
-        
-        function restartQuiz() {
-            // Reset quiz data
-            quizData.currentQuestion = 0;
-            quizData.correctAnswers = 0;
-            quizData.questions = [];
-            
-            // Show question container
-            document.getElementById('quizQuestionContainer').style.display = 'block';
-            document.getElementById('quizResults').style.display = 'none';
-            
-            // Reinitialize
-            generateQuizQuestions();
-            displayQuestion();
-        }
-        
-        // Progress tracker with functional section scrolling
-        function scrollToSection(sectionIndex) {
-            const sections = document.querySelectorAll('[data-section]');
-            if (sections[sectionIndex]) {
-                sections[sectionIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
-                progressData.sectionsVisited.add(sectionIndex);
-                updateProgressTracker();
-            }
-        }
-        
-        function updateProgressTracker() {
-            const steps = document.querySelectorAll('.progress-step');
-            steps.forEach((step, index) => {
-                step.classList.remove('active', 'completed');
-                if (index === progressData.currentSection) {
-                    step.classList.add('active');
-                } else if (progressData.sectionsVisited.has(index)) {
-                    step.classList.add('completed');
+
+            // Check if already logged in
+            checkAuth().then(user => {
+                if (user) {
+                    window.location.href = '/dashboard';
                 }
             });
         }
-        
-        // Track scroll position for progress
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('[data-section]');
-            const scrollPosition = window.scrollY + window.innerHeight / 2;
-            
-            sections.forEach((section, index) => {
-                const sectionTop = section.offsetTop;
-                const sectionBottom = sectionTop + section.offsetHeight;
-                
-                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                    if (progressData.currentSection !== index) {
-                        progressData.currentSection = index;
-                        progressData.sectionsVisited.add(index);
-                        updateProgressTracker();
-                    }
-                }
-            });
-        });
-        
-        // Start trial
-        function startTrial() {
-            window.location.href = '/signup';
-        }
-        
-        // Initialize everything
-        document.addEventListener('DOMContentLoaded', () => {
-            loadVoiceOptions();
-            initializeQuiz();
-            updateProgressTracker();
-        });
-        
-        // Stars animation
-        const starsContainer = document.getElementById('stars');
-        for (let i = 0; i < 100; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-star.style.animationDelay = Math.random() * 3 + 's';
-            starsContainer.appendChild(star);
-        }
-        
-        // Floating Hebrew letters
-        const particlesContainer = document.getElementById('particles');
-        setInterval(() => {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.innerHTML = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח'][Math.floor(Math.random() * 8)];
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.fontSize = (Math.random() * 20 + 10) + 'px';
-            particle.style.color = ['#9D4EDD', '#00D4FF', '#FF10F0', '#39FF14'][Math.floor(Math.random() * 4)];
-            particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
-            particlesContainer.appendChild(particle);
-            
-            setTimeout(() => particle.remove(), 10000);
-        }, 500);
-        
-        // Cursor trail
-        let cursorX = 0, cursorY = 0;
-        let trailX = 0, trailY = 0;
-        const cursorTrail = document.getElementById('cursorTrail');
-        
-        document.addEventListener('mousemove', (e) => {
-            cursorX = e.clientX;
-            cursorY = e.clientY;
-        });
-        
-        function animateTrail() {
-            trailX += (cursorX - trailX) * 0.1;
-            trailY += (cursorY - trailY) * 0.1;
-            
-            cursorTrail.style.left = trailX + 'px';
-            cursorTrail.style.top = trailY + 'px';
-            cursorTrail.style.background = `radial-gradient(circle, rgba(0, 212, 255, 0.3), transparent)`;
-            
-            requestAnimationFrame(animateTrail);
-        }
-        animateTrail();
-        
-        // Live counter
-        let liveCount = 237;
-        setInterval(() => {
-            liveCount = Math.floor(Math.random() * 50) + 220;
-            document.getElementById('liveCount').textContent = liveCount;
-        }, 5000);
-        
-        // Countdown timer
-        let countdownTime = 86400;
-        function updateCountdown() {
-            const hours = Math.floor(countdownTime / 3600);
-            const minutes = Math.floor((countdownTime % 3600) / 60);
-            const seconds = countdownTime % 60;
-            
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-            
-            countdownTime--;
-            if (countdownTime < 0) countdownTime = 86400;
-        }
-        setInterval(updateCountdown, 1000);
     </script>
 </body>
 </html>

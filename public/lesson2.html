@@ -1037,10 +1037,31 @@
         }
 
         function playLetterSound() {
-            const utterance = new SpeechSynthesisUtterance('בֵּית');
-            utterance.lang = 'he-IL';
-            utterance.rate = 0.7;
-            speechSynthesis.speak(utterance);
+            // Try multiple methods to ensure audio plays
+            const letter = 'Bet';
+            
+            // Method 1: Hebrew with better settings
+            const utterance = new SpeechSynthesisUtterance(letter);
+            utterance.lang = 'en-US'; // Use English for better pronunciation
+            utterance.rate = 0.6;
+            utterance.pitch = 1.0;
+            utterance.volume = 1.0;
+            
+            // Wait for voices to load
+            if (speechSynthesis.getVoices().length === 0) {
+                speechSynthesis.addEventListener('voiceschanged', () => {
+                    speechSynthesis.speak(utterance);
+                });
+            } else {
+                speechSynthesis.speak(utterance);
+            }
+            
+            // Provide visual feedback
+            const btn = event.target;
+            btn.textContent = '🔊 Playing...';
+            setTimeout(() => {
+                btn.textContent = '🔊 Hear it';
+            }, 1500);
         }
 
         function goBack() {

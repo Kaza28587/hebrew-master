@@ -19,33 +19,6 @@
             color: #fff;
             min-height: 100vh;
             overflow-x: hidden;
-            cursor: none;
-        }
-
-        /* Custom Cursor */
-        .cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #a855f7;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: all 0.15s ease;
-            transform: translate(-50%, -50%);
-            mix-blend-mode: difference;
-        }
-
-        .cursor-follower {
-            width: 40px;
-            height: 40px;
-            border: 1px solid rgba(168, 85, 247, 0.3);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9998;
-            transition: all 0.3s ease;
-            transform: translate(-50%, -50%);
         }
 
         /* 3D Background Canvas */
@@ -127,9 +100,9 @@
         .container {
             position: relative;
             z-index: 10;
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -138,30 +111,19 @@
 
         /* Glassmorphism Card */
         .test-card {
-            background: rgba(17, 17, 27, 0.4);
+            background: rgba(17, 17, 27, 0.6);
             backdrop-filter: blur(40px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 30px;
-            padding: 4rem 3rem;
+            padding: 3rem 2rem;
             box-shadow: 
                 0 8px 32px rgba(0, 0, 0, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1),
                 0 0 80px rgba(168, 85, 247, 0.1);
             position: relative;
             overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: cardAppear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        @keyframes cardAppear {
-            from {
-                opacity: 0;
-                transform: translateY(50px) scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+            width: 100%;
+            max-width: 700px;
         }
 
         .test-card::before {
@@ -192,12 +154,10 @@
         /* Logo Animation */
         .logo {
             text-align: center;
-            font-size: 4rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
-            animation: logoFloat 3s ease-in-out infinite, logoRotate 20s linear infinite;
+            animation: logoFloat 3s ease-in-out infinite;
             filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.6));
-            display: inline-block;
-            position: relative;
         }
 
         @keyframes logoFloat {
@@ -205,23 +165,14 @@
                 transform: translateY(0px) scale(1);
             }
             50% {
-                transform: translateY(-20px) scale(1.1);
+                transform: translateY(-15px) scale(1.05);
             }
         }
 
-        @keyframes logoRotate {
-            0% {
-                filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.6)) hue-rotate(0deg);
-            }
-            100% {
-                filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.6)) hue-rotate(360deg);
-            }
-        }
-
-        /* Title with Gradient */
+        /* Title */
         h1 {
             text-align: center;
-            font-size: 3rem;
+            font-size: clamp(2rem, 5vw, 2.8rem);
             font-weight: 900;
             margin-bottom: 1rem;
             background: linear-gradient(135deg, #fff 0%, #a855f7 50%, #ec4899 100%);
@@ -245,13 +196,12 @@
         .subtitle {
             text-align: center;
             color: rgba(255, 255, 255, 0.7);
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            margin-bottom: 2rem;
             font-weight: 300;
-            letter-spacing: 0.5px;
         }
 
-        /* Benefits with Hover Effects */
+        /* Benefits */
         .benefits {
             display: grid;
             gap: 1rem;
@@ -261,125 +211,74 @@
         .benefit-item {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
-            padding: 1.5rem;
+            gap: 1rem;
+            padding: 1.2rem;
             background: rgba(99, 102, 241, 0.05);
-            border-radius: 20px;
+            border-radius: 15px;
             border: 1px solid rgba(99, 102, 241, 0.1);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .benefit-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.1), transparent);
-            transition: left 0.5s ease;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .benefit-item:hover {
-            transform: translateX(10px) scale(1.02);
-            background: rgba(99, 102, 241, 0.15);
+            transform: translateX(5px);
+            background: rgba(99, 102, 241, 0.1);
             border-color: rgba(168, 85, 247, 0.3);
-            box-shadow: 0 10px 40px rgba(168, 85, 247, 0.2);
-        }
-
-        .benefit-item:hover::before {
-            left: 100%;
         }
 
         .benefit-icon {
-            font-size: 2.5rem;
+            font-size: 2rem;
             flex-shrink: 0;
-            animation: iconBounce 2s ease-in-out infinite;
-            filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.5));
-        }
-
-        @keyframes iconBounce {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-5px) rotate(5deg);
-            }
         }
 
         .benefit-text {
-            font-size: 1.05rem;
+            font-size: clamp(0.9rem, 2vw, 1.05rem);
             color: rgba(255, 255, 255, 0.9);
-            font-weight: 400;
         }
 
-        /* Futuristic Button */
+        /* Primary Button */
         .btn-primary {
             width: 100%;
-            padding: 1.5rem;
+            padding: 1.3rem;
             background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
             background-size: 200% 200%;
             border: none;
-            border-radius: 20px;
+            border-radius: 18px;
             color: white;
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 
-                0 10px 40px rgba(168, 85, 247, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 40px rgba(168, 85, 247, 0.4);
             animation: gradientFlow 5s ease infinite;
+            margin-top: 1.5rem;
         }
 
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(168, 85, 247, 0.6);
         }
 
-        .btn-primary:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 
-                0 20px 60px rgba(168, 85, 247, 0.6),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3),
-                0 0 50px rgba(168, 85, 247, 0.4);
+        .btn-primary:active:not(:disabled) {
+            transform: translateY(-1px);
         }
 
-        .btn-primary:hover::before {
-            width: 300px;
-            height: 300px;
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
-        .btn-primary:active {
-            transform: translateY(-2px) scale(0.98);
-        }
-
-        /* Question Screen Styles */
+        /* Question Screen */
         .question-screen {
             display: none;
         }
 
         .progress-bar {
             width: 100%;
-            height: 10px;
+            height: 8px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
             margin-bottom: 2rem;
             overflow: hidden;
-            position: relative;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .progress-fill {
@@ -390,259 +289,228 @@
             transition: width 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             animation: gradientFlow 3s ease infinite;
             box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
-            position: relative;
-        }
-
-        .progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: progressShine 2s infinite;
-        }
-
-        @keyframes progressShine {
-            0% {
-                transform: translateX(-100%);
-            }
-            100% {
-                transform: translateX(100%);
-            }
         }
 
         .progress-text {
             text-align: center;
             margin-bottom: 1rem;
             color: rgba(255, 255, 255, 0.6);
-            font-size: 0.95rem;
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
             font-weight: 500;
-            letter-spacing: 1px;
         }
 
         .question-text {
-            font-size: 1.8rem;
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
             margin-bottom: 2rem;
             text-align: center;
             line-height: 1.6;
             font-weight: 600;
-            animation: textGlow 3s ease-in-out infinite;
         }
 
-        @keyframes textGlow {
-            0%, 100% {
-                text-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
-            }
-            50% {
-                text-shadow: 0 0 40px rgba(168, 85, 247, 0.6);
-            }
-        }
-
-        /* Hebrew Text with 3D Effect */
         .hebrew-example {
-            font-size: 4rem;
+            font-size: clamp(2.5rem, 8vw, 4rem);
             text-align: center;
-            margin: 3rem 0;
-            padding: 3rem;
+            margin: 2rem auto;
+            padding: 2rem;
             background: rgba(168, 85, 247, 0.1);
-            border-radius: 25px;
+            border-radius: 20px;
             border: 2px solid rgba(168, 85, 247, 0.3);
-            position: relative;
-            transform-style: preserve-3d;
             transition: all 0.4s ease;
             animation: hebrewFloat 4s ease-in-out infinite;
-            text-shadow: 
-                0 0 30px rgba(168, 85, 247, 0.8),
-                0 0 60px rgba(168, 85, 247, 0.4),
-                2px 2px 0 rgba(99, 102, 241, 0.5),
-                4px 4px 0 rgba(99, 102, 241, 0.3);
+            text-shadow: 0 0 30px rgba(168, 85, 247, 0.8);
+            max-width: 300px;
         }
 
         @keyframes hebrewFloat {
             0%, 100% {
-                transform: translateY(0) rotateX(0deg);
+                transform: translateY(0);
             }
             50% {
-                transform: translateY(-15px) rotateX(5deg);
+                transform: translateY(-10px);
             }
         }
 
-        .hebrew-example:hover {
-            transform: scale(1.1) rotateY(5deg);
-            box-shadow: 0 20px 60px rgba(168, 85, 247, 0.4);
+        /* Audio Button */
+        .audio-btn {
+            display: block;
+            margin: 1.5rem auto;
+            padding: 1rem 2rem;
+            background: rgba(99, 102, 241, 0.2);
+            border: 2px solid rgba(99, 102, 241, 0.4);
+            border-radius: 50px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        /* Options with 3D Tilt */
+        .audio-btn:hover {
+            background: rgba(99, 102, 241, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* Options */
         .options {
             display: grid;
-            gap: 1.2rem;
+            gap: 1rem;
+            margin-bottom: 2rem;
         }
 
         .option-btn {
-            padding: 1.8rem;
+            padding: 1.3rem;
             background: rgba(255, 255, 255, 0.03);
             border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
+            border-radius: 15px;
             color: white;
-            font-size: 1.15rem;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
             text-align: left;
-            position: relative;
-            overflow: hidden;
-            transform-style: preserve-3d;
-        }
-
-        .option-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.2), transparent);
-            transition: left 0.5s ease;
         }
 
         .option-btn:hover {
             background: rgba(255, 255, 255, 0.08);
             border-color: rgba(168, 85, 247, 0.5);
-            transform: translateX(10px) scale(1.02);
-            box-shadow: 0 10px 40px rgba(168, 85, 247, 0.3);
-        }
-
-        .option-btn:hover::before {
-            left: 100%;
+            transform: translateX(5px);
         }
 
         .option-btn.selected {
             background: rgba(168, 85, 247, 0.2);
             border-color: #a855f7;
-            box-shadow: 
-                0 0 30px rgba(168, 85, 247, 0.5),
-                inset 0 0 20px rgba(168, 85, 247, 0.2);
-            animation: pulseSelected 1.5s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
         }
 
-        @keyframes pulseSelected {
-            0%, 100% {
-                box-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
-            }
-            50% {
-                box-shadow: 0 0 50px rgba(168, 85, 247, 0.8);
-            }
-        }
-
-        /* Results Screen */
+        /* Results */
         .results-screen {
             display: none;
+            text-align: center;
         }
 
         .level-badge {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 5rem;
+            font-size: 4rem;
             margin: 2rem auto;
-            padding: 3rem;
+            padding: 2.5rem;
             background: linear-gradient(135deg, #6366f1, #a855f7);
             border-radius: 50%;
-            width: 180px;
-            height: 180px;
-            animation: badgeSpin 20s linear infinite, badgePulse 2s ease-in-out infinite;
-            box-shadow: 
-                0 0 60px rgba(168, 85, 247, 0.6),
-                inset 0 0 40px rgba(255, 255, 255, 0.2);
-            position: relative;
-        }
-
-        @keyframes badgeSpin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
+            width: 150px;
+            height: 150px;
+            animation: badgePulse 2s ease-in-out infinite;
+            box-shadow: 0 0 60px rgba(168, 85, 247, 0.6);
         }
 
         @keyframes badgePulse {
             0%, 100% {
                 transform: scale(1);
-                box-shadow: 0 0 60px rgba(168, 85, 247, 0.6);
             }
             50% {
-                transform: scale(1.1);
-                box-shadow: 0 0 100px rgba(168, 85, 247, 1);
+                transform: scale(1.05);
             }
         }
 
         .level-title {
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
             margin-bottom: 1rem;
             background: linear-gradient(135deg, #a855f7, #ec4899);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
             font-weight: 900;
         }
 
-        /* Sparkles Effect */
-        .sparkle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: white;
-            border-radius: 50%;
-            animation: sparkleAnim 1.5s ease-out forwards;
-            pointer-events: none;
-            box-shadow: 0 0 10px white;
+        .level-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            margin-bottom: 2rem;
+            line-height: 1.6;
         }
 
-        @keyframes sparkleAnim {
-            0% {
-                transform: translate(0, 0) scale(0);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(var(--tx), var(--ty)) scale(1);
-                opacity: 0;
-            }
+        .recommendation {
+            background: rgba(99, 102, 241, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            margin: 2rem 0;
         }
 
+        .recommendation h3 {
+            font-size: clamp(1.3rem, 3vw, 1.5rem);
+            margin-bottom: 1rem;
+            color: #6366f1;
+        }
+
+        .recommendation p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: clamp(1rem, 2vw, 1.1rem);
+            line-height: 1.8;
+        }
+
+        /* Mobile Optimizations */
         @media (max-width: 768px) {
+            .container {
+                padding: 0.5rem;
+            }
+
             .test-card {
-                padding: 2.5rem 1.5rem;
+                padding: 2rem 1.5rem;
+                border-radius: 20px;
             }
 
-            h1 {
-                font-size: 2.2rem;
+            .logo {
+                font-size: 2.5rem;
             }
 
-            .question-text {
-                font-size: 1.3rem;
+            .benefits {
+                gap: 0.8rem;
+            }
+
+            .benefit-item {
+                padding: 1rem;
+            }
+
+            .benefit-icon {
+                font-size: 1.5rem;
+            }
+
+            .options {
+                gap: 0.8rem;
+            }
+
+            .option-btn {
+                padding: 1.1rem;
             }
 
             .hebrew-example {
+                margin: 1.5rem auto;
+                padding: 1.5rem;
+            }
+
+            .level-badge {
+                width: 120px;
+                height: 120px;
                 font-size: 3rem;
+                padding: 2rem;
             }
 
-            body {
-                cursor: auto;
+            .recommendation {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Tablet */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container {
+                padding: 1.5rem;
             }
 
-            .cursor, .cursor-follower {
-                display: none;
+            .test-card {
+                max-width: 650px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Custom Cursor -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
-
     <!-- 3D Canvas Background -->
     <canvas id="canvas3d"></canvas>
 
@@ -656,36 +524,32 @@
         <div class="test-card">
             <!-- Welcome Screen -->
             <div id="welcomeScreen" class="welcome-screen">
-                <div style="text-align: center;">
-                    <div class="logo">🕊️</div>
-                </div>
+                <div class="logo">🕊️</div>
                 <h1>Hebrew Level Assessment</h1>
                 <p class="subtitle">Let's find your perfect starting point!</p>
 
                 <div class="benefits">
                     <div class="benefit-item">
                         <div class="benefit-icon">⏱️</div>
-                        <div class="benefit-text"><strong>5 minutes</strong> - Quick and easy assessment</div>
+                        <div class="benefit-text"><strong>5 minutes</strong> - Quick assessment</div>
                     </div>
                     <div class="benefit-item">
                         <div class="benefit-icon">🎯</div>
-                        <div class="benefit-text"><strong>Personalized path</strong> - Start at your exact level</div>
+                        <div class="benefit-text"><strong>Personalized path</strong> - Start at your level</div>
                     </div>
                     <div class="benefit-item">
-                        <div class="benefit-icon">📊</div>
-                        <div class="benefit-text"><strong>15 questions</strong> - From beginner to advanced</div>
+                        <div class="benefit-icon">🎧</div>
+                        <div class="benefit-text"><strong>Audio + Visual</strong> - Complete assessment</div>
                     </div>
                     <div class="benefit-item">
                         <div class="benefit-icon">🚀</div>
-                        <div class="benefit-text"><strong>Skip what you know</strong> - Don't waste time</div>
+                        <div class="benefit-text"><strong>Skip what you know</strong> - Save time</div>
                     </div>
                 </div>
 
-                <button class="btn-primary" onclick="startTest()">
-                    <span>Start Assessment 🎯</span>
-                </button>
-                <p style="text-align: center; margin-top: 1.5rem; color: rgba(255,255,255,0.4); font-size: 0.9rem; font-weight: 300;">
-                    No account required • Takes 5 minutes
+                <button class="btn-primary" onclick="startTest()">Start Assessment 🎯</button>
+                <p style="text-align: center; margin-top: 1rem; color: rgba(255,255,255,0.4); font-size: 0.9rem;">
+                    No account required • 5 minutes
                 </p>
             </div>
 
@@ -701,34 +565,33 @@
                 <div class="question-content">
                     <div class="question-text" id="questionText"></div>
                     <div class="hebrew-example" id="hebrewExample" style="display: none;"></div>
+                    <button class="audio-btn" id="audioBtn" style="display: none;" onclick="playAudio()">
+                        🔊 Listen
+                    </button>
                     <div class="options" id="optionsContainer"></div>
                 </div>
 
                 <button class="btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>
-                    <span>Next Question →</span>
+                    Next Question →
                 </button>
             </div>
 
             <!-- Results Screen -->
             <div id="resultsScreen" class="results-screen">
-                <div style="text-align: center;">
-                    <div class="logo">🎉</div>
-                </div>
+                <div class="logo">🎉</div>
                 <h1>Assessment Complete!</h1>
                 
-                <div style="text-align: center;">
-                    <div class="level-badge" id="levelBadge">🌟</div>
-                </div>
-                <div class="level-title" style="text-align: center;" id="levelTitle"></div>
-                <div class="level-description" style="text-align: center; color: rgba(255,255,255,0.8); font-size: 1.15rem; margin-bottom: 2rem; line-height: 1.6;" id="levelDescription"></div>
+                <div class="level-badge" id="levelBadge">🌟</div>
+                <div class="level-title" id="levelTitle"></div>
+                <div class="level-description" id="levelDescription"></div>
 
-                <div style="background: rgba(99, 102, 241, 0.1); padding: 2rem; border-radius: 20px; border: 1px solid rgba(99, 102, 241, 0.3); margin: 2rem 0;">
-                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #6366f1; text-align: center;">📚 Your Learning Path</h3>
-                    <p id="recommendedPath" style="text-align: center; color: rgba(255,255,255,0.9); font-size: 1.1rem; line-height: 1.8;"></p>
+                <div class="recommendation">
+                    <h3>📚 Your Learning Path</h3>
+                    <p id="recommendedPath"></p>
                 </div>
 
                 <button class="btn-primary" onclick="goToDashboard()">
-                    <span>Start Learning! 🚀</span>
+                    Start Learning! 🚀
                 </button>
             </div>
         </div>
@@ -740,7 +603,7 @@
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
         import { getFirestore, doc, setDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
-        // Firebase config - REPLACE WITH YOURS
+        // REPLACE WITH YOUR FIREBASE CONFIG
         const firebaseConfig = {
             apiKey: "YOUR_API_KEY",
             authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
@@ -760,21 +623,7 @@
             currentUser = user;
         });
 
-        // Custom Cursor
-        const cursor = document.querySelector('.cursor');
-        const cursorFollower = document.querySelector('.cursor-follower');
-
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            setTimeout(() => {
-                cursorFollower.style.left = e.clientX + 'px';
-                cursorFollower.style.top = e.clientY + 'px';
-            }, 100);
-        });
-
-        // 3D Background with Three.js
+        // 3D Background
         const canvas = document.getElementById('canvas3d');
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -782,8 +631,6 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         camera.position.z = 15;
 
-        // Create Hebrew letter particles
-        const hebrewLetters = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח'];
         const particles = [];
 
         for (let i = 0; i < 50; i++) {
@@ -791,9 +638,7 @@
             const material = new THREE.MeshPhongMaterial({ 
                 color: Math.random() > 0.5 ? 0x6366f1 : 0xa855f7,
                 transparent: true,
-                opacity: 0.6,
-                emissive: 0x6366f1,
-                emissiveIntensity: 0.5
+                opacity: 0.6
             });
             const sphere = new THREE.Mesh(geometry, material);
             
@@ -811,19 +656,13 @@
             particles.push(sphere);
         }
 
-        // Lighting
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
         scene.add(ambientLight);
 
-        const pointLight1 = new THREE.PointLight(0xa855f7, 2, 50);
-        pointLight1.position.set(10, 10, 10);
-        scene.add(pointLight1);
+        const pointLight = new THREE.PointLight(0xa855f7, 2, 50);
+        pointLight.position.set(10, 10, 10);
+        scene.add(pointLight);
 
-        const pointLight2 = new THREE.PointLight(0x6366f1, 2, 50);
-        pointLight2.position.set(-10, -10, 10);
-        scene.add(pointLight2);
-
-        // Animation loop
         function animate() {
             requestAnimationFrame(animate);
 
@@ -852,7 +691,7 @@
 
         // Floating Particles
         const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 20; i++) {
             const particle = document.createElement('div');
             particle.className = 'particle';
             particle.style.left = Math.random() * 100 + '%';
@@ -861,131 +700,128 @@
             particlesContainer.appendChild(particle);
         }
 
-        // Sparkle effect on click
-        document.addEventListener('click', (e) => {
-            for (let i = 0; i < 12; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.className = 'sparkle';
-                sparkle.style.left = e.clientX + 'px';
-                sparkle.style.top = e.clientY + 'px';
-                
-                const angle = (Math.PI * 2 * i) / 12;
-                const distance = 50 + Math.random() * 50;
-                sparkle.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
-                sparkle.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
-                
-                document.body.appendChild(sparkle);
-                
-                setTimeout(() => sparkle.remove(), 1500);
-            }
-        });
-
-        // Test Questions (same as before)
+        // Test Questions with audio
         const questions = [
             {
                 question: "Can you recognize this Hebrew letter?",
                 hebrew: "א",
                 options: ["Alef", "Bet", "Gimel", "I don't know"],
                 correct: 0,
-                level: 1
+                level: 1,
+                hasAudio: false
             },
             {
                 question: "What is this Hebrew letter?",
                 hebrew: "ב",
                 options: ["Alef", "Bet", "Dalet", "I don't know"],
                 correct: 1,
-                level: 1
+                level: 1,
+                hasAudio: false
             },
             {
                 question: "Which word means 'Hello' in Hebrew?",
                 hebrew: "",
                 options: ["שלום (Shalom)", "תודה (Toda)", "בוקר (Boker)", "I don't know"],
                 correct: 0,
-                level: 1
+                level: 1,
+                hasAudio: false
+            },
+            {
+                question: "Listen to this word. What does it mean?",
+                hebrew: "",
+                audioText: "shalom",
+                options: ["Hello", "Thank you", "Goodbye", "I don't know"],
+                correct: 0,
+                level: 2,
+                hasAudio: true
             },
             {
                 question: "Read this word. What does it mean?",
                 hebrew: "מים",
                 options: ["Water", "Bread", "House", "I don't know"],
                 correct: 0,
-                level: 2
+                level: 2,
+                hasAudio: false
             },
             {
                 question: "What does 'תודה' mean?",
                 hebrew: "תודה",
                 options: ["Hello", "Thank you", "Goodbye", "I don't know"],
                 correct: 1,
-                level: 2
-            },
-            {
-                question: "Complete: 'אני _____ ישראלי' (I am Israeli)",
-                hebrew: "",
-                options: ["הוא", "היא", "אני", "I don't know"],
-                correct: 2,
-                level: 2
+                level: 2,
+                hasAudio: false
             },
             {
                 question: "What is the past tense of 'to go' (הלך)?",
                 hebrew: "",
                 options: ["הלכתי (I went)", "הולך (I go)", "אלך (I will go)", "I don't know"],
                 correct: 0,
-                level: 3
+                level: 3,
+                hasAudio: false
             },
             {
                 question: "How do you say 'I want to eat'?",
                 hebrew: "",
                 options: ["אני רוצה לאכול", "אני אוכל", "אני אכלתי", "I don't know"],
                 correct: 0,
-                level: 3
+                level: 3,
+                hasAudio: false
             },
             {
                 question: "What does 'איפה השירותים?' mean?",
                 hebrew: "איפה השירותים?",
                 options: ["Where is the bathroom?", "What time is it?", "How are you?", "I don't know"],
                 correct: 0,
-                level: 3
+                level: 3,
+                hasAudio: false
             },
             {
                 question: "Choose the correct form: 'הם _____ לקולנוע אתמול'",
                 hebrew: "",
                 options: ["הלכו", "הולכים", "ילכו", "I don't know"],
                 correct: 0,
-                level: 4
+                level: 4,
+                hasAudio: false
             },
             {
                 question: "What does 'נראה לי ש...' express?",
                 hebrew: "",
                 options: ["It seems to me that...", "I know that...", "I hope that...", "I don't know"],
                 correct: 0,
-                level: 4
+                level: 4,
+                hasAudio: false
             },
             {
                 question: "Translate: 'If I had time, I would travel'",
                 hebrew: "",
                 options: ["אם היה לי זמן, הייתי נוסע", "כשיש לי זמן, אני נוסע", "אם יהיה לי זמן, אסע", "I don't know"],
                 correct: 0,
-                level: 4
+                level: 4,
+                hasAudio: false
             },
             {
                 question: "What does the idiom 'לשים את היד על הפצע' mean?",
                 hebrew: "",
                 options: ["To hit the nail on the head", "To be in pain", "To help someone", "I don't know"],
                 correct: 0,
-                level: 5
+                level: 5,
+                hasAudio: false
             },
             {
                 question: "Choose the correct binyan for 'להתקשר' (to call)",
                 hebrew: "",
                 options: ["התפעל", "פיעל", "נפעל", "I don't know"],
                 correct: 0,
-                level: 5
+                level: 5,
+                hasAudio: false
             },
             {
-                question: "Complete the sentence with proper smichut: 'בית _____'",
+                question: "Complete: 'בית _____' (smichut form)",
                 hebrew: "",
                 options: ["הספר", "ספר", "של ספר", "I don't know"],
                 correct: 0,
-                level: 5
+                level: 5,
+                hasAudio: false
             }
         ];
 
@@ -1007,11 +843,19 @@
             document.getElementById('questionText').textContent = question.question;
             
             const hebrewExample = document.getElementById('hebrewExample');
+            const audioBtn = document.getElementById('audioBtn');
+            
             if (question.hebrew) {
                 hebrewExample.textContent = question.hebrew;
                 hebrewExample.style.display = 'block';
             } else {
                 hebrewExample.style.display = 'none';
+            }
+
+            if (question.hasAudio) {
+                audioBtn.style.display = 'block';
+            } else {
+                audioBtn.style.display = 'none';
             }
 
             const optionsContainer = document.getElementById('optionsContainer');
@@ -1028,6 +872,13 @@
             selectedAnswer = null;
             document.getElementById('nextBtn').disabled = true;
         }
+
+        window.playAudio = function() {
+            // Placeholder for audio - would use ElevenLabs API in production
+            const utterance = new SpeechSynthesisUtterance(questions[currentQuestionIndex].audioText || 'shalom');
+            utterance.lang = 'he-IL';
+            speechSynthesis.speak(utterance);
+        };
 
         window.selectAnswer = function(index) {
             selectedAnswer = index;
@@ -1063,7 +914,7 @@
                 level = 1;
                 levelName = "Complete Beginner";
                 badge = "🌱";
-                description = "You're just starting your Hebrew journey! That's perfect - everyone starts here.";
+                description = "You're just starting your Hebrew journey! Perfect - everyone starts here.";
                 startLesson = 1;
             } else if (score <= 6) {
                 level = 2;
@@ -1075,7 +926,7 @@
                 level = 3;
                 levelName = "Elementary";
                 badge = "🌳";
-                description = "You have a good grasp of basic Hebrew! Time to expand your skills.";
+                description = "You have a good grasp of basic Hebrew! Time to expand.";
                 startLesson = 21;
             } else if (score <= 12) {
                 level = 4;
@@ -1100,7 +951,6 @@
                 Estimated time to fluency: <strong>${6 - level} months</strong>
             `;
 
-            // Save to Firestore if user is logged in
             if (currentUser) {
                 try {
                     await setDoc(doc(db, 'users', currentUser.uid), {
@@ -1110,7 +960,7 @@
                         testCompletedAt: new Date().toISOString()
                     }, { merge: true });
                 } catch (error) {
-                    console.error('Error saving test results:', error);
+                    console.error('Error saving results:', error);
                 }
             }
 

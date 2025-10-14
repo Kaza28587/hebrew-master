@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 3: The Letter Gimel | Hebrew Master</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: white;
+            position: relative;
+            transition: background 0.5s ease;
+        }
+
+        body.dark-theme {
+            background: linear-gradient(135deg, #0a0b0d 0%, #1a1b26 100%);
+        }
+
+        body.light-theme {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 100%);
+            color: #1a1b26;
+        }
+
+        body.neon-theme {
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+        }
+
+        body.nature-theme {
+            background: linear-gradient(135deg, #134e4a 0%, #064e3b 100%);
+        }
+
+        body.minimalist-theme {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        .mesh-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.4;
+            animation: float 25s infinite ease-in-out;
+        }
+
+        .orb1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.3), transparent);
+            top: -200px;
+            left: -200px;
+        }
+
+        .orb2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.25), transparent);
+            bottom: -250px;
+            right: -250px;
+            animation-delay: 7s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(50px, -50px); }
+            66% { transform: translate(-30px, 30px); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        .lesson-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .user-greeting {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .persona-icon {
+            font-size: 2.5rem;
+            animation: gentleFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .lesson-info {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .streak-counter, .progress-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .progress-badge {
+            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+        }
+
+        .lesson-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(40px);
+            border-radius: 24px;
+            padding: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+        }
+
+        body.light-theme .lesson-card {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .lesson-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ffffff 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.light-theme .lesson-title {
+            background: linear-gradient(135deg, #1a1b26 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .lesson-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 40px;
+        }
+
+        .hebrew-showcase {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 60px;
+            border-radius: 24px;
+            text-align: center;
+            margin: 40px 0;
+            border: 2px solid rgba(168, 85, 247, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hebrew-showcase::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
+            animation: rotateGlow 10s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hebrew-letter-big {
+            font-size: 10rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            animation: letterPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes letterPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .letter-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .letter-sound {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .audio-btn, .btn {
+            margin-top: 25px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(168, 85, 247, 0.3);
+        }
+
+        .audio-btn:hover, .btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(168, 85, 247, 0.5);
+        }
+
+        .section-heading {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 50px 0 25px 0;
+            text-align: center;
+        }
+
+        .examples-grid {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .example-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .example-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .hebrew-text {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            direction: rtl;
+        }
+
+        .translation {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        /* VOICE RECORDING */
+        .voice-section {
+            background: rgba(34, 197, 94, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .record-btn {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            border: 4px solid white;
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.4);
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .record-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(239, 68, 68, 0.6);
+        }
+
+        .record-btn.recording {
+            animation: recordPulse 1.5s infinite;
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+        }
+
+        @keyframes recordPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .recording-status {
+            font-size: 1.2rem;
+            margin: 20px 0;
+            min-height: 30px;
+        }
+
+        .playback-controls {
+            display: none;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .playback-controls.show {
+            display: flex;
+        }
+
+        .canvas-btn {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .canvas-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* GAMES */
+        .game-section {
+            background: rgba(251, 146, 60, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid rgba(251, 146, 60, 0.3);
+            margin: 40px 0;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .game-card {
+            aspect-ratio: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .game-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .game-card.flipped {
+            background: rgba(168, 85, 247, 0.3);
+            border-color: #a78bfa;
+        }
+
+        .game-card.matched {
+            background: rgba(34, 197, 94, 0.3);
+            border-color: #22c55e;
+            pointer-events: none;
+        }
+
+        /* PRACTICE QUIZ */
+        .practice-section {
+            background: rgba(168, 85, 247, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid rgba(168, 85, 247, 0.3);
+            margin: 40px 0;
+        }
+
+        .question-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .options {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .option {
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 20px 30px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .option:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(10px);
+        }
+
+        .option.selected {
+            background: rgba(168, 85, 247, 0.3);
+            border-color: #a78bfa;
+        }
+
+        .option.correct {
+            background: rgba(34, 197, 94, 0.3);
+            border-color: #22c55e;
+        }
+
+        .option.incorrect {
+            background: rgba(239, 68, 68, 0.3);
+            border-color: #ef4444;
+        }
+
+        .feedback-message {
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 600;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .feedback-message.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback-message.correct {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+
+        .feedback-message.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 18px 40px;
+            border-radius: 15px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+            color: white;
+            box-shadow: 0 10px 25px rgba(168, 85, 247, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(168, 85, 247, 0.5);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .celebration-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(40px);
+            padding: 60px;
+            border-radius: 30px;
+            border: 2px solid rgba(168, 85, 247, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            text-align: center;
+            max-width: 500px;
+        }
+
+        .celebration-modal.show {
+            display: block;
+            animation: popIn 0.6s ease;
+        }
+
+        @keyframes popIn {
+            0% { transform: translate(-50%, -50%) scale(0); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .celebration-emoji {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+
+        .celebration-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .celebration-text {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .completion-checklist {
+            text-align: left;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+        }
+
+        .completion-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .lesson-card {
+                padding: 30px 20px;
+            }
+
+            .hebrew-letter-big {
+                font-size: 6rem;
+            }
+
+            .lesson-title {
+                font-size: 2rem;
+            }
+
+            .lesson-nav {
+                flex-direction: column;
+            }
+
+            .game-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <div class="mesh-gradient">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+    </div>
+
+    <audio id="background-audio" loop></audio>
+
+    <div class="container">
+        <div class="lesson-header">
+            <div class="user-greeting">
+                <div class="persona-icon" id="persona-icon">🦉</div>
+                <div>
+                    <div id="greeting-text">Hey there!</div>
+                    <div style="font-size: 0.9rem; opacity: 0.7; margin-top: 5px;">Lesson 3 of 60</div>
+                </div>
+            </div>
+
+            <div class="lesson-info">
+                <div class="streak-counter" id="streak-display" style="display: none;">
+                    <span>🔥</span>
+                    <span id="streak-count">0</span>
+                </div>
+                <div class="progress-badge" id="progress-display" style="display: none;">
+                    <span id="progress-text">0%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="lesson-card">
+            <h1 class="lesson-title">The Letter Gimel</h1>
+            <p class="lesson-subtitle">Three letters down! You're on fire! 🔥</p>
+
+            <!-- INTRODUCTION -->
+            <div class="hebrew-showcase">
+                <div class="hebrew-letter-big">ג</div>
+                <div class="letter-name">Gimel (גִּימֶל)</div>
+                <div class="letter-sound">Sound: "g" as in "goat"</div>
+                <button class="audio-btn" onclick="playLetterSound()">🔊 Hear it</button>
+            </div>
+
+            <!-- EXAMPLES -->
+            <h2 class="section-heading">See Gimel in Action</h2>
+            <div class="examples-grid" id="examples-container"></div>
+
+            <!-- VOICE RECORDING -->
+            <div class="voice-section">
+                <h2 class="section-heading">🗣️ Speaking Practice</h2>
+                <p style="opacity: 0.9; margin-bottom: 20px;">Say "Gimel" out loud and record yourself:</p>
+                
+                <button class="record-btn" id="record-btn" onclick="toggleRecording()">
+                    <span id="record-icon">🎤</span>
+                </button>
+                
+                <div class="recording-status" id="recording-status">Click to start recording</div>
+                
+                <div class="playback-controls" id="playback-controls">
+                    <button class="canvas-btn" onclick="playRecording()">▶️ Play</button>
+                    <button class="canvas-btn" onclick="deleteRecording()">🗑️ Delete</button>
+                </div>
+            </div>
+
+            <!-- MEMORY GAME -->
+            <div class="game-section">
+                <h2 class="section-heading">🎮 Memory Matching Game</h2>
+                <p style="text-align: center; opacity: 0.9; margin-bottom: 20px;">Match the Hebrew letters with their English names:</p>
+                
+                <div class="game-grid" id="memory-game"></div>
+                
+                <div class="feedback-message" id="game-feedback"></div>
+            </div>
+
+            <!-- QUIZ -->
+            <div class="practice-section">
+                <h2 class="section-heading">📝 Quick Quiz</h2>
+                <p class="question-text">Which letter is this?</p>
+                
+                <div class="hebrew-showcase" style="padding: 40px;">
+                    <div class="hebrew-letter-big" style="font-size: 6rem;">ג</div>
+                </div>
+
+                <div class="options">
+                    <div class="option" onclick="checkAnswer(0)">Aleph (א)</div>
+                    <div class="option" onclick="checkAnswer(1)">Bet (ב)</div>
+                    <div class="option" onclick="checkAnswer(2)">Gimel (ג)</div>
+                    <div class="option" onclick="checkAnswer(3)">Dalet (ד)</div>
+                </div>
+
+                <div class="feedback-message" id="feedback"></div>
+            </div>
+
+            <div class="lesson-nav">
+                <button class="nav-btn btn-secondary" onclick="goBack()">← Lesson 2</button>
+                <button class="nav-btn btn-primary" id="complete-btn" onclick="completeLesson()" disabled>Complete Lesson →</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="celebration-modal" id="celebration">
+        <div class="celebration-emoji" id="celebration-emoji">🎉</div>
+        <h2 class="celebration-title" id="celebration-title">Amazing!</h2>
+        <p class="celebration-text" id="celebration-text">You completed Lesson 3!</p>
+        
+        <div class="completion-checklist" id="completion-checklist"></div>
+        
+        <button class="nav-btn btn-primary" onclick="nextLesson()">Next Lesson →</button>
+    </div>
+
+    <script>
+        let userProfile = null;
+        let completedActivities = {
+            quiz: false,
+            speaking: false,
+            game: false
+        };
+
+        let mediaRecorder, audioChunks = [], recordedBlob = null;
+        let gameCards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+
+        function loadUserProfile() {
+            const saved = localStorage.getItem('hebrewMasterProfile');
+            userProfile = saved ? JSON.parse(saved) : {
+                name: 'Friend',
+                persona: { emoji: '🦉', name: 'Zen Owl' },
+                visualTheme: ['dark'],
+                atmosphere: ['silence'],
+                interests: ['food'],
+                humorIntensity: 5,
+                encouragementStyle: ['gentle'],
+                rewards: []
+            };
+            applyPersonalization();
+        }
+
+        function applyPersonalization() {
+            document.getElementById('greeting-text').textContent = `Hey ${userProfile.name}! ${userProfile.persona.emoji}`;
+            document.getElementById('persona-icon').textContent = userProfile.persona.emoji;
+
+            document.body.className = '';
+            document.body.classList.add(`${userProfile.visualTheme[0] || 'dark'}-theme`);
+
+            if (userProfile.atmosphere && userProfile.atmosphere[0] !== 'silence') {
+                playBackgroundSound(userProfile.atmosphere[0]);
+            }
+
+            if (userProfile.rewards && userProfile.rewards.includes('streaks')) {
+                document.getElementById('streak-display').style.display = 'flex';
+                updateStreak();
+            }
+
+            if (userProfile.rewards && userProfile.rewards.includes('progress')) {
+                document.getElementById('progress-display').style.display = 'block';
+                document.getElementById('progress-text').textContent = '5%';
+            }
+
+            generateExamples();
+            initializeMemoryGame();
+        }
+
+        function playBackgroundSound(atmosphere) {
+            const audio = document.getElementById('background-audio');
+            const sounds = {
+                'ocean': 'https://cdn.pixabay.com/audio/2022/03/10/audio_c8c8e2d37f.mp3',
+                'lofi': 'https://cdn.pixabay.com/audio/2022/03/15/audio_7c0b4b1e15.mp3',
+                'rain': 'https://cdn.pixabay.com/audio/2022/03/10/audio_24681e28e6.mp3'
+            };
+            if (sounds[atmosphere]) {
+                audio.src = sounds[atmosphere];
+                audio.volume = 0.2;
+                audio.play().catch(() => {});
+            }
+        }
+
+        function generateExamples() {
+            const sets = {
+                food: [
+                    { hebrew: 'גבינה', translation: 'Cheese' },
+                    { hebrew: 'גזר', translation: 'Carrot' },
+                    { hebrew: 'גלידה', translation: 'Ice cream' }
+                ],
+                tech: [
+                    { hebrew: 'גוגל', translation: 'Google' },
+                    { hebrew: 'גיימר', translation: 'Gamer' },
+                    { hebrew: 'גרפיקה', translation: 'Graphics' }
+                ],
+                music: [
+                    { hebrew: 'גיטרה', translation: 'Guitar' },
+                    { hebrew: 'גאז', translation: 'Jazz' },
+                    { hebrew: 'גל', translation: 'Wave' }
+                ],
+                sports: [
+                    { hebrew: 'גולף', translation: 'Golf' },
+                    { hebrew: 'גול', translation: 'Goal' },
+                    { hebrew: 'גמיש', translation: 'Flexible' }
+                ],
+                gaming: [
+                    { hebrew: 'גיימינג', translation: 'Gaming' },
+                    { hebrew: 'גרפיקס', translation: 'Graphics' },
+                    { hebrew: 'גולש', translation: 'Surfer/Browser' }
+                ]
+            };
+
+            const interest = (userProfile.interests && userProfile.interests[0]) || 'food';
+            const examples = sets[interest] || sets.food;
+
+            document.getElementById('examples-container').innerHTML = examples.map(ex => `
+                <div class="example-card">
+                    <div class="hebrew-text">${ex.hebrew}</div>
+                    <div class="translation">${ex.translation}</div>
+                </div>
+            `).join('');
+        }
+
+        // VOICE RECORDING
+        async function toggleRecording() {
+            const btn = document.getElementById('record-btn');
+            const status = document.getElementById('recording-status');
+            const icon = document.getElementById('record-icon');
+
+            if (!mediaRecorder || mediaRecorder.state === 'inactive') {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    audioChunks = [];
+
+                    mediaRecorder.ondataavailable = (e) => audioChunks.push(e.data);
+                    mediaRecorder.onstop = () => {
+                        recordedBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                        completedActivities.speaking = true;
+                        document.getElementById('playback-controls').classList.add('show');
+                        status.textContent = '✓ Recording saved! Great job!';
+                        updateCompletionButton();
+                    };
+
+                    mediaRecorder.start();
+                    btn.classList.add('recording');
+                    icon.textContent = '⏹️';
+                    status.textContent = '🔴 Recording... Click to stop';
+
+                } catch (err) {
+                    status.textContent = '⚠️ Microphone access needed';
+                }
+            } else {
+                mediaRecorder.stop();
+                btn.classList.remove('recording');
+                icon.textContent = '🎤';
+            }
+        }
+
+        function playRecording() {
+            if (recordedBlob) {
+                const audio = new Audio(URL.createObjectURL(recordedBlob));
+                audio.play();
+            }
+        }
+
+        function deleteRecording() {
+            recordedBlob = null;
+            completedActivities.speaking = false;
+            document.getElementById('playback-controls').classList.remove('show');
+            document.getElementById('recording-status').textContent = 'Click to start recording';
+            document.getElementById('record-icon').textContent = '🎤';
+            updateCompletionButton();
+        }
+
+        // MEMORY GAME
+        function initializeMemoryGame() {
+            const pairs = [
+                { id: 1, content: 'א', type: 'hebrew' },
+                { id: 1, content: 'Aleph', type: 'english' },
+                { id: 2, content: 'ב', type: 'hebrew' },
+                { id: 2, content: 'Bet', type: 'english' },
+                { id: 3, content: 'ג', type: 'hebrew' },
+                { id: 3, content: 'Gimel', type: 'english' }
+            ];
+
+            gameCards = pairs.sort(() => Math.random() - 0.5);
+            const gameGrid = document.getElementById('memory-game');
+
+            gameGrid.innerHTML = gameCards.map((card, index) => `
+                <div class="game-card" data-id="${card.id}" data-index="${index}">
+                    <span>${card.content}</span>
+                </div>
+            `).join('');
+
+            gameGrid.querySelectorAll('.game-card').forEach(card => {
+                card.addEventListener('click', () => flipCard(card));
+            });
+        }
+
+        function flipCard(card) {
+            if (flippedCards.length >= 2 || card.classList.contains('matched')) return;
+
+            card.classList.add('flipped');
+            flippedCards.push(card);
+
+            if (flippedCards.length === 2) {
+                setTimeout(checkMatch, 800);
+            }
+        }
+
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+            const id1 = card1.getAttribute('data-id');
+            const id2 = card2.getAttribute('data-id');
+
+            if (id1 === id2) {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                matchedPairs++;
+
+                if (matchedPairs === 3) {
+                    completedActivities.game = true;
+                    const feedback = document.getElementById('game-feedback');
+                    feedback.className = 'feedback-message correct show';
+                    feedback.textContent = '🎉 Amazing! You matched all pairs!';
+                    updateCompletionButton();
+                }
+            } else {
+                card1.classList.remove('flipped');
+                card2.classList.remove('flipped');
+            }
+
+            flippedCards = [];
+        }
+
+        // QUIZ
+        function checkAnswer(index) {
+            const options = document.querySelectorAll('.option');
+            const feedback = document.getElementById('feedback');
+
+            options.forEach(opt => opt.classList.remove('selected', 'correct', 'incorrect'));
+            options[index].classList.add('selected');
+
+            if (index === 2) {
+                options[2].classList.add('correct');
+                feedback.className = 'feedback-message correct show';
+                feedback.textContent = getPersonalizedFeedback('correct');
+                completedActivities.quiz = true;
+                updateCompletionButton();
+            } else {
+                options[index].classList.add('incorrect');
+                feedback.className = 'feedback-message incorrect show';
+                feedback.textContent = getPersonalizedFeedback('incorrect');
+            }
+        }
+
+        function getPersonalizedFeedback(type) {
+            const intensity = userProfile.humorIntensity || 5;
+            const style = (userProfile.encouragementStyle && userProfile.encouragementStyle[0]) || 'gentle';
+
+            if (type === 'correct') {
+                if (style === 'joke' && intensity >= 8) {
+                    return "🎉 Gimel whiz! You're crushing this! 😄";
+                } else if (style === 'challenge') {
+                    return "💪 Correct! Keep that momentum going!";
+                } else {
+                    return "🌟 Perfect! You got it right!";
+                }
+            } else {
+                return "💙 Not quite, but great try! Give it another go!";
+            }
+        }
+
+        function updateCompletionButton() {
+            const allCompleted = Object.values(completedActivities).every(v => v);
+            document.getElementById('complete-btn').disabled = !allCompleted;
+        }
+
+        function completeLesson() {
+            const modal = document.getElementById('celebration');
+            document.getElementById('celebration-emoji').textContent = userProfile.persona.emoji;
+            document.getElementById('celebration-title').textContent = '🎉 Lesson Complete!';
+            document.getElementById('celebration-text').textContent = `Amazing work, ${userProfile.name}! You mastered Gimel!`;
+
+            document.getElementById('completion-checklist').innerHTML = `
+                <div class="completion-item">✓ Learned Gimel letter</div>
+                <div class="completion-item">✓ Heard pronunciation</div>
+                <div class="completion-item">✓ Recorded your voice</div>
+                <div class="completion-item">✓ Played memory game</div>
+                <div class="completion-item">✓ Passed the quiz</div>
+            `;
+
+            modal.classList.add('show');
+            updateProgress();
+        }
+
+        function updateProgress() {
+            let progress = JSON.parse(localStorage.getItem('hebrewProgress') || '{}');
+            progress.lesson3 = true;
+            progress.completedLessons = (progress.completedLessons || 0) + 1;
+            localStorage.setItem('hebrewProgress', JSON.stringify(progress));
+        }
+
+        function updateStreak() {
+            const lastStudy = localStorage.getItem('lastStudyDate');
+            const today = new Date().toDateString();
+            let streak = parseInt(localStorage.getItem('studyStreak') || '0');
+
+            if (lastStudy !== today) {
+                streak++;
+                localStorage.setItem('studyStreak', streak);
+                localStorage.setItem('lastStudyDate', today);
+            }
+
+            document.getElementById('streak-count').textContent = streak;
+        }
+
+        function playLetterSound() {
+            const utterance = new SpeechSynthesisUtterance('גִּימֶל');
+            utterance.lang = 'he-IL';
+            utterance.rate = 0.7;
+            speechSynthesis.speak(utterance);
+        }
+
+        function goBack() {
+            window.location.href = 'lesson-2.html';
+        }
+
+        function nextLesson() {
+            alert('Lesson 4 coming soon! 🚀');
+            window.location.href = 'index.html';
+        }
+
+        window.addEventListener('DOMContentLoaded', loadUserProfile);
+    </script>
+</body>
+</html>
